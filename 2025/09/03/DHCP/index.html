@@ -1,0 +1,543 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>DHCP | 蜡笔小王的博客</title><meta name="keywords" content="网络基础"><meta name="author" content="蜡笔小王"><meta name="copyright" content="蜡笔小王"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="DHCP"><meta name="application-name" content="DHCP"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="DHCP"><meta property="og:url" content="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/index.html"><meta property="og:site_name" content="蜡笔小王的博客"><meta property="og:description" content="Web"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://github.com/wjh0527/wjh0527.github.io.git/assets/lbxw.jpg"><meta property="article:author" content="蜡笔小王"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://github.com/wjh0527/wjh0527.github.io.git/assets/lbxw.jpg"><meta name="description" content="Web"><link rel="shortcut icon" href="/wjh0527/wjh0527.github.io.git/favicon.ico"><link rel="canonical" href="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/wjh0527/wjh0527.github.io.git/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/wjh0527/wjh0527.github.io.git/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/wjh0527/wjh0527.github.io.git/img/siteicon/16.png"/><link rel="bookmark" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/wjh0527/wjh0527.github.io.git/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"每天学习亿点点","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/wjh0527/wjh0527.github.io.git/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 蜡笔小王","link":"链接: ","source":"来源: 蜡笔小王的博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '蜡笔小王的博客',
+  title: 'DHCP',
+  postAI: '',
+  pageFillDescription: '一、DHCP基础认知, 1.1 核心定义与价值, 1.2 关键技术参数, 二、DHCP工作原理（四步流程）, 2.1 补充流程, 三、DHCP地址池类型与配置, 3.1 类型1：基于接口的地址池（小型网络）, 3.1.1 适用场景, 3.1.2 配置示例（以路由器AR1的G0x2F0x2F0接口为例网段192.168.1.0x2F24）, 3.2 类型2：基于全局的地址池（中大型网络）, 3.2.1 适用场景, 3.2.2 配置示例（创建VLAN10、VLAN20对应的全局地址池）, 四、DHCP中继配置（跨网段分配）, 4.1 应用场景, 4.2 配置前提, 4.3 配置示例（以AR1为DHCP服务器AR2为中继设备）, 4.3.1 步骤1：在DHCP服务器（AR1）配置全局地址池, 4.3.2 步骤2：在中继设备（AR2）配置DHCP中继, 五、DHCP Snooping配置（防欺骗）, 5.1 核心作用, 5.2 配置示例（华为交换机）, 六、关键命令汇总, 操作配置一基础认知核心定义与价值动态主机配置协议是一种工作在应用层的网络协议通过自动为客户端分配地址子网掩码网关等网络参数解决手工配置带来的地址冲突工作量大管理效率低等问题适用于企业校园等主机数量多的网络场景关键技术参数端口号采用协议服务器端使用端口客户端使用端口核心功能动态分配地址集中管理网络参数自动续租释放地址二工作原理四步流程客户端如从获取到完成配置需经过以下四个核心步骤均基于广播单播报文交互步骤报文类型发送方核心作用客户端客户端首次接入网络时通过广播报文寻找网络中的服务器此时客户端无目标为服务器服务器收到后通过广播单播报文响应携带可分配的地址子网掩码租期网关等参数客户端客户端选择最优的如最先收到的通过广播报文向服务器确认申请该同时告知其他服务器无需分配服务器服务器确认客户端的通过广播单播报文发送最终配置参数客户端接收后完成配置补充流程续租当租期到达时客户端向原服务器发送单播申请续租服务器回复确认续租释放客户端主动下线时发送报文告知服务器释放若租期到期未续租客户端自动停止使用该三地址池类型与配置华为设备支持两种核心地址池类型分别适用于不同网络规模配置流程如下类型基于接口的地址池小型网络适用场景单网段小型网络如办公室单楼层地址池基于接口自动生成无需手动指定网段配置简单配置示例以路由器的接口为例网段全局开启服务必做步骤进入连接客户端的接口如需先配置接口作为网段网关接口即网段网关启用接口地址池模式配置可选参数按需配置分配服务器地址常用公共排除不分配的如网关服务器避免冲突设置租期默认天此处配置天小时分钟类型基于全局的地址池中大型网络适用场景多网段中大型网络如企业多部门多楼层可手动创建多个地址池对应不同网段灵活管理配置示例创建对应的全局地址池全局开启服务创建的全局地址池网段地址池名称建议与对应便于管理指定地址池网段排除不分配的配置配置网段网关配置租期退出地址池视图创建的全局地址池网段步骤与一致将地址池绑定到接口接口需连接对应网段的客户端连接客户端的接口启用全局地址池模式四中继配置跨网段分配应用场景当服务器与客户端不在同一网段时如服务器在客户端在需在中间路由器中继设备配置中继转发客户端与服务器的报文实现跨网段分配配置前提需先配置路由协议如静态路由确保服务器中继设备客户端所在网段互通配置示例以为服务器为中继设备步骤在服务器配置全局地址池客户端所在网段的地址池连接中继设备的接口服务器侧接口步骤在中继设备配置中继连接客户端的接口客户端侧网关启用中继模式指定服务器的五配置防欺骗核心作用是部署在交换机上的安全功能用于识别合法服务器防止非法服务器如恶意向客户端分配错误导致网络故障其核心逻辑是默认所有交换机端口为非信任端口仅转发客户端的请求报文不转发服务器的等响应报文手动将连接合法服务器的端口设为信任端口允许转发所有报文包括配置示例华为交换机全局开启服务全局开启功能批量在客户端接入端口启用如创建端口组简化批量配置加入目标端口端口启用将连接合法服务器的端口设为信任端口如标记为信任端口验证配置查看全局配置查看客户端与的绑定关系六关键命令汇总功能需求命令备注全局开启服务所有配置的前提接口启用接口地址池小型单网段场景接口启用全局地址池中大型多网段场景创建全局地址池地址池名称需后续配置网段网关等参数配置地址池网段网段子网掩码全局地址池必配排除不分配的起始结束避免分配网关服务器配置服务器常用公共配置租期天数小时分钟默认天可按需调整启用中继中继设备的客户端侧接口配置指定服务器服务器中继必配全局开启交换机安全配置前提端口标记为信任端口仅连接合法服务器的端口配置查看配置验证全局与端口配置操作配置实验一配置基于接口地址池的开启服务实验二配置基于全局地址池的实验三配置中继首先需要配置路由协议保证所有网络都可以通信上配置全局地址池上配置中继实验四配置在交换机上进行设置用来确定真正的服务器默认情况下所有端口被设置为非信任端口不会转发任何和相关的报文除了的请求报文需要手动设置信任端口允许转发所有的相关报文配置步骤在交换机上开启功能在交换机下开启功能设置信任端口查看配置动态主机配置协议为客户端自动分配地址使用的端口号服务端客户端工作过程客户端发送寻找网络中的服务器服务器发送告诉客户端可以分配的地址客户端发送向服务器申请地址服务端发送确认分配的地址信息',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-09-03 16:27:33',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/wjh0527/wjh0527.github.io.git/" accesskey="h"><div class="title">蜡笔小王的博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" alt="微信" src="/wjh0527/wjh0527.github.io.git/null"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/wjh0527/wjh0527.github.io.git/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/wjh0527/wjh0527.github.io.git/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 1.05rem;">SQL注入<sup>2</sup></a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">网络基础<sup>16</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/wjh0527/wjh0527.github.io.git/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/wjh0527/wjh0527.github.io.git/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/wjh0527/wjh0527.github.io.git/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url">网络基础</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>网络基础</span></a></span></div></div><h1 class="post-title" itemprop="name headline">DHCP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-09-03T08:10:33.000Z" title="发表于 2025-09-03 16:10:33">2025-09-03</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-09-03T08:27:33.885Z" title="更新于 2025-09-03 16:27:33">2025-09-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="DHCP"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/"><header><a class="post-meta-categories" href="/wjh0527/wjh0527.github.io.git/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url">网络基础</a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" tabindex="-1" itemprop="url">网络基础</a><h1 id="CrawlerTitle" itemprop="name headline">DHCP</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">蜡笔小王</span><time itemprop="dateCreated datePublished" datetime="2025-09-03T08:10:33.000Z" title="发表于 2025-09-03 16:10:33">2025-09-03</time><time itemprop="dateCreated datePublished" datetime="2025-09-03T08:27:33.885Z" title="更新于 2025-09-03 16:27:33">2025-09-03</time></header><h2 id="一、DHCP基础认知"><a href="#一、DHCP基础认知" class="headerlink" title="一、DHCP基础认知"></a>一、DHCP基础认知</h2><h3 id="1-1-核心定义与价值"><a href="#1-1-核心定义与价值" class="headerlink" title="1.1 核心定义与价值"></a>1.1 核心定义与价值</h3><p>DHCP（Dynamic Host Configuration Protocol，动态主机配置协议）是一种工作在应用层的网络协议，通过<strong>自动为客户端分配IP地址、子网掩码、网关、DNS等网络参数</strong>，解决手工配置IP带来的地址冲突、工作量大、管理效率低等问题，适用于企业、校园等主机数量多的网络场景。</p>
+<h3 id="1-2-关键技术参数"><a href="#1-2-关键技术参数" class="headerlink" title="1.2 关键技术参数"></a>1.2 关键技术参数</h3><ul>
+<li><strong>端口号</strong>：采用UDP协议，服务器端使用67端口，客户端使用68端口。</li>
+<li><strong>核心功能</strong>：动态分配IP地址、集中管理网络参数、自动续租&#x2F;释放IP地址。</li>
+</ul>
+<h2 id="二、DHCP工作原理（四步流程）"><a href="#二、DHCP工作原理（四步流程）" class="headerlink" title="二、DHCP工作原理（四步流程）"></a>二、DHCP工作原理（四步流程）</h2><p>DHCP客户端（如PC）从获取IP到完成配置，需经过以下四个核心步骤，均基于广播&#x2F;单播报文交互：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>报文类型</th>
+<th>发送方</th>
+<th>核心作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>DHCP Discover</td>
+<td>客户端</td>
+<td>客户端首次接入网络时，通过广播报文寻找网络中的DHCP服务器（此时客户端无IP，目标IP为255.255.255.255）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>DHCP Offer</td>
+<td>服务器</td>
+<td>DHCP服务器收到Discover后，通过广播&#x2F;单播报文响应，携带可分配的IP地址、子网掩码、租期、网关、DNS等参数</td>
+</tr>
+<tr>
+<td>3</td>
+<td>DHCP Request</td>
+<td>客户端</td>
+<td>客户端选择最优的Offer（如最先收到的），通过广播报文向服务器确认申请该IP，同时告知其他服务器“无需分配”</td>
+</tr>
+<tr>
+<td>4</td>
+<td>DHCP ACK</td>
+<td>服务器</td>
+<td>服务器确认客户端的Request，通过广播&#x2F;单播报文发送最终配置参数，客户端接收后完成IP配置</td>
+</tr>
+</tbody></table>
+<h3 id="2-1-补充流程"><a href="#2-1-补充流程" class="headerlink" title="2.1 补充流程"></a>2.1 补充流程</h3><ul>
+<li><strong>IP续租</strong>：当IP租期到达50%时，客户端向原服务器发送单播<code>DHCP Request</code>申请续租，服务器回复<code>DHCP ACK</code>确认续租。</li>
+<li><strong>IP释放</strong>：客户端主动下线时，发送<code>DHCP Release</code>报文告知服务器释放IP；若租期到期未续租，客户端自动停止使用该IP。</li>
+</ul>
+<h2 id="三、DHCP地址池类型与配置"><a href="#三、DHCP地址池类型与配置" class="headerlink" title="三、DHCP地址池类型与配置"></a>三、DHCP地址池类型与配置</h2><p>华为设备支持两种核心地址池类型，分别适用于不同网络规模，配置流程如下：</p>
+<h3 id="3-1-类型1：基于接口的地址池（小型网络）"><a href="#3-1-类型1：基于接口的地址池（小型网络）" class="headerlink" title="3.1 类型1：基于接口的地址池（小型网络）"></a>3.1 类型1：基于接口的地址池（小型网络）</h3><h4 id="3-1-1-适用场景"><a href="#3-1-1-适用场景" class="headerlink" title="3.1.1 适用场景"></a>3.1.1 适用场景</h4><p>单网段、小型网络（如办公室单楼层），地址池基于接口IP自动生成，无需手动指定网段，配置简单。</p>
+<h4 id="3-1-2-配置示例（以路由器AR1的G0-0-0接口为例，网段192-168-1-0-24）"><a href="#3-1-2-配置示例（以路由器AR1的G0-0-0接口为例，网段192-168-1-0-24）" class="headerlink" title="3.1.2 配置示例（以路由器AR1的G0&#x2F;0&#x2F;0接口为例，网段192.168.1.0&#x2F;24）"></a>3.1.2 配置示例（以路由器AR1的G0&#x2F;0&#x2F;0接口为例，网段192.168.1.0&#x2F;24）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 1. 全局开启DHCP服务（必做步骤）</span><br><span class="line">[Huawei]dhcp enable  </span><br><span class="line"></span><br><span class="line">// 2. 进入连接客户端的接口（如G0/0/0，需先配置接口IP作为网段网关）</span><br><span class="line">[Huawei]interface GigabitEthernet0/0/0</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]ip address 192.168.1.254 255.255.255.0  // 接口IP即网段网关</span><br><span class="line"></span><br><span class="line">// 3. 启用接口地址池模式</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp select interface  </span><br><span class="line"></span><br><span class="line">// 4. 配置可选参数（按需配置）</span><br><span class="line">// （1）分配DNS服务器地址（常用公共DNS：61.139.2.69、114.114.114.114）</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp server dns-list 61.139.2.69 114.114.114.114  </span><br><span class="line">// （2）排除不分配的IP（如网关、服务器IP，避免冲突）</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp server excluded-ip-address 192.168.1.1 192.168.1.10  </span><br><span class="line">// （3）设置IP租期（默认1天，此处配置3天10小时30分钟）</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp server lease day 3 hour 10 minute 30  </span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-2-类型2：基于全局的地址池（中大型网络）"><a href="#3-2-类型2：基于全局的地址池（中大型网络）" class="headerlink" title="3.2 类型2：基于全局的地址池（中大型网络）"></a>3.2 类型2：基于全局的地址池（中大型网络）</h3><h4 id="3-2-1-适用场景"><a href="#3-2-1-适用场景" class="headerlink" title="3.2.1 适用场景"></a>3.2.1 适用场景</h4><p>多网段、中大型网络（如企业多部门、多楼层），可手动创建多个地址池对应不同网段，灵活管理。</p>
+<h4 id="3-2-2-配置示例（创建VLAN10、VLAN20对应的全局地址池）"><a href="#3-2-2-配置示例（创建VLAN10、VLAN20对应的全局地址池）" class="headerlink" title="3.2.2 配置示例（创建VLAN10、VLAN20对应的全局地址池）"></a>3.2.2 配置示例（创建VLAN10、VLAN20对应的全局地址池）</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 1. 全局开启DHCP服务</span><br><span class="line">[Huawei]dhcp enable  </span><br><span class="line"></span><br><span class="line">// 2. 创建VLAN10的全局地址池（网段192.168.1.0/24）</span><br><span class="line">[Huawei]ip pool vlan10  // 地址池名称，建议与VLAN对应，便于管理</span><br><span class="line">[Huawei-ip-pool-vlan10]network 192.168.1.0 mask 24  // 指定地址池网段</span><br><span class="line">[Huawei-ip-pool-vlan10]excluded-ip-address 192.168.1.1 192.168.1.10  // 排除不分配的IP</span><br><span class="line">[Huawei-ip-pool-vlan10]dns-list 61.139.2.69 114.114.114.114  // 配置DNS</span><br><span class="line">[Huawei-ip-pool-vlan10]gateway-list 192.168.1.254  // 配置网段网关</span><br><span class="line">[Huawei-ip-pool-vlan10]lease day 3 hour 10 minute 30  // 配置租期</span><br><span class="line">[Huawei-ip-pool-vlan10]quit  // 退出地址池视图</span><br><span class="line"></span><br><span class="line">// 3. 创建VLAN20的全局地址池（网段192.168.2.0/24，步骤与VLAN10一致）</span><br><span class="line">[Huawei]ip pool vlan20</span><br><span class="line">[Huawei-ip-pool-vlan20]network 192.168.2.0 mask 24</span><br><span class="line">[Huawei-ip-pool-vlan20]excluded-ip-address 192.168.2.1 192.168.2.10</span><br><span class="line">[Huawei-ip-pool-vlan20]dns-list 61.139.2.69 114.114.114.114</span><br><span class="line">[Huawei-ip-pool-vlan20]gateway-list 192.168.2.254</span><br><span class="line">[Huawei-ip-pool-vlan20]lease day 3 hour 10 minute 30</span><br><span class="line">[Huawei-ip-pool-vlan20]quit</span><br><span class="line"></span><br><span class="line">// 4. 将地址池绑定到接口（接口需连接对应网段的客户端）</span><br><span class="line">[Huawei]interface GigabitEthernet0/0/0  // 连接VLAN10客户端的接口</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp select global  // 启用全局地址池模式</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="四、DHCP中继配置（跨网段分配）"><a href="#四、DHCP中继配置（跨网段分配）" class="headerlink" title="四、DHCP中继配置（跨网段分配）"></a>四、DHCP中继配置（跨网段分配）</h2><h3 id="4-1-应用场景"><a href="#4-1-应用场景" class="headerlink" title="4.1 应用场景"></a>4.1 应用场景</h3><p>当DHCP服务器与客户端不在同一网段时（如服务器在12.1.1.0&#x2F;24，客户端在192.168.3.0&#x2F;24），需在中间路由器（中继设备）配置DHCP中继，转发客户端与服务器的DHCP报文，实现跨网段IP分配。</p>
+<h3 id="4-2-配置前提"><a href="#4-2-配置前提" class="headerlink" title="4.2 配置前提"></a>4.2 配置前提</h3><p>需先配置路由协议（如静态路由、OSPF），确保DHCP服务器、中继设备、客户端所在网段互通。</p>
+<h3 id="4-3-配置示例（以AR1为DHCP服务器，AR2为中继设备）"><a href="#4-3-配置示例（以AR1为DHCP服务器，AR2为中继设备）" class="headerlink" title="4.3 配置示例（以AR1为DHCP服务器，AR2为中继设备）"></a>4.3 配置示例（以AR1为DHCP服务器，AR2为中继设备）</h3><h4 id="4-3-1-步骤1：在DHCP服务器（AR1）配置全局地址池"><a href="#4-3-1-步骤1：在DHCP服务器（AR1）配置全局地址池" class="headerlink" title="4.3.1 步骤1：在DHCP服务器（AR1）配置全局地址池"></a>4.3.1 步骤1：在DHCP服务器（AR1）配置全局地址池</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[AR1]dhcp enable</span><br><span class="line">[AR1]ip pool vlan30  // 客户端所在网段（192.168.3.0/24）的地址池</span><br><span class="line">[AR1-ip-pool-vlan30]network 192.168.3.0 mask 24</span><br><span class="line">[AR1-ip-pool-vlan30]excluded-ip-address 192.168.3.1 192.168.3.10</span><br><span class="line">[AR1-ip-pool-vlan30]dns-list 61.139.2.69 114.114.114.114</span><br><span class="line">[AR1-ip-pool-vlan30]gateway-list 192.168.3.254</span><br><span class="line">[AR1-ip-pool-vlan30]lease day 3 hour 10 minute 30</span><br><span class="line">[AR1]interface GigabitEthernet0/0/2  // 连接中继设备（AR2）的接口</span><br><span class="line">[AR1-GigabitEthernet0/0/2]ip address 12.1.1.1 24  // 服务器侧接口IP</span><br><span class="line">[AR1-GigabitEthernet0/0/2]dhcp select global</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-3-2-步骤2：在中继设备（AR2）配置DHCP中继"><a href="#4-3-2-步骤2：在中继设备（AR2）配置DHCP中继" class="headerlink" title="4.3.2 步骤2：在中继设备（AR2）配置DHCP中继"></a>4.3.2 步骤2：在中继设备（AR2）配置DHCP中继</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[AR2]interface GigabitEthernet0/0/0  // 连接客户端（192.168.3.0/24）的接口</span><br><span class="line">[AR2-GigabitEthernet0/0/0]ip address 192.168.3.254 24  // 客户端侧网关IP</span><br><span class="line">[AR2-GigabitEthernet0/0/0]dhcp select relay  // 启用DHCP中继模式</span><br><span class="line">[AR2-GigabitEthernet0/0/0]dhcp relay server-ip 12.1.1.1  // 指定DHCP服务器IP（AR1的12.1.1.1）</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="五、DHCP-Snooping配置（防欺骗）"><a href="#五、DHCP-Snooping配置（防欺骗）" class="headerlink" title="五、DHCP Snooping配置（防欺骗）"></a>五、DHCP Snooping配置（防欺骗）</h2><h3 id="5-1-核心作用"><a href="#5-1-核心作用" class="headerlink" title="5.1 核心作用"></a>5.1 核心作用</h3><p>DHCP Snooping是部署在交换机上的安全功能，用于<strong>识别合法DHCP服务器</strong>，防止非法DHCP服务器（如恶意PC）向客户端分配错误IP，导致网络故障。其核心逻辑是：</p>
+<ul>
+<li>默认所有交换机端口为“非信任端口”：仅转发客户端的<code>DHCP Discover</code>请求报文，不转发服务器的<code>DHCP Offer</code>等响应报文。</li>
+<li>手动将连接合法DHCP服务器的端口设为“信任端口”：允许转发所有DHCP报文（包括Offer、ACK）。</li>
+</ul>
+<h3 id="5-2-配置示例（华为交换机）"><a href="#5-2-配置示例（华为交换机）" class="headerlink" title="5.2 配置示例（华为交换机）"></a>5.2 配置示例（华为交换机）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 1. 全局开启DHCP服务</span><br><span class="line">[Huawei]dhcp enable  </span><br><span class="line"></span><br><span class="line">// 2. 全局开启DHCP Snooping功能</span><br><span class="line">[Huawei]dhcp snooping enable  </span><br><span class="line"></span><br><span class="line">// 3. 批量在客户端接入端口启用DHCP Snooping（如E0/0/1~E0/0/22）</span><br><span class="line">[Huawei]port-group 1  // 创建端口组，简化批量配置</span><br><span class="line">[Huawei-port-group-1]group-member Ethernet0/0/1 to Ethernet0/0/22  // 加入目标端口</span><br><span class="line">[Huawei-port-group-1]dhcp snooping enable  // 端口启用DHCP Snooping</span><br><span class="line"></span><br><span class="line">// 4. 将连接合法DHCP服务器的端口设为信任端口（如E0/0/1）</span><br><span class="line">[Huawei]interface Ethernet0/0/1</span><br><span class="line">[Huawei-Ethernet0/0/1]dhcp snooping trusted  // 标记为信任端口</span><br><span class="line"></span><br><span class="line">// 5. 验证配置</span><br><span class="line">[Huawei]display dhcp snooping configuration  // 查看DHCP Snooping全局配置</span><br><span class="line">[Huawei]display dhcp snooping user-bind all  // 查看客户端与IP的绑定关系</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="六、关键命令汇总"><a href="#六、关键命令汇总" class="headerlink" title="六、关键命令汇总"></a>六、关键命令汇总</h2><table>
+<thead>
+<tr>
+<th>功能需求</th>
+<th>命令</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全局开启DHCP服务</td>
+<td><code>dhcp enable</code></td>
+<td>所有DHCP配置的前提</td>
+</tr>
+<tr>
+<td>接口启用接口地址池</td>
+<td><code>dhcp select interface</code></td>
+<td>小型单网段场景</td>
+</tr>
+<tr>
+<td>接口启用全局地址池</td>
+<td><code>dhcp select global</code></td>
+<td>中大型多网段场景</td>
+</tr>
+<tr>
+<td>创建全局地址池</td>
+<td><code>ip pool 地址池名称</code></td>
+<td>需后续配置网段、网关等参数</td>
+</tr>
+<tr>
+<td>配置地址池网段</td>
+<td><code>network 网段 mask 子网掩码</code></td>
+<td>全局地址池必配</td>
+</tr>
+<tr>
+<td>排除不分配的IP</td>
+<td><code>excluded-ip-address 起始IP 结束IP</code></td>
+<td>避免分配网关、服务器IP</td>
+</tr>
+<tr>
+<td>配置DNS服务器</td>
+<td><code>dns-list DNS1 DNS2</code></td>
+<td>常用公共DNS：114.114.114.114</td>
+</tr>
+<tr>
+<td>配置IP租期</td>
+<td><code>lease day 天数 hour 小时 minute 分钟</code></td>
+<td>默认1天，可按需调整</td>
+</tr>
+<tr>
+<td>启用DHCP中继</td>
+<td><code>dhcp select relay</code></td>
+<td>中继设备的客户端侧接口配置</td>
+</tr>
+<tr>
+<td>指定DHCP服务器IP</td>
+<td><code>dhcp relay server-ip 服务器IP</code></td>
+<td>DHCP中继必配</td>
+</tr>
+<tr>
+<td>全局开启DHCP Snooping</td>
+<td><code>dhcp snooping enable</code></td>
+<td>交换机安全配置前提</td>
+</tr>
+<tr>
+<td>端口标记为信任端口</td>
+<td><code>dhcp snooping trusted</code></td>
+<td>仅连接合法DHCP服务器的端口配置</td>
+</tr>
+<tr>
+<td>查看DHCP Snooping配置</td>
+<td><code>display dhcp snooping configuration</code></td>
+<td>验证全局与端口配置</td>
+</tr>
+</tbody></table>
+<h1 id="操作配置"><a href="#操作配置" class="headerlink" title="操作配置"></a>操作配置</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250903161700783.png" alt="image-20250903161700783"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">实验一：配置基于接口地址池的DHCP</span><br><span class="line">[Huawei]dhcp enable   开启DHCP服务</span><br><span class="line">[Huawei]interface GigabitEthernet0/0/0</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp select interface</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp server dns-list 61.139.2.69 114.114.114.114</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp server excluded-ip-address 192.168.1.1 192.168.1.10</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp server lease day 3 hour 10 minute 30</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">实验二：配置基于全局地址池的DHCP</span><br><span class="line">[Huawei]dhcp enable</span><br><span class="line">[Huawei]ip pool vlan10</span><br><span class="line">[Huawei-ip-pool-vlan10]network 192.168.1.0 mask 24</span><br><span class="line">[Huawei-ip-pool-vlan10]excluded-ip-address 192.168.1.1 192.168.1.10</span><br><span class="line">[Huawei-ip-pool-vlan10]dns-list 61.139.2.69 114.114.114.114</span><br><span class="line">[Huawei-ip-pool-vlan10]gateway-list 192.168.1.254</span><br><span class="line">[Huawei-ip-pool-vlan10]lease day 3 hour 10 minute 30</span><br><span class="line">[Huawei-ip-pool-vlan10]quit</span><br><span class="line">[Huawei]int g0/0/0</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp select global </span><br><span class="line">[Huawei]ip pool vlan20</span><br><span class="line">[Huawei-ip-pool-vlan10]network 192.168.2.0 mask 24</span><br><span class="line">[Huawei-ip-pool-vlan10]excluded-ip-address 192.168.2.1 192.168.2.10</span><br><span class="line">[Huawei-ip-pool-vlan10]dns-list 61.139.2.69 114.114.114.114</span><br><span class="line">[Huawei-ip-pool-vlan10]gateway-list 192.168.2.254</span><br><span class="line">[Huawei-ip-pool-vlan10]lease day 3 hour 10 minute 30</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">实验三：配置DHCP中继</span><br><span class="line">1.首先需要配置路由协议保证所有网络都可以通信</span><br><span class="line">2.AR1上配置全局地址池</span><br><span class="line">[Huawei]ip pool vlan30</span><br><span class="line">[Huawei-ip-pool-vlan10]network 192.168.3.0 mask 24</span><br><span class="line">[Huawei-ip-pool-vlan10]excluded-ip-address 192.168.3.1 192.168.3.10</span><br><span class="line">[Huawei-ip-pool-vlan10]dns-list 61.139.2.69 114.114.114.114</span><br><span class="line">[Huawei-ip-pool-vlan10]gateway-list 192.168.3.254</span><br><span class="line">[Huawei-ip-pool-vlan10]lease day 3 hour 10 minute 30</span><br><span class="line">[Huawei]int g0/0/2</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp select global </span><br><span class="line">3.AR2上配置DHCP中继</span><br><span class="line">[Huawei]int g0/0/0</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp select relay     </span><br><span class="line">[Huawei-GigabitEthernet0/0/0]dhcp relay server-ip 12.1.1.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">实验四：DHCP Snooping配置</span><br><span class="line">DHCP SNOOPING:在交换机上进行设置，用来确定真正的DHCP服务器</span><br><span class="line">默认情况下所有端口被设置为非信任端口:不会转发任何和DHCP相关的报文，除了DHCP的请求报文</span><br><span class="line">需要手动设置信任端口:允许转发所有dhcp 的相关报文</span><br><span class="line"></span><br><span class="line">配置步骤：</span><br><span class="line">1.在交换机上开启dhcp功能</span><br><span class="line">[Huawei]dhcp enable </span><br><span class="line">2.在交换机下开启dhcp snooping功能</span><br><span class="line">[Huawei]dhcp snooping enable </span><br><span class="line">[Huawei]port-group 1</span><br><span class="line">[Huawei-port-group-1]group-member e0/0/1 to e0/0/22</span><br><span class="line">[Huawei-port-group-1]dhcp snooping enable</span><br><span class="line">3.设置信任端口</span><br><span class="line">[Huawei-Ethernet0/0/1]dhcp snooping trusted</span><br><span class="line">4.查看配置</span><br><span class="line">[Huawei-Ethernet0/0/1]display dhcp snooping configuration </span><br><span class="line">[Huawei-Ethernet0/0/1]display dhcp snooping user-bind all</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250903161737704.png" alt="image-20250903161737704"></p>
+<p>DHCP：动态主机配置协议，为客户端自动分配IP地址<br>使用的端口号：服务端67&#x2F;udp    客户端68&#x2F;udp<br>工作过程：客户端发送DHCP Discover 寻找网络中的DHCP服务器<br>          服务器发送DHCP Offer 告诉客户端可以分配的IP地址<br>          客户端发送DHCP Request 向服务器申请IP地址<br>          服务端发送DHCP ACK 确认分配的Ip地址信息</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/wjh0527/wjh0527.github.io.git/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">蜡笔小王</div><div class="post-copyright__author_desc">不想学习啊！！！</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/')">DHCP</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/null" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=DHCP&amp;url=https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://github.com/wjh0527/wjh0527.github.io.git" target="_blank">蜡笔小王的博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>网络基础<span class="tagsPageCount">16</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/acl-nat/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" onerror="onerror=null;src='/wjh0527/wjh0527.github.io.git/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">acl+nat</div></div></a></div><div class="next-post pull-right"><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/Firewall/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" onerror="onerror=null;src='/wjh0527/wjh0527.github.io.git/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Firewall</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/GVRP/" title="GVRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">GVRP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/Firewall/" title="Firewall"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">Firewall</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/STP/" title="STP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">STP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/" title="VRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">VRP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VRRP/" title="VRRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">VRRP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VLAN%E6%8A%80%E6%9C%AF/" title="VLAN技术"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">VLAN技术</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" onerror="this.onerror=null;this.src='/wjh0527/wjh0527.github.io.git/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">别看了，去玩会吧</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(null) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81DHCP%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5"><span class="toc-number">1.</span> <span class="toc-text">一、DHCP基础认知</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BB%B7%E5%80%BC"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 核心定义与价值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 关键技术参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81DHCP%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E5%9B%9B%E6%AD%A5%E6%B5%81%E7%A8%8B%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">二、DHCP工作原理（四步流程）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%A1%A5%E5%85%85%E6%B5%81%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 补充流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81DHCP%E5%9C%B0%E5%9D%80%E6%B1%A0%E7%B1%BB%E5%9E%8B%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">三、DHCP地址池类型与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%B1%BB%E5%9E%8B1%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%9C%B0%E5%9D%80%E6%B1%A0%EF%BC%88%E5%B0%8F%E5%9E%8B%E7%BD%91%E7%BB%9C%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 类型1：基于接口的地址池（小型网络）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1 适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%BB%A5%E8%B7%AF%E7%94%B1%E5%99%A8AR1%E7%9A%84G0-0-0%E6%8E%A5%E5%8F%A3%E4%B8%BA%E4%BE%8B%EF%BC%8C%E7%BD%91%E6%AE%B5192-168-1-0-24%EF%BC%89"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2 配置示例（以路由器AR1的G0&#x2F;0&#x2F;0接口为例，网段192.168.1.0&#x2F;24）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E7%B1%BB%E5%9E%8B2%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%85%A8%E5%B1%80%E7%9A%84%E5%9C%B0%E5%9D%80%E6%B1%A0%EF%BC%88%E4%B8%AD%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 类型2：基于全局的地址池（中大型网络）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.2.1.</span> <span class="toc-text">3.2.1 适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%EF%BC%88%E5%88%9B%E5%BB%BAVLAN10%E3%80%81VLAN20%E5%AF%B9%E5%BA%94%E7%9A%84%E5%85%A8%E5%B1%80%E5%9C%B0%E5%9D%80%E6%B1%A0%EF%BC%89"><span class="toc-number">3.2.2.</span> <span class="toc-text">3.2.2 配置示例（创建VLAN10、VLAN20对应的全局地址池）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81DHCP%E4%B8%AD%E7%BB%A7%E9%85%8D%E7%BD%AE%EF%BC%88%E8%B7%A8%E7%BD%91%E6%AE%B5%E5%88%86%E9%85%8D%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">四、DHCP中继配置（跨网段分配）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E9%85%8D%E7%BD%AE%E5%89%8D%E6%8F%90"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 配置前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%EF%BC%88%E4%BB%A5AR1%E4%B8%BADHCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8CAR2%E4%B8%BA%E4%B8%AD%E7%BB%A7%E8%AE%BE%E5%A4%87%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 配置示例（以AR1为DHCP服务器，AR2为中继设备）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-1-%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%9C%A8DHCP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88AR1%EF%BC%89%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E5%9C%B0%E5%9D%80%E6%B1%A0"><span class="toc-number">4.3.1.</span> <span class="toc-text">4.3.1 步骤1：在DHCP服务器（AR1）配置全局地址池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-2-%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%9C%A8%E4%B8%AD%E7%BB%A7%E8%AE%BE%E5%A4%87%EF%BC%88AR2%EF%BC%89%E9%85%8D%E7%BD%AEDHCP%E4%B8%AD%E7%BB%A7"><span class="toc-number">4.3.2.</span> <span class="toc-text">4.3.2 步骤2：在中继设备（AR2）配置DHCP中继</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81DHCP-Snooping%E9%85%8D%E7%BD%AE%EF%BC%88%E9%98%B2%E6%AC%BA%E9%AA%97%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">五、DHCP Snooping配置（防欺骗）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%EF%BC%88%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 配置示例（华为交换机）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%85%B3%E9%94%AE%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB"><span class="toc-number">6.</span> <span class="toc-text">六、关键命令汇总</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E9%85%8D%E7%BD%AE"><span class="toc-number"></span> <span class="toc-text">操作配置</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%98%B2%E7%81%AB%E5%A2%99%E5%9F%BA%E7%A1%80/" title="防火墙基础">防火墙基础</a><time datetime="2025-09-03T09:11:11.000Z" title="发表于 2025-09-03 17:11:11">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/Firewall/" title="Firewall">Firewall</a><time datetime="2025-09-03T08:42:52.000Z" title="发表于 2025-09-03 16:42:52">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/" title="DHCP">DHCP</a><time datetime="2025-09-03T08:10:33.000Z" title="发表于 2025-09-03 16:10:33">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/acl-nat/" title="acl+nat">acl+nat</a><time datetime="2025-09-03T07:56:44.000Z" title="发表于 2025-09-03 15:56:44">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE/" title="网络管理协议">网络管理协议</a><time datetime="2025-09-03T07:55:12.000Z" title="发表于 2025-09-03 15:55:12">2025-09-03</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/wjh0527/wjh0527.github.io.git/" title="蜡笔小王" target="_blank">蜡笔小王</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/wjh0527/wjh0527.github.io.git/archives/" title="archive"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/wjh0527/wjh0527.github.io.git/tags/" title="tag"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/wjh0527/wjh0527.github.io.git/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/wjh0527/wjh0527.github.io.git/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 0.88rem;">SQL注入<sup>2</sup></a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">网络基础<sup>16</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/wjh0527/wjh0527.github.io.git/js/utils.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/main.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/01/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 蜡笔小王 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/wjh0527/wjh0527.github.io.git/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

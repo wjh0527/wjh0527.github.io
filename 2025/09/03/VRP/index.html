@@ -1,0 +1,757 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>VRP | 蜡笔小王的博客</title><meta name="keywords" content="网络基础"><meta name="author" content="蜡笔小王"><meta name="copyright" content="蜡笔小王"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="VRP"><meta name="application-name" content="VRP"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="VRP"><meta property="og:url" content="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/index.html"><meta property="og:site_name" content="蜡笔小王的博客"><meta property="og:description" content="Web"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://github.com/wjh0527/wjh0527.github.io.git/assets/lbxw.jpg"><meta property="article:author" content="蜡笔小王"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://github.com/wjh0527/wjh0527.github.io.git/assets/lbxw.jpg"><meta name="description" content="Web"><link rel="shortcut icon" href="/wjh0527/wjh0527.github.io.git/favicon.ico"><link rel="canonical" href="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/wjh0527/wjh0527.github.io.git/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/wjh0527/wjh0527.github.io.git/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/wjh0527/wjh0527.github.io.git/img/siteicon/16.png"/><link rel="bookmark" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/wjh0527/wjh0527.github.io.git/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"每天学习亿点点","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/wjh0527/wjh0527.github.io.git/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 蜡笔小王","link":"链接: ","source":"来源: 蜡笔小王的博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '蜡笔小王的博客',
+  title: 'VRP',
+  postAI: '',
+  pageFillDescription: 'VRP（Versatile Routing Platform）技术文档, 一、VRP概述与核心价值, （一）VRP定义与定位, （二）VRP发展历程, （三）VRP核心应用场景, 二、VRP设备登录与初始化, （一）设备管理接口类型, 接口实物示例：, （二）Console口登录步骤, 1. 硬件连接, 2. 终端软件配置（以SecureCRT为例）, 3. 设备登录与初始化, （三）Mini USB口登录步骤, 1. 驱动安装, 2. 终端配置与登录, 三、VRP命令行基础, （一）命令行视图体系, 视图切换示例：, （二）命令行操作技巧, 1. 快捷键功能, 2. 在线帮助功能, （三）基础配置命令, 1. 设备命名, 2. 系统时钟配置, 3. 接口IP地址配置, 4. 用户界面配置, 四、VRP文件系统管理, （一）文件系统核心概念, （二）基础文件操作命令, 示例：查看Flash目录文件, （三）配置文件管理, 核心操作流程：, 技术文档一概述与核心价值一定义与定位通用路由平台是华为数据通信产品的专用操作系统平台以业务为核心采用组件化体系结构覆盖路由器交换机无线等多类网络设备其核心价值在于功能可裁剪与扩展支持根据设备硬件规格如中低端交换机高端核心路由器和业务需求灵活启用路由交换安全网管无线等组件平衡功能与性能提升设备运行效率通过优化的资源调度机制解决多终端接入场景下网络设备的负载压力保障企业网络的稳定运行统一管理接口为不同类型的华为设备提供一致的命令行操作界面和配置逻辑降低网络工程师的学习成本与运维复杂度二发展历程历经多代演进从早期的集中式设计逐步升级为支持多核多框的分布式架构具体发展阶段如下发展阶段时间范围核心特点适用场景集中式设计功能简单中低端设备如早期小型路由器初步分布式平台支持基础路由特性中小型企业园区网路由器组件化设计支持更多业务特性如中高端路由器与交换机至今高可靠性架构支持热备份故障快速切换核心路由器数据中心交换机至今多进程多多框协同高性能与高扩展性大型骨干网路由器云数据中心设备三核心应用场景通过组件化设计适配不同网络场景的需求主要应用方向包括路由场景支持静态路由动态路由协议实现跨网段跨区域的报文转发交换场景支持划分链路端口安全链路聚合满足局域网二层通信需求安全场景集成防火墙访问控制列表欺骗防御等功能保障网络边界与数据传输安全无线场景支持无线控制器与瘦的协同管理实现接入漫游流量控制网管场景提供简单网络管理协议接口支持通过华为等网管平台进行设备监控配置下发与故障告警二设备登录与初始化一设备管理接口类型华为网络设备如系列路由器系列交换机提供两种主要的本地登录接口用于初始配置与故障排查接口类型设备支持连接方式核心用途口所有华为数通设备如路由器交换机线一端为另一端为或转连接主机口本地初始化配置如首次登录设置密码地址口部分中高端设备如交换机线连接主机口本地登录备份无需口兼容性更强接口实物示例路由器同时提供口与口位于设备前面板标识分别为和交换机仅提供口位于设备后面板标识为二口登录步骤硬件连接将线的端插入设备的口端或转适配器插入主机的口或口确保设备通电主机与设备之间无物理链路中断终端软件配置以为例打开新建连接选择对应的口如配置串口参数需与设备默认口参数一致波特率位秒数据位奇偶校验无停止位数据流控制无点击连接打开终端窗口设备登录与初始化重启设备终端窗口将显示设备启动日志如初始化系统加载启动完成后提示输入默认用户名如和密码如部分设备首次登录需修改密码登录后若提示输入停止自动配置避免自动配置覆盖手动设置进入用户视图三口登录步骤驱动安装将线连接设备与主机主机将识别到新硬件如安装华为设备配套的驱动如按安装向导完成操作默认安装路径即可终端配置与登录打开设备管理器查看对应的口如终端软件配置与口一致波特率等连接后登录流程与口相同三命令行基础一命令行视图体系采用视图分层设计不同视图对应不同的配置权限与功能范围核心视图及切换方式如下视图名称标识核心功能切换命令用户视图设备名查看设备运行状态如版本接口状态无配置权限设备登录后默认进入系统视图设备名配置设备系统参数如设备名时区用户界面用户视图下输入可缩写为接口视图设备名接口类型编号配置接口参数如地址端口类型系统视图下输入接口名如协议视图设备名协议名配置路由协议如安全协议如系统视图下输入协议命令如用户界面视图设备名类型编号配置登录参数如超时时间密码系统视图下输入口或远程登录视图切换示例从用户视图切换到系统视图从系统视图切换到接口视图从接口视图返回用户视图快捷键二命令行操作技巧快捷键功能命令行支持多种快捷键提升操作效率常用快捷键如下快捷键功能描述示例光标跳转至当前命令行开头输入按后光标到前停止当前命令运行如中断测试执行时按终止从任意视图返回用户视图在接口视图下按直接回到终止当前远程连接如登录连接异常时按强制断开键补全不完整命令输入按键自动补全为删除光标左侧字符输入按删除改为在线帮助功能提供部分帮助与完全帮助用于查询命令语法部分帮助输入命令前缀查询以该前缀开头的所有命令查询以开头的命令完全帮助输入命令查询命令的参数与格式查询命令的子命令三基础配置命令设备命名配置设备名称便于运维识别需在系统视图下操作将设备名改为视图标识同步更新系统时钟配置设置设备时区与当前时间确保日志时间准确性在用户视图或系统视图下操作设置时区为北京设置当前时间为查看时钟配置接口地址配置为路由器物理接口或交换机接口配置地址需在接口视图下操作为路由器接口配置地址为交换机接口配置地址需先创建用户界面配置配置登录参数如超时时间历史命令缓存需在用户界面视图下操作配置口编号超时时间为分钟避免长时间闲置格式分钟秒配置支持个远程登录会话的认证密码密码加密存储设置用户级别为配置级可执行大部分配置命令四文件系统管理一文件系统核心概念文件系统用于存储设备的配置文件系统文件日志文件等依赖设备的物理存储介质如卡核心文件类型如下文件类型用途默认存储路径示例文件名配置文件保存设备配置如接口路由协议默认保存配置文件自定义配置文件系统文件设备运行的操作系统镜像路由器系统文件日志文件记录设备运行日志如接口登录事件二基础文件操作命令提供类似的文件操作命令用于查询创建删除文件目录核心命令如下操作类型命令功能描述示例目录查询查看当前工作目录输出文件列表路径显示指定目录下的文件信息包括文件名大小日期列出根目录所有文件目录创建路径目录名在指定路径下创建新目录在下创建目录文件复制源路径文件名目标路径文件名复制文件到指定路径复制配置文件到目录文件删除路径文件名永久删除文件跳过回收站永久删除目录下的文件重命名源路径文件名目标路径新文件名修改文件名将重命名为文件查看路径文件名查看文本文件内容如配置文件查看默认配置文件内容示例查看目录文件总存储空间与剩余空间三配置文件管理配置文件是的核心文件分为当前配置文件和保存配置文件两者的关系与操作如下配置文件类型存储位置特点操作命令当前配置文件内存设备运行时的实时配置未保存前断电丢失查看保存配置文件闪存已保存的配置设备启动时自动加载查看保存核心操作流程查看当前配置查看设备实时配置如接口路由协议保存当前配置将中的当前配置保存到的默认配置文件配置操作基础基本配置为设备配置名称配置系统时间配置标题消息路由器接口配置回环接口用于测试或管理关闭接口开启接口一配置接口地址信息二配置用户信息三配置虚拟终端用户用户级别允许的服务测试查看路由器的接口地址配置查看本地用户信息或使用登录到进行测试具有用户模式下的命令使用不能进行配置查看当前登录用户查看日志使用登录到进行测试跟用户的权限一样使用登录到进行测试可以进行配置但不能进行管理如用户管理文件管理等使用和登录到进行测试两个用户都具有管理员权限将命令等级设置为此时上面所有用户都不能使用命令将用户级别设置为此时用户就可以使用命令了系统配置将配置为服务器参考文档服务器的配置参考文档配置文件管理查看系统启动配置文件修改下次启动的配置比较当前配置与下次启动的配置清除下次启动时加载的配置文件初始化配置系统升级删除无关的文件或其他文件以释放空间从服务器获取指定下次启动时加载的设备在重启后将会加载新的系统配置向日志主机输出日志信息配置的接口地址配置通道的名称为配置信息通道允许输出模块的日志信息允许输出的日志级别最低为配置发送日志信息的源接口配置日志信息输出到日志主机配置静态路由保证与日志主机之间路由可达文件系统管理命令功能查看当前目录显示当前目录下的文件信息查看文本文件的具体内容切换当前工作目录创建新的目录删除目录复制文件移动文件重命名文件删除永久删除文件恢复删除的文件彻底回收站中的文件显示当前配置文件还未保存的显示保存的配置文件保存当前配置信息查看系统启动配置参数配置系统下次启动时使用的配置文件比较当前配置与下次启动的配置清楚下次启动时加载的配置文件',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-09-03 11:22:10',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/wjh0527/wjh0527.github.io.git/" accesskey="h"><div class="title">蜡笔小王的博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" alt="微信" src="/wjh0527/wjh0527.github.io.git/null"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/wjh0527/wjh0527.github.io.git/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/wjh0527/wjh0527.github.io.git/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 1.05rem;">SQL注入<sup>2</sup></a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">网络基础<sup>16</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/wjh0527/wjh0527.github.io.git/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/wjh0527/wjh0527.github.io.git/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/wjh0527/wjh0527.github.io.git/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url">网络基础</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>网络基础</span></a></span></div></div><h1 class="post-title" itemprop="name headline">VRP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-09-03T03:02:11.000Z" title="发表于 2025-09-03 11:02:11">2025-09-03</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-09-03T03:22:10.102Z" title="更新于 2025-09-03 11:22:10">2025-09-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="VRP"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/"><header><a class="post-meta-categories" href="/wjh0527/wjh0527.github.io.git/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url">网络基础</a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" tabindex="-1" itemprop="url">网络基础</a><h1 id="CrawlerTitle" itemprop="name headline">VRP</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">蜡笔小王</span><time itemprop="dateCreated datePublished" datetime="2025-09-03T03:02:11.000Z" title="发表于 2025-09-03 11:02:11">2025-09-03</time><time itemprop="dateCreated datePublished" datetime="2025-09-03T03:22:10.102Z" title="更新于 2025-09-03 11:22:10">2025-09-03</time></header><h1 id="VRP（Versatile-Routing-Platform）技术文档"><a href="#VRP（Versatile-Routing-Platform）技术文档" class="headerlink" title="VRP（Versatile Routing Platform）技术文档"></a>VRP（Versatile Routing Platform）技术文档</h1><h2 id="一、VRP概述与核心价值"><a href="#一、VRP概述与核心价值" class="headerlink" title="一、VRP概述与核心价值"></a>一、VRP概述与核心价值</h2><h3 id="（一）VRP定义与定位"><a href="#（一）VRP定义与定位" class="headerlink" title="（一）VRP定义与定位"></a>（一）VRP定义与定位</h3><p>VRP（通用路由平台）是华为数据通信产品的专用操作系统平台，以IP业务为核心，采用组件化体系结构，覆盖路由器、交换机、无线AP等多类网络设备。其核心价值在于：</p>
+<ul>
+<li><strong>功能可裁剪与扩展</strong>：支持根据设备硬件规格（如中低端交换机、高端核心路由器）和业务需求，灵活启用路由、交换、安全、网管、无线等组件，平衡功能与性能。</li>
+<li><strong>提升设备运行效率</strong>：通过优化的资源调度机制，解决多终端接入场景下网络设备的负载压力，保障企业网络的稳定运行。</li>
+<li><strong>统一管理接口</strong>：为不同类型的华为设备提供一致的命令行操作界面和配置逻辑，降低网络工程师的学习成本与运维复杂度。</li>
+</ul>
+<h3 id="（二）VRP发展历程"><a href="#（二）VRP发展历程" class="headerlink" title="（二）VRP发展历程"></a>（二）VRP发展历程</h3><p>VRP历经多代演进，从早期的集中式设计逐步升级为支持多核、多框的分布式架构，具体发展阶段如下：</p>
+<table>
+<thead>
+<tr>
+<th>发展阶段</th>
+<th>时间范围</th>
+<th>核心特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VRP1</td>
+<td>1998-2001</td>
+<td>集中式设计，功能简单</td>
+<td>中低端设备（如早期小型路由器）</td>
+</tr>
+<tr>
+<td>VRP2</td>
+<td>1999-2000</td>
+<td>初步分布式平台，支持基础路由特性</td>
+<td>中小型企业园区网路由器</td>
+</tr>
+<tr>
+<td>VRP3</td>
+<td>2000-2004</td>
+<td>组件化设计，支持更多业务特性（如VPN、QoS）</td>
+<td>中高端路由器与交换机</td>
+</tr>
+<tr>
+<td>VRP5</td>
+<td>2004-至今</td>
+<td>高可靠性架构，支持热备份、故障快速切换</td>
+<td>核心路由器、数据中心交换机</td>
+</tr>
+<tr>
+<td>VRP8</td>
+<td>2009-至今</td>
+<td>多进程、多CPU、多框协同，高性能与高扩展性</td>
+<td>大型骨干网路由器、云数据中心设备</td>
+</tr>
+</tbody></table>
+<h3 id="（三）VRP核心应用场景"><a href="#（三）VRP核心应用场景" class="headerlink" title="（三）VRP核心应用场景"></a>（三）VRP核心应用场景</h3><p>VRP通过组件化设计，适配不同网络场景的需求，主要应用方向包括：</p>
+<ul>
+<li><strong>路由场景</strong>：支持静态路由、动态路由协议（OSPF、BGP、RIP），实现跨网段、跨区域的IP报文转发。</li>
+<li><strong>交换场景</strong>：支持VLAN划分、Trunk链路、端口安全（Port-Security）、链路聚合（LACP），满足局域网二层通信需求。</li>
+<li><strong>安全场景</strong>：集成防火墙、ACL（访问控制列表）、ARP欺骗防御、IPsec VPN等功能，保障网络边界与数据传输安全。</li>
+<li><strong>无线场景</strong>：支持无线控制器（AC）与瘦AP（FIT AP）的协同管理，实现Wi-Fi接入、漫游、流量控制。</li>
+<li><strong>网管场景</strong>：提供SNMP（简单网络管理协议）接口，支持通过华为eSight等网管平台进行设备监控、配置下发与故障告警。</li>
+</ul>
+<h2 id="二、VRP设备登录与初始化"><a href="#二、VRP设备登录与初始化" class="headerlink" title="二、VRP设备登录与初始化"></a>二、VRP设备登录与初始化</h2><h3 id="（一）设备管理接口类型"><a href="#（一）设备管理接口类型" class="headerlink" title="（一）设备管理接口类型"></a>（一）设备管理接口类型</h3><p>华为网络设备（如AR系列路由器、S系列交换机）提供两种主要的本地登录接口，用于初始配置与故障排查：</p>
+<table>
+<thead>
+<tr>
+<th>接口类型</th>
+<th>设备支持</th>
+<th>连接方式</th>
+<th>核心用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Console口</td>
+<td>所有华为数通设备（如AR2200E路由器、S5720交换机）</td>
+<td>Console线（一端为RJ45，另一端为DB9或USB转DB9）连接主机COM口</td>
+<td>本地初始化配置（如首次登录设置密码、IP地址）</td>
+</tr>
+<tr>
+<td>Mini USB口</td>
+<td>部分中高端设备（如AR2200E、S6720交换机）</td>
+<td>Mini USB线连接主机USB口</td>
+<td>本地登录备份，无需COM口，兼容性更强</td>
+</tr>
+</tbody></table>
+<h4 id="接口实物示例："><a href="#接口实物示例：" class="headerlink" title="接口实物示例："></a>接口实物示例：</h4><ul>
+<li><strong>AR2200E路由器</strong>：同时提供Console口与Mini USB口，位于设备前面板，标识分别为“Console”和“Mini USB”。</li>
+<li><strong>S5720交换机</strong>：仅提供Console口，位于设备后面板，标识为“Console”。</li>
+</ul>
+<h3 id="（二）Console口登录步骤"><a href="#（二）Console口登录步骤" class="headerlink" title="（二）Console口登录步骤"></a>（二）Console口登录步骤</h3><h4 id="1-硬件连接"><a href="#1-硬件连接" class="headerlink" title="1. 硬件连接"></a>1. 硬件连接</h4><ol>
+<li>将Console线的RJ45端插入设备的Console口，DB9端（或USB转DB9适配器）插入主机的COM口（或USB口）。</li>
+<li>确保设备通电，主机与设备之间无物理链路中断。</li>
+</ol>
+<h4 id="2-终端软件配置（以SecureCRT为例）"><a href="#2-终端软件配置（以SecureCRT为例）" class="headerlink" title="2. 终端软件配置（以SecureCRT为例）"></a>2. 终端软件配置（以SecureCRT为例）</h4><ol>
+<li>打开SecureCRT，新建“Serial”连接，选择对应的COM口（如COM3）。</li>
+<li>配置串口参数，需与设备默认Console口参数一致：<ul>
+<li>波特率（位&#x2F;秒）：9600</li>
+<li>数据位：8</li>
+<li>奇偶校验：无</li>
+<li>停止位：1</li>
+<li>数据流控制：无</li>
+</ul>
+</li>
+<li>点击“连接”，打开终端窗口。</li>
+</ol>
+<h4 id="3-设备登录与初始化"><a href="#3-设备登录与初始化" class="headerlink" title="3. 设备登录与初始化"></a>3. 设备登录与初始化</h4><ol>
+<li>重启设备，终端窗口将显示设备启动日志（如BIOS初始化、VRP系统加载）。</li>
+<li>启动完成后，提示“Login authentication”，输入默认用户名（如“admin”）和密码（如“<a href="mailto:&#x61;&#100;&#109;&#105;&#110;&#64;&#104;&#117;&#x61;&#x77;&#x65;&#x69;&#x2e;&#x63;&#111;&#109;">&#x61;&#100;&#109;&#105;&#110;&#64;&#104;&#117;&#x61;&#x77;&#x65;&#x69;&#x2e;&#x63;&#111;&#109;</a>”，部分设备首次登录需修改密码）。</li>
+<li>登录后若提示“Auto-Config is working”，输入“y”停止自动配置（避免自动配置覆盖手动设置）：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Warning: Auto-Config is working. Before configuring the device, stop Auto-Config. If you perform configurations when Auto-Config is running, the DHCP, routing, DNS, and VTY configurations will be lost. Do you want to stop Auto-Config? [y/n]:y</span><br><span class="line">Info: Auto-Config has been stopped.</span><br><span class="line">&lt;Huawei&gt;  // 进入用户视图</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="（三）Mini-USB口登录步骤"><a href="#（三）Mini-USB口登录步骤" class="headerlink" title="（三）Mini USB口登录步骤"></a>（三）Mini USB口登录步骤</h3><h4 id="1-驱动安装"><a href="#1-驱动安装" class="headerlink" title="1. 驱动安装"></a>1. 驱动安装</h4><ol>
+<li>将Mini USB线连接设备与主机，主机将识别到新硬件（如“TUSB3410”）。</li>
+<li>安装华为设备配套的Mini USB驱动（如“TUSB3410 Single Driver Wrapper”），按安装向导完成操作（默认安装路径即可）。</li>
+</ol>
+<h4 id="2-终端配置与登录"><a href="#2-终端配置与登录" class="headerlink" title="2. 终端配置与登录"></a>2. 终端配置与登录</h4><ol>
+<li>打开设备管理器，查看Mini USB对应的COM口（如COM4）。</li>
+<li>终端软件配置与Console口一致（波特率9600等），连接后登录流程与Console口相同。</li>
+</ol>
+<h2 id="三、VRP命令行基础"><a href="#三、VRP命令行基础" class="headerlink" title="三、VRP命令行基础"></a>三、VRP命令行基础</h2><h3 id="（一）命令行视图体系"><a href="#（一）命令行视图体系" class="headerlink" title="（一）命令行视图体系"></a>（一）命令行视图体系</h3><p>VRP采用“视图分层”设计，不同视图对应不同的配置权限与功能范围，核心视图及切换方式如下：</p>
+<table>
+<thead>
+<tr>
+<th>视图名称</th>
+<th>标识</th>
+<th>核心功能</th>
+<th>切换命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户视图</td>
+<td>&lt;设备名&gt;</td>
+<td>查看设备运行状态（如版本、接口状态），无配置权限</td>
+<td>设备登录后默认进入</td>
+</tr>
+<tr>
+<td>系统视图</td>
+<td>[设备名]</td>
+<td>配置设备系统参数（如设备名、时区、用户界面）</td>
+<td>用户视图下输入“system-view”（可缩写为“sys”）</td>
+</tr>
+<tr>
+<td>接口视图</td>
+<td>[设备名-接口类型编号]</td>
+<td>配置接口参数（如IP地址、端口类型、VLAN）</td>
+<td>系统视图下输入“interface 接口名”（如“interface GigabitEthernet 0&#x2F;0&#x2F;0”）</td>
+</tr>
+<tr>
+<td>协议视图</td>
+<td>[设备名-协议名]</td>
+<td>配置路由协议（如OSPF、BGP）、安全协议（如ACL）</td>
+<td>系统视图下输入协议命令（如“ospf 1”“acl number 2000”）</td>
+</tr>
+<tr>
+<td>用户界面视图</td>
+<td>[设备名-ui-类型编号]</td>
+<td>配置Console&#x2F;VTY登录参数（如超时时间、密码）</td>
+<td>系统视图下输入“user-interface console 0”（Console口）或“user-interface vty 0 4”（VTY远程登录）</td>
+</tr>
+</tbody></table>
+<h4 id="视图切换示例："><a href="#视图切换示例：" class="headerlink" title="视图切换示例："></a>视图切换示例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 从用户视图切换到系统视图</span><br><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">Enter system view, return user view with Ctrl+Z.</span><br><span class="line">[Huawei]</span><br><span class="line"></span><br><span class="line"># 从系统视图切换到GigabitEthernet 0/0/0接口视图</span><br><span class="line">[Huawei] interface GigabitEthernet 0/0/0</span><br><span class="line">[Huawei-GigabitEthernet0/0/0]</span><br><span class="line"></span><br><span class="line"># 从接口视图返回用户视图（快捷键Ctrl+Z）</span><br><span class="line">[Huawei-GigabitEthernet0/0/0] ^Z</span><br><span class="line">&lt;Huawei&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（二）命令行操作技巧"><a href="#（二）命令行操作技巧" class="headerlink" title="（二）命令行操作技巧"></a>（二）命令行操作技巧</h3><h4 id="1-快捷键功能"><a href="#1-快捷键功能" class="headerlink" title="1. 快捷键功能"></a>1. 快捷键功能</h4><p>VRP命令行支持多种快捷键，提升操作效率，常用快捷键如下：</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+A</td>
+<td>光标跳转至当前命令行开头</td>
+<td>输入“dis play”，按Ctrl+A后光标到“d”前</td>
+</tr>
+<tr>
+<td>Ctrl+C</td>
+<td>停止当前命令运行（如中断Ping测试）</td>
+<td>执行“ping 192.168.1.1”时，按Ctrl+C终止</td>
+</tr>
+<tr>
+<td>Ctrl+Z</td>
+<td>从任意视图返回用户视图</td>
+<td>在接口视图下按Ctrl+Z，直接回到“<Huawei>”</td>
+</tr>
+<tr>
+<td>Ctrl+]</td>
+<td>终止当前远程连接（如VTY登录）</td>
+<td>VTY连接异常时，按Ctrl+]强制断开</td>
+</tr>
+<tr>
+<td>Tab键</td>
+<td>补全不完整命令</td>
+<td>输入“inter”，按Tab键自动补全为“interface”</td>
+</tr>
+<tr>
+<td>Backspace</td>
+<td>删除光标左侧字符</td>
+<td>输入“displa”，按Backspace删除“a”改为“display”</td>
+</tr>
+</tbody></table>
+<h4 id="2-在线帮助功能"><a href="#2-在线帮助功能" class="headerlink" title="2. 在线帮助功能"></a>2. 在线帮助功能</h4><p>VRP提供“部分帮助”与“完全帮助”，用于查询命令语法：</p>
+<ul>
+<li><strong>部分帮助</strong>：输入命令前缀+“?”，查询以该前缀开头的所有命令：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Huawei] d?  # 查询以“d”开头的命令</span><br><span class="line">  ddns        dhcp        dhcpv6      diagnose    display     dns         domain      dot1x</span><br></pre></td></tr></table></figure></li>
+<li><strong>完全帮助</strong>：输入命令+“?”，查询命令的参数与格式：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Huawei] display ?  # 查询“display”命令的子命令</span><br><span class="line">  acl             arp             clock           cpu             device          dns</span><br><span class="line">  ip              interface       license         log             memory          ospf</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="（三）基础配置命令"><a href="#（三）基础配置命令" class="headerlink" title="（三）基础配置命令"></a>（三）基础配置命令</h3><h4 id="1-设备命名"><a href="#1-设备命名" class="headerlink" title="1. 设备命名"></a>1. 设备命名</h4><p>配置设备名称（便于运维识别），需在<strong>系统视图</strong>下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Huawei] sysname RTA  # 将设备名改为“RTA”</span><br><span class="line">[RTA]  # 视图标识同步更新</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-系统时钟配置"><a href="#2-系统时钟配置" class="headerlink" title="2. 系统时钟配置"></a>2. 系统时钟配置</h4><p>设置设备时区与当前时间，确保日志时间准确性，在<strong>用户视图</strong>或<strong>系统视图</strong>下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 设置时区为北京（UTC+8）</span><br><span class="line">&lt;Huawei&gt; clock timezone BJ add 08:00:00</span><br><span class="line"># 设置当前时间为2024-05-20 14:30:00</span><br><span class="line">&lt;Huawei&gt; clock datetime 14:30:00 2024-05-20</span><br><span class="line"># 查看时钟配置</span><br><span class="line">&lt;Huawei&gt; display clock</span><br><span class="line">2024-05-20 14:30:05</span><br><span class="line">Monday</span><br><span class="line">Time Zone(BJ) : UTC+08:00</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-接口IP地址配置"><a href="#3-接口IP地址配置" class="headerlink" title="3. 接口IP地址配置"></a>3. 接口IP地址配置</h4><p>为路由器物理接口或交换机VLANIF接口配置IP地址（需在<strong>接口视图</strong>下操作）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 为路由器GigabitEthernet 0/0/0接口配置IP地址192.168.1.1/24</span><br><span class="line">[Huawei] interface GigabitEthernet 0/0/0</span><br><span class="line">[Huawei-GigabitEthernet0/0/0] ip address 192.168.1.1 255.255.255.0</span><br><span class="line"># 为交换机VLANIF 10接口配置IP地址192.168.10.1/24（需先创建VLAN 10）</span><br><span class="line">[Huawei] vlan batch 10</span><br><span class="line">[Huawei] interface Vlanif 10</span><br><span class="line">[Huawei-Vlanif10] ip address 192.168.10.1 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-用户界面配置"><a href="#4-用户界面配置" class="headerlink" title="4. 用户界面配置"></a>4. 用户界面配置</h4><p>配置Console&#x2F;VTY登录参数（如超时时间、历史命令缓存），需在<strong>用户界面视图</strong>下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 配置Console口（编号0）超时时间为5分钟（避免长时间闲置）</span><br><span class="line">[Huawei] user-interface console 0</span><br><span class="line">[Huawei-ui-console0] idle-timeout 5 0  # 格式：分钟 秒</span><br><span class="line"># 配置VTY 0-4（支持5个远程登录会话）的认证密码</span><br><span class="line">[Huawei] user-interface vty 0 4</span><br><span class="line">[Huawei-ui-vty0-4] set authentication password cipher Huawei@123  # 密码加密存储</span><br><span class="line">[Huawei-ui-vty0-4] user privilege level 2  # 设置用户级别为2（配置级，可执行大部分配置命令）</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="四、VRP文件系统管理"><a href="#四、VRP文件系统管理" class="headerlink" title="四、VRP文件系统管理"></a>四、VRP文件系统管理</h2><h3 id="（一）文件系统核心概念"><a href="#（一）文件系统核心概念" class="headerlink" title="（一）文件系统核心概念"></a>（一）文件系统核心概念</h3><p>VRP文件系统用于存储设备的配置文件、VRP系统文件、日志文件等，依赖设备的物理存储介质（如Flash、SD卡），核心文件类型如下：</p>
+<table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>用途</th>
+<th>默认存储路径</th>
+<th>示例文件名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>配置文件</td>
+<td>保存设备配置（如接口IP、路由协议）</td>
+<td>Flash:&#x2F;</td>
+<td>vrpcfg.zip（默认保存配置文件）、huawei.cfg（自定义配置文件）</td>
+</tr>
+<tr>
+<td>VRP系统文件</td>
+<td>设备运行的VRP操作系统镜像</td>
+<td>Flash:&#x2F;</td>
+<td>AR2220E-V200R007C00SPC600.cc（AR2200E路由器系统文件）</td>
+</tr>
+<tr>
+<td>日志文件</td>
+<td>记录设备运行日志（如接口up&#x2F;down、登录事件）</td>
+<td>Flash:&#x2F;log&#x2F;</td>
+<td>logfile.log</td>
+</tr>
+</tbody></table>
+<h3 id="（二）基础文件操作命令"><a href="#（二）基础文件操作命令" class="headerlink" title="（二）基础文件操作命令"></a>（二）基础文件操作命令</h3><p>VRP提供类似Linux的文件操作命令，用于查询、创建、删除文件&#x2F;目录，核心命令如下：</p>
+<table>
+<thead>
+<tr>
+<th>操作类型</th>
+<th>命令</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目录查询</td>
+<td><code>pwd</code></td>
+<td>查看当前工作目录</td>
+<td><code>&lt;Huawei&gt; pwd</code> → 输出“flash:&#x2F;”</td>
+</tr>
+<tr>
+<td>文件列表</td>
+<td><code>dir [路径]</code></td>
+<td>显示指定目录下的文件信息（包括文件名、大小、日期）</td>
+<td><code>&lt;Huawei&gt; dir flash:/</code> → 列出Flash根目录所有文件</td>
+</tr>
+<tr>
+<td>目录创建</td>
+<td><code>mkdir [路径/目录名]</code></td>
+<td>在指定路径下创建新目录</td>
+<td><code>&lt;Huawei&gt; mkdir flash:/test</code> → 在Flash下创建“test”目录</td>
+</tr>
+<tr>
+<td>文件复制</td>
+<td><code>copy [源路径/文件名] [目标路径/文件名]</code></td>
+<td>复制文件到指定路径</td>
+<td><code>&lt;Huawei&gt; copy flash:/vrpcfg.zip flash:/test/</code> → 复制配置文件到test目录</td>
+</tr>
+<tr>
+<td>文件删除</td>
+<td><code>delete /unreserved [路径/文件名]</code></td>
+<td>永久删除文件（跳过回收站）</td>
+<td><code>&lt;Huawei&gt; delete /unreserved flash:/test/huawei.cfg</code> → 永久删除test目录下的huawei.cfg</td>
+</tr>
+<tr>
+<td>文件重命名</td>
+<td><code>rename [源路径/文件名] [目标路径/新文件名]</code></td>
+<td>修改文件名</td>
+<td><code>&lt;Huawei&gt; rename flash:/test.cfg flash:/new.cfg</code> → 将test.cfg重命名为new.cfg</td>
+</tr>
+<tr>
+<td>文件查看</td>
+<td><code>more [路径/文件名]</code></td>
+<td>查看文本文件内容（如配置文件）</td>
+<td><code>&lt;Huawei&gt; more flash:/vrpcfg.zip</code> → 查看默认配置文件内容</td>
+</tr>
+</tbody></table>
+<h4 id="示例：查看Flash目录文件"><a href="#示例：查看Flash目录文件" class="headerlink" title="示例：查看Flash目录文件"></a>示例：查看Flash目录文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; dir flash:/</span><br><span class="line">Directory of flash:/</span><br><span class="line">  Idx   Attr     Size(Byte)  Date        Time       FileName </span><br><span class="line">    0   drw-          -      May 20 2024 14:30:35   src</span><br><span class="line">    1   -rw-          28     May 20 2024 14:31:38   private-data.txt</span><br><span class="line">    2   -rw-        1024     May 20 2024 14:32:38   vrpcfg.zip</span><br><span class="line">    3   -rw-      512000     May 20 2024 14:35:11   AR2220E-V200R007C00SPC600.cc</span><br><span class="line">32,004 KB total (31,995 KB free)  # 总存储空间与剩余空间</span><br></pre></td></tr></table></figure>
+
+<h3 id="（三）配置文件管理"><a href="#（三）配置文件管理" class="headerlink" title="（三）配置文件管理"></a>（三）配置文件管理</h3><p>配置文件是VRP的核心文件，分为“当前配置文件（Current-Configuration）”和“保存配置文件（Saved-Configuration）”，两者的关系与操作如下：</p>
+<table>
+<thead>
+<tr>
+<th>配置文件类型</th>
+<th>存储位置</th>
+<th>特点</th>
+<th>操作命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>当前配置文件</td>
+<td>RAM（内存）</td>
+<td>设备运行时的实时配置，未保存前断电丢失</td>
+<td><code>display current-configuration</code>（查看）</td>
+</tr>
+<tr>
+<td>保存配置文件</td>
+<td>Flash（闪存）</td>
+<td>已保存的配置，设备启动时自动加载</td>
+<td><code>display saved-configuration</code>（查看）、<code>save</code>（保存）</td>
+</tr>
+</tbody></table>
+<h4 id="核心操作流程："><a href="#核心操作流程：" class="headerlink" title="核心操作流程："></a>核心操作流程：</h4><ol>
+<li><strong>查看当前配置</strong>：查看设备实时配置（如接口IP、路由协议）：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; display current-configuration</span><br><span class="line">#</span><br><span class="line">sysname Huawei</span><br><span class="line">#</span><br><span class="line">interface GigabitEthernet0/0/0</span><br><span class="line"> ip address 192.168.1.1 255.255.255.0</span><br><span class="line">#</span><br><span class="line">return</span><br></pre></td></tr></table></figure></li>
+<li><strong>保存当前配置</strong>：将RAM中的当前配置保存到Flash的默认配置文件（vrpcfg.zip）：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   &lt;Huawei&gt; save</span><br><span class="line">   The current configuration will be written to the device. </span><br><span class="line">   Are you sure to continue</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 配置操作</span><br><span class="line"></span><br><span class="line">#### vrp基础</span><br><span class="line"></span><br><span class="line">![image-20250903110942014](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250903110942014.png)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+基本配置：</li>
+</ol>
+<p>1.为设备配置名称<br><Huawei>system-view<br>[Huawei]sysname R1</p>
+<p>2.配置系统时间<br><Huawei>clock timezone BJ add 08:00:00<br><Huawei>clock datetime 10:20:29 2016-04-11<br><Huawei>display clock </p>
+<p>3.配置标题消息<br>[Huawei]header login information “welcome to huawei certification!”<br>[Huawei]header shell information “Please don’t reboot the device!”</p>
+<p>4.路由器接口IP配置<br>[Huawei]interface gigabitethernet 0&#x2F;0&#x2F;0<br>[Huawei-GigabitEthernet0&#x2F;0&#x2F;0]ip address 10.0.12.1 255.255.255.0<br>[Huawei-GigabitEthernet0&#x2F;0&#x2F;0]interface loopback 0       回环接口，用于测试或管理<br>[Huawei-LoopBack0]ip address 1.1.1.1 32<br>[Huawei]interface gigabitethernet 0&#x2F;0&#x2F;0<br>[Huawei-GigabitEthernet0&#x2F;0&#x2F;0]shutdown                关闭接口<br>[Huawei-GigabitEthernet0&#x2F;0&#x2F;0]undo shutdown           开启接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>一 配置接口IP地址信息<br>[R1]int g0&#x2F;0&#x2F;0<br>[R1-GigabitEthernet0&#x2F;0&#x2F;0]192.168.1.1 24</p>
+<p>[R2]int g0&#x2F;0&#x2F;0<br>[R2-GigabitEthernet0&#x2F;0&#x2F;0]ip add 192.168.1.2 24</p>
+<p>二 配置用户信息<br>[R2]aaa<br>[R2-aaa]local-user admin password cipher 123456<br>[R2-aaa]local-user admin privilege level 3<br>[R2-aaa]local-user admin service-type telnet </p>
+<p>[R2-aaa]local-user root password cipher 123456<br>[R2-aaa]local-user root privilege level 3<br>[R2-aaa]local-user root service-type telnet </p>
+<p>[R2-aaa]local-user xiaoming password cipher 123456<br>[R2-aaa]local-user xiaoming privilege level 0<br>[R2-aaa]local-user xiaoming service-type telnet</p>
+<p>[R2-aaa]local-user xiaohua password cipher 123456<br>[R2-aaa]local-user xiaohua privilege level 1<br>[R2-aaa]local-user xiaohua service-type telnet</p>
+<p>[R2-aaa]local-user xiaocheng password cipher 123456<br>[R2-aaa]local-user xiaocheng privilege level 2<br>[R2-aaa]local-user xiaocheng service-type telnet</p>
+<p>三 配置虚拟终端（telnet)<br>[R2]user-interface vty 0 4<br>[R2-ui-vty0-4]authentication-mode aaa</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>用户     用户级别      允许的服务<br>admin     3               telnet<br>root      3               telnet<br>xiaoming  0               telnet<br>xiaohua   1               telnet<br>xiaocheng 2               telnet</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试：<br>1.查看路由器的接口IP地址配置<br>[R2]display ip interface brief </p>
+<p>2.查看本地用户信息<br>[R2]display local-user </p>
+<p>[R2]display current-configuration<br>或<br>[R2]aaa<br>[R2-aaa]display this </p>
+<p>3.使用xiaoming登录到R2进行测试—-具有用户模式下的命令使用，不能进行配置<br><R2>display access-user   查看当前登录用户<br><R2>display logbuffer     查看日志</p>
+<p>4.使用xiaohua登录到R2进行测试—-跟用户xiaoming的权限一样</p>
+<p>5.使用xiaocheng登录到R2进行测试—-可以进行配置，但不能进行管理，如用户管理、文件管理等</p>
+<p>6.使用admin和root登录到R2进行测试—-两个用户都具有管理员权限</p>
+<p>7.[R2]command-privilege level 4 view user save   将save命令等级设置为4<br>  此时上面所有用户都不能使用save命令</p>
+<p>[R2-aaa]local-user admin privilege level 4      将admin用户级别设置为4<br>  此时admin用户就可以使用save命令了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image-20250903110458717](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250903110458717.png)</span><br><span class="line"></span><br><span class="line">#### vrp系统配置</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><Huawei>system-view<br>[Huawei]sysname R1<br>[R1]int g0&#x2F;0&#x2F;0<br>[R1-GigabitEthernet0&#x2F;0&#x2F;0]ip add 192.168.1.1 24</p>
+<p><Huawei>system-view<br>[Huawei]sysname R2<br><R2>system-view<br>[R2]int g0&#x2F;0&#x2F;0<br>[R2-GigabitEthernet0&#x2F;0&#x2F;0]ip add 192.168.1.2 24</p>
+<p>将R2配置为ftp服务器：<br>参考文档：<a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100130778/a0d596ac">https://support.huawei.com/enterprise/zh/doc/EDOC1100130778/a0d596ac</a><br>tftp服务器的配置参考文档：<a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/doc/EDOC1100212566?section=j020">https://support.huawei.com/enterprise/zh/doc/EDOC1100212566?section=j020</a></p>
+<p>[R2]ftp server enable<br>[R2]aaa<br>[R2]local-user admin password cipher 123456<br>[Huawei-aaa]local-user admin privilege level 3<br>[Huawei-aaa]local-user admin service-type ftp<br>[Huawei-aaa]local-user admin ftp-directory flash:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>配置文件管理：<br>[Huawei]display startup   查看系统启动配置文件<br><Huawei>startup saved-configuration flash:&#x2F;huawei.zip   修改下次启动的配置<br><Huawei>compare configuration    比较当前配置与下次启动的配置<br><Huawei>reset saved-configuration    清除下次启动时加载的配置文件【初始化配置】</p>
+<p>VRP系统升级：<br><R1>dir<br><R1>delete &#x2F;unreserved flash:&#x2F;ar2220E_v100r006c00.cc  删除无关的VRP文件或其他文件以释放空间<br><R1>ftp 192.168..1.2     从FTP服务器获取VRP<br>[ftp]get AR2220E-V200R007C00SPC600.cc<br><R1>startup system-software AR2220E-V200R007C00SPC600.cc   指定下次启动时加载的VRP<br><R1>reboot         设备在重启后，将会加载新的VRP系统。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>配置向日志主机输出日志信息：<br>#<br> sysname Router<br>#<br>interface Ethernet1&#x2F;0&#x2F;0<br> ip address 11.1.1.1 255.255.255.0  &#x2F;&#x2F;配置Router的接口IP地址  </p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p> info-center channel 6 name loghost1  &#x2F;&#x2F;配置通道6的名称为loghost1<br> info-center source IP channel 6 log level warning  &#x2F;&#x2F;配置信息通道6允许输出IP模块的日志信息，允许输出的日志级别最低为warning<br> info-center loghost source Ethernet1&#x2F;0&#x2F;0  &#x2F;&#x2F;配置发送日志信息的源接口<br> info-center loghost 10.1.1.1 channel 6  &#x2F;&#x2F;配置日志信息输出到日志主机<br>#<br>ip route-static 10.1.1.1 255.255.255.255 Ethernet1&#x2F;0&#x2F;0 11.1.1.2  &#x2F;&#x2F;配置静态路由，保证Router与日志主机之间路由可达<br>#<br>return</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>文件系统管理：</p>
+<p>命令	功能<br>pwd	查看当前目录<br>dir	显示当前目录下的文件信息<br>more	查看文本文件的具体内容<br>cd	切换当前工作目录<br>mkdir	创建新的目录<br>rmdir	删除目录<br>copy	复制文件<br>move	移动文件<br>rename	重命名文件<br>delete &#x2F;unreserved	删除&#x2F;永久删除文件<br>undelete	恢复删除的文件<br>reset recycle-bin	彻底回收站中的文件<br>display current-configuration	显示当前配置文件还未保存的<br>display saved-configuration	显示保存的配置文件<br>save	保存当前配置信息<br>display startup	查看系统启动配置参数<br>startup saved-configuration	配置系统下次启动时使用的配置文件<br>compare configuration	比较当前配置与下次启动的配置<br>reset saved-configuration	清楚下次启动时加载的配置文件</p>
+<pre><code>
+</code></pre>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/wjh0527/wjh0527.github.io.git/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">蜡笔小王</div><div class="post-copyright__author_desc">不想学习啊！！！</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/')">VRP</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/null" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=VRP&amp;url=https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://github.com/wjh0527/wjh0527.github.io.git" target="_blank">蜡笔小王的博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>网络基础<span class="tagsPageCount">16</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" onerror="onerror=null;src='/wjh0527/wjh0527.github.io.git/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">网络通信</div></div></a></div><div class="next-post pull-right"><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VLAN%E6%8A%80%E6%9C%AF/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" onerror="onerror=null;src='/wjh0527/wjh0527.github.io.git/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VLAN技术</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/" title="DHCP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">DHCP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/GVRP/" title="GVRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">GVRP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/Firewall/" title="Firewall"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">Firewall</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/STP/" title="STP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">STP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VRRP/" title="VRRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">VRRP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VLAN%E6%8A%80%E6%9C%AF/" title="VLAN技术"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">VLAN技术</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" onerror="this.onerror=null;this.src='/wjh0527/wjh0527.github.io.git/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">别看了，去玩会吧</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(null) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VRP%EF%BC%88Versatile-Routing-Platform%EF%BC%89%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3"><span class="toc-number">1.</span> <span class="toc-text">VRP（Versatile Routing Platform）技术文档</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81VRP%E6%A6%82%E8%BF%B0%E4%B8%8E%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC"><span class="toc-number">1.1.</span> <span class="toc-text">一、VRP概述与核心价值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89VRP%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9A%E4%BD%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">（一）VRP定义与定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89VRP%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">（二）VRP发展历程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89VRP%E6%A0%B8%E5%BF%83%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.3.</span> <span class="toc-text">（三）VRP核心应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81VRP%E8%AE%BE%E5%A4%87%E7%99%BB%E5%BD%95%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">二、VRP设备登录与初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">（一）设备管理接口类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%89%A9%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">接口实物示例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89Console%E5%8F%A3%E7%99%BB%E5%BD%95%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.2.2.</span> <span class="toc-text">（二）Console口登录步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%A1%AC%E4%BB%B6%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">1. 硬件连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BB%88%E7%AB%AF%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BB%A5SecureCRT%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2. 终端软件配置（以SecureCRT为例）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%AE%BE%E5%A4%87%E7%99%BB%E5%BD%95%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">3. 设备登录与初始化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89Mini-USB%E5%8F%A3%E7%99%BB%E5%BD%95%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.2.3.</span> <span class="toc-text">（三）Mini USB口登录步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">1. 驱动安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%99%BB%E5%BD%95"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2. 终端配置与登录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81VRP%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">三、VRP命令行基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%A7%86%E5%9B%BE%E4%BD%93%E7%B3%BB"><span class="toc-number">1.3.1.</span> <span class="toc-text">（一）命令行视图体系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%88%87%E6%8D%A2%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">视图切换示例：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C%E6%8A%80%E5%B7%A7"><span class="toc-number">1.3.2.</span> <span class="toc-text">（二）命令行操作技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8A%9F%E8%83%BD"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">1. 快捷键功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9C%A8%E7%BA%BF%E5%B8%AE%E5%8A%A9%E5%8A%9F%E8%83%BD"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">2. 在线帮助功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.3.</span> <span class="toc-text">（三）基础配置命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%AE%BE%E5%A4%87%E5%91%BD%E5%90%8D"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">1. 设备命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%92%9F%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">2. 系统时钟配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%A3IP%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">3. 接口IP地址配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">4. 用户界面配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81VRP%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">四、VRP文件系统管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.4.1.</span> <span class="toc-text">（一）文件系统核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%9F%BA%E7%A1%80%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.4.2.</span> <span class="toc-text">（二）基础文件操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%9F%A5%E7%9C%8BFlash%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">示例：查看Flash目录文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-number">1.4.3.</span> <span class="toc-text">（三）配置文件管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">核心操作流程：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%98%B2%E7%81%AB%E5%A2%99%E5%9F%BA%E7%A1%80/" title="防火墙基础">防火墙基础</a><time datetime="2025-09-03T09:11:11.000Z" title="发表于 2025-09-03 17:11:11">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/Firewall/" title="Firewall">Firewall</a><time datetime="2025-09-03T08:42:52.000Z" title="发表于 2025-09-03 16:42:52">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/" title="DHCP">DHCP</a><time datetime="2025-09-03T08:10:33.000Z" title="发表于 2025-09-03 16:10:33">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/acl-nat/" title="acl+nat">acl+nat</a><time datetime="2025-09-03T07:56:44.000Z" title="发表于 2025-09-03 15:56:44">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE/" title="网络管理协议">网络管理协议</a><time datetime="2025-09-03T07:55:12.000Z" title="发表于 2025-09-03 15:55:12">2025-09-03</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/wjh0527/wjh0527.github.io.git/" title="蜡笔小王" target="_blank">蜡笔小王</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/wjh0527/wjh0527.github.io.git/archives/" title="archive"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/wjh0527/wjh0527.github.io.git/tags/" title="tag"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/wjh0527/wjh0527.github.io.git/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/wjh0527/wjh0527.github.io.git/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 0.88rem;">SQL注入<sup>2</sup></a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">网络基础<sup>16</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/wjh0527/wjh0527.github.io.git/js/utils.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/main.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/01/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 蜡笔小王 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/wjh0527/wjh0527.github.io.git/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>静态路由 | 蜡笔小王的博客</title><meta name="keywords" content="网络基础"><meta name="author" content="蜡笔小王"><meta name="copyright" content="蜡笔小王"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="静态路由"><meta name="application-name" content="静态路由"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="静态路由"><meta property="og:url" content="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/index.html"><meta property="og:site_name" content="蜡笔小王的博客"><meta property="og:description" content="Web"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://github.com/wjh0527/wjh0527.github.io.git/assets/lbxw.jpg"><meta property="article:author" content="蜡笔小王"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://github.com/wjh0527/wjh0527.github.io.git/assets/lbxw.jpg"><meta name="description" content="Web"><link rel="shortcut icon" href="/wjh0527/wjh0527.github.io.git/favicon.ico"><link rel="canonical" href="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/wjh0527/wjh0527.github.io.git/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/wjh0527/wjh0527.github.io.git/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/wjh0527/wjh0527.github.io.git/img/siteicon/16.png"/><link rel="bookmark" href="/wjh0527/wjh0527.github.io.git/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/wjh0527/wjh0527.github.io.git/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"每天学习亿点点","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/wjh0527/wjh0527.github.io.git/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 蜡笔小王","link":"链接: ","source":"来源: 蜡笔小王的博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '蜡笔小王的博客',
+  title: '静态路由',
+  postAI: '',
+  pageFillDescription: '一、IP路由基础认知, 1.1 路由器核心作用, 1.2 自治系统（AS）, 1.3 路由表核心概念, 1.3.1 路由条目来源, 二、静态路由核心知识, 2.1 静态路由定义与特点, 2.2 静态路由配置规则, 2.2.1 基本配置格式, 2.2.2 关键配置示例, 2.3 静态路由的高级应用, 2.3.1 1. 负载分担（等价路由）, 2.3.2 2. 浮动静态路由（路由备份）, 2.3.3 3. 缺省路由（默认路由）, 三、路由器选路原则, 3.1 1. 最长匹配原则, 3.2 2. 优先级（Pre）原则, 3.3 3. 度量值（Cost）原则, 四、常用命令汇总, 五、常见问题与注意事项, 5.1 静态路由配置后无法通信？, 5.2 为什么广播型网络不能仅配置出接口？, 5.3 缺省路由配置在哪个设备？, 操作配置一路由基础认知路由器核心作用路由器工作在网络层三层是连接不同网络实现跨网段数据转发的核心设备主要功能包括隔离广播域每个接口对应一个独立广播域网段避免广播风暴扩散路由寻址根据数据包的源和目标查询路由表选择最优路径转发数据若路由表中无目标网段路径则直接丢弃数据包连接异构网络可连接以太网串行链路等不同类型的网络实现不同网段间的通信自治系统定义由同一管理机构管理使用统一路由策略的路由器集合是路由协议划分的基本单位分类内部网关协议用于自治系统内的路由交互如外部网关协议用于不同自治系统间的路由交互如路由表核心概念路由表是路由器转发数据的导航地图记录到达目标网络的最优路径其核心构成如下字段含义目的地址目标网络的地址或网段如网络掩码与目标逻辑与运算确定目标网段掩码越长路由匹配精度越高路由协议路由条目的来源如直连静态优先级路由协议的优先级数值越小越优先决定多协议路由时的选择顺序度量值到达目标网络的路径开销如跳数带宽同协议下数值越小路径越优下一跳数据包转发的下一个路由器接口广播型网络必需配置出接口数据包从当前路由器转发出去的接口点到点网络可仅配置出接口路由条目来源直连路由接口配置地址并后自动生成的路由优先级最高静态路由管理员手动配置的路由默认可调整动态路由通过路由协议如自动学习生成的路由二静态路由核心知识静态路由定义与特点定义由管理员手动配置和维护的路由无协议自动交互仅依赖人工管理优点配置简单占用带宽少无协议报文交互转发效率高缺点拓扑变化时需手动更新配置扩展性差大型网络配置繁琐静态路由配置规则基本配置格式静态路由配置需指定目标网络子网掩码下一跳出接口格式分两种场景场景配置命令格式说明广播型网络如以太网目标网络子网掩码下一跳必须指定下一跳避免广播域内多设备转发混乱如点到点网络如串行链路目标网络子网掩码出接口可仅指定出接口点到点链路仅有一个对端设备如关键配置示例以需访问的网段为例拓扑与通过串行链路连接侧有网段配置命令下一跳为的串行接口或点到点场景直接指定出接口静态路由的高级应用负载分担等价路由适用场景存在多条优先级相同度量值相同的路径到达同一目标网络需分摊流量配置示例通过和双链路访问第一条路径第二条路径优先级与第一条一致验证可看到两条静态路由均存在流量自动在双链路间分摊浮动静态路由路由备份适用场景主路由故障时备份路由自动生效保障网络可靠性通过调整优先级实现配置逻辑主路由优先级低数值小正常时生效备份路由优先级高数值大主路由故障后才加入路由表配置示例主路由备份路由主路由默认备份路由验证主链路正常路由表仅显示主路由主链路故障如备份路由自动加入路由表承担转发缺省路由默认路由适用场景路由器无法匹配路由表中任何目标网段时默认转发的兜底路由常用于出口路由器如连接的网关配置格式目的网络和掩码均为全指定下一跳或出接口所有未知目标网段均转发到或指定出接口注意缺省路由需谨慎配置避免路由黑洞如无后续转发路径导致数据包丢弃三路由器选路原则路由器转发数据包时按以下优先级顺序选择路由确保最优路径最长匹配原则规则匹配目标时优先选择子网掩码最长的路由条目掩码越长网段范围越小匹配精度越高示例路由表中存在掩码位和掩码位目标为时优先匹配优先级原则规则若多条路由掩码长度相同优先选择优先级数值小的路由协议不同协议的默认优先级如下路由类型路由协议默认优先级直连路由静态路由示例目标网段同时存在路由和静态路由优先选择路由度量值原则规则若多条路由掩码优先级均相同同协议路由优先选择度量值数值小的路径示例两条路由到达分别为和优先选择的路由四常用命令汇总功能需求命令华为设备说明查看接口配置快速检查接口地址状态查看路由表查看所有路由条目包括目的网段协议下一跳出接口等配置静态路由下一跳目标网络子网掩码下一跳广播型网络必需如以太网例配置静态路由出接口目标网络子网掩码出接口点到点网络适用如串行链路例配置浮动静态路由目标网络子网掩码下一跳优先级例配置缺省路由下一跳出接口例关闭接口模拟故障接口名例五常见问题与注意事项静态路由配置后无法通信检查接口状态确保连接下一跳的接口已检查路由表确认静态路由已正确加入路由表无掩码错误下一跳错误检查反向路由跨网段通信需双向路由确保对端路由器也配置了返回本网段的路由为什么广播型网络不能仅配置出接口广播型网络如以太网存在多个设备仅指定出接口时路由器无法确定下一个转发对象会导致数据包无法正确送达需指定下一跳明确转发目标缺省路由配置在哪个设备通常配置在网络出口路由器如连接的网关避免内部路由器配置大量静态路由内部设备仅需指向出口路由器的缺省路由即可访问外网操作配置路由器工作在第三层网络层隔离广播一个接口代表一个广播域网段路由寻址根据源和目标进行寻址寻址时会检查路由表中有没有到达目标所在网段的路径如果有则根据路径所记录的方向进行转发如果没有则不转发路由表记录路由条目到达目标网络的最佳路径这个路由条目如何产生的呢直连路由只要你在接口上配置了地址就自动写入到路由表静态路由需要管理员手动添加动态路由通过相关的动态路由协议路由器相互之间会发送路由信息告诉对方路由我连接的网络或连接的网络状态信息然后进行学习根据路由协议的算法并产生路由条目到达目标的最优路径内部网路由协议同一个自治系统内使用的路由协议外部网关路由协议路由表的结构检查接口地址查看路由表配置到达网络的静态路由路由表中包含了下列关键项目的地址用来标识数据包的目的地址或目的网络网络掩码在编址课程中已经介绍了网络掩码的结构和作用同样在路由表中网络掩码也具有重要的意义地址和网络掩码进行逻辑与便可得到相应的网段信息如本例中目的地址掩码为相与后便可得到一个类的网段信网络掩码的另一个作用还表现在当路由表中有多条目的地址同的路由信息时路由器将选择其掩码最长的一项作为匹配项路由协议直接路由静态路由输出接口指明数据包将从该路由器的哪个接口转发出去下一跳地址指明数据包所经由的下一跳路由器的接口地址路由表中优先每个路由协议都有默认的优先级度量值到达目标的路径开销不同的路由协议有不同的计算方法静态路由的配置实现和通信命令格式目标网络子网掩码下一跳地址广播多路访问网络中目标网络子网掩码出接口主要在点到点网络中配置如何理解下一跳向目标网络方向的直连的下一个路由器的接口地址称为下一跳地址最长匹配原则以子网掩码长度最长的这个路由条目为先浮动静态路由静态路由备份优先级高的会显示在路由表中缺省路由默认路由在不知道目标网络时配置一般配置在出口路由器上缺点配置麻烦当拓朴发生变化时得重新配置',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-09-03 15:35:37',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/wjh0527/wjh0527.github.io.git/" accesskey="h"><div class="title">蜡笔小王的博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" alt="微信" src="/wjh0527/wjh0527.github.io.git/null"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/wjh0527/wjh0527.github.io.git/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/wjh0527/wjh0527.github.io.git/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 1.05rem;">SQL注入<sup>2</sup></a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">网络基础<sup>16</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/wjh0527/wjh0527.github.io.git/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/wjh0527/wjh0527.github.io.git/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/wjh0527/wjh0527.github.io.git/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url">网络基础</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>网络基础</span></a></span></div></div><h1 class="post-title" itemprop="name headline">静态路由</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-09-03T07:21:39.000Z" title="发表于 2025-09-03 15:21:39">2025-09-03</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-09-03T07:35:37.988Z" title="更新于 2025-09-03 15:35:37">2025-09-03</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="静态路由"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/"><header><a class="post-meta-categories" href="/wjh0527/wjh0527.github.io.git/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url">网络基础</a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" tabindex="-1" itemprop="url">网络基础</a><h1 id="CrawlerTitle" itemprop="name headline">静态路由</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">蜡笔小王</span><time itemprop="dateCreated datePublished" datetime="2025-09-03T07:21:39.000Z" title="发表于 2025-09-03 15:21:39">2025-09-03</time><time itemprop="dateCreated datePublished" datetime="2025-09-03T07:35:37.988Z" title="更新于 2025-09-03 15:35:37">2025-09-03</time></header><h2 id="一、IP路由基础认知"><a href="#一、IP路由基础认知" class="headerlink" title="一、IP路由基础认知"></a>一、IP路由基础认知</h2><h3 id="1-1-路由器核心作用"><a href="#1-1-路由器核心作用" class="headerlink" title="1.1 路由器核心作用"></a>1.1 路由器核心作用</h3><p>路由器工作在<strong>网络层（三层）</strong>，是连接不同网络、实现跨网段数据转发的核心设备，主要功能包括：</p>
+<ul>
+<li><strong>隔离广播域</strong>：每个接口对应一个独立广播域（网段），避免广播风暴扩散。</li>
+<li><strong>路由寻址</strong>：根据数据包的<strong>源IP和目标IP</strong>查询路由表，选择最优路径转发数据；若路由表中无目标网段路径，则直接丢弃数据包。</li>
+<li><strong>连接异构网络</strong>：可连接以太网、串行链路等不同类型的网络，实现不同网段间的通信。</li>
+</ul>
+<h3 id="1-2-自治系统（AS）"><a href="#1-2-自治系统（AS）" class="headerlink" title="1.2 自治系统（AS）"></a>1.2 自治系统（AS）</h3><ul>
+<li><strong>定义</strong>：由同一管理机构管理、使用统一路由策略的路由器集合，是路由协议划分的基本单位。</li>
+<li><strong>分类</strong>：<ul>
+<li>内部网关协议（IGP）：用于自治系统内的路由交互，如RIP、OSPF。</li>
+<li>外部网关协议（EGP）：用于不同自治系统间的路由交互，如BGP。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-路由表核心概念"><a href="#1-3-路由表核心概念" class="headerlink" title="1.3 路由表核心概念"></a>1.3 路由表核心概念</h3><p>路由表是路由器转发数据的“导航地图”，记录到达目标网络的<strong>最优路径</strong>，其核心构成如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目的地址（Destination）</td>
+<td>目标网络的IP地址或网段（如192.168.1.0&#x2F;24）</td>
+</tr>
+<tr>
+<td>网络掩码（Mask）</td>
+<td>与目标IP“逻辑与”运算，确定目标网段；掩码越长，路由匹配精度越高</td>
+</tr>
+<tr>
+<td>路由协议（Proto）</td>
+<td>路由条目的来源，如直连（Direct）、静态（Static）、OSPF、RIP</td>
+</tr>
+<tr>
+<td>优先级（Pre）</td>
+<td>路由协议的优先级，数值越小越优先（决定多协议路由时的选择顺序）</td>
+</tr>
+<tr>
+<td>度量值（Cost）</td>
+<td>到达目标网络的路径开销（如跳数、带宽），同协议下数值越小路径越优</td>
+</tr>
+<tr>
+<td>下一跳（NextHop）</td>
+<td>数据包转发的下一个路由器接口IP（广播型网络必需配置）</td>
+</tr>
+<tr>
+<td>出接口（Interface）</td>
+<td>数据包从当前路由器转发出去的接口（点到点网络可仅配置出接口）</td>
+</tr>
+</tbody></table>
+<h4 id="1-3-1-路由条目来源"><a href="#1-3-1-路由条目来源" class="headerlink" title="1.3.1 路由条目来源"></a>1.3.1 路由条目来源</h4><ul>
+<li><strong>直连路由（Direct）</strong>：接口配置IP地址并UP后，自动生成的路由（优先级最高，Pre&#x3D;0）。</li>
+<li><strong>静态路由（Static）</strong>：管理员手动配置的路由（Pre默认60，可调整）。</li>
+<li><strong>动态路由</strong>：通过路由协议（如OSPF、RIP）自动学习生成的路由。</li>
+</ul>
+<h2 id="二、静态路由核心知识"><a href="#二、静态路由核心知识" class="headerlink" title="二、静态路由核心知识"></a>二、静态路由核心知识</h2><h3 id="2-1-静态路由定义与特点"><a href="#2-1-静态路由定义与特点" class="headerlink" title="2.1 静态路由定义与特点"></a>2.1 静态路由定义与特点</h3><ul>
+<li><strong>定义</strong>：由管理员手动配置和维护的路由，无协议自动交互，仅依赖人工管理。</li>
+<li><strong>优点</strong>：配置简单、占用带宽少（无协议报文交互）、转发效率高。</li>
+<li><strong>缺点</strong>：拓扑变化时需手动更新配置，扩展性差（大型网络配置繁琐）。</li>
+</ul>
+<h3 id="2-2-静态路由配置规则"><a href="#2-2-静态路由配置规则" class="headerlink" title="2.2 静态路由配置规则"></a>2.2 静态路由配置规则</h3><h4 id="2-2-1-基本配置格式"><a href="#2-2-1-基本配置格式" class="headerlink" title="2.2.1 基本配置格式"></a>2.2.1 基本配置格式</h4><p>静态路由配置需指定“目标网络+子网掩码+下一跳&#x2F;出接口”，格式分两种场景：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>配置命令格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>广播型网络（如以太网）</td>
+<td><code>ip route-static 目标网络 子网掩码 下一跳IP</code></td>
+<td>必须指定下一跳（避免广播域内多设备转发混乱，如<code>ip route-static 192.168.2.0 24 12.1.1.2</code>）</td>
+</tr>
+<tr>
+<td>点到点网络（如串行链路）</td>
+<td><code>ip route-static 目标网络 子网掩码 出接口</code></td>
+<td>可仅指定出接口（点到点链路仅有一个对端设备，如<code>ip route-static 192.168.2.0 24 Serial 1/0/0</code>）</td>
+</tr>
+</tbody></table>
+<h4 id="2-2-2-关键配置示例"><a href="#2-2-2-关键配置示例" class="headerlink" title="2.2.2 关键配置示例"></a>2.2.2 关键配置示例</h4><p>以“RTB需访问RTA的192.168.1.0&#x2F;24网段”为例：</p>
+<ul>
+<li>拓扑：RTA（S1&#x2F;0&#x2F;0：10.0.12.1）与RTB（S1&#x2F;0&#x2F;0：10.0.12.2）通过串行链路连接，RTA侧有192.168.1.0&#x2F;24网段。</li>
+<li>RTB配置命令：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[RTB]ip route-static 192.168.1.0 255.255.255.0 10.0.12.1  // 下一跳为RTA的串行接口IP</span><br><span class="line">// 或（点到点场景）</span><br><span class="line">[RTB]ip route-static 192.168.1.0 24 Serial 1/0/0  // 直接指定出接口</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-3-静态路由的高级应用"><a href="#2-3-静态路由的高级应用" class="headerlink" title="2.3 静态路由的高级应用"></a>2.3 静态路由的高级应用</h3><h4 id="2-3-1-1-负载分担（等价路由）"><a href="#2-3-1-1-负载分担（等价路由）" class="headerlink" title="2.3.1 1. 负载分担（等价路由）"></a>2.3.1 1. 负载分担（等价路由）</h4><ul>
+<li><strong>适用场景</strong>：存在多条“优先级相同、度量值相同”的路径到达同一目标网络，需分摊流量。</li>
+<li><strong>配置示例</strong>：RTB通过G0&#x2F;0&#x2F;0（10.0.12.1）和G0&#x2F;0&#x2F;1（20.0.12.1）双链路访问192.168.1.0&#x2F;24：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[RTB]ip route-static 192.168.1.0 24 10.0.12.1  // 第一条路径</span><br><span class="line">[RTB]ip route-static 192.168.1.0 24 20.0.12.1  // 第二条路径（优先级、Cost与第一条一致）</span><br></pre></td></tr></table></figure></li>
+<li><strong>验证</strong>：<code>display ip routing-table</code>可看到两条静态路由均存在，流量自动在双链路间分摊。</li>
+</ul>
+<h4 id="2-3-2-2-浮动静态路由（路由备份）"><a href="#2-3-2-2-浮动静态路由（路由备份）" class="headerlink" title="2.3.2 2. 浮动静态路由（路由备份）"></a>2.3.2 2. 浮动静态路由（路由备份）</h4><ul>
+<li><strong>适用场景</strong>：主路由故障时，备份路由自动生效，保障网络可靠性（通过调整优先级实现）。</li>
+<li><strong>配置逻辑</strong>：主路由优先级低（数值小），正常时生效；备份路由优先级高（数值大），主路由故障后才加入路由表。</li>
+<li><strong>配置示例</strong>：主路由（10.0.12.1，Pre&#x3D;60），备份路由（20.0.12.1，Pre&#x3D;100）：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[RTB]ip route-static 192.168.1.0 24 10.0.12.1  // 主路由（默认Pre=60）</span><br><span class="line">[RTB]ip route-static 192.168.1.0 24 20.0.12.1 preference 100  // 备份路由（Pre=100）</span><br></pre></td></tr></table></figure></li>
+<li><strong>验证</strong>：<ul>
+<li>主链路正常：路由表仅显示主路由（Pre&#x3D;60）。</li>
+<li>主链路故障（如<code>shutdown G0/0/0</code>）：备份路由（Pre&#x3D;100）自动加入路由表，承担转发。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-3-3-3-缺省路由（默认路由）"><a href="#2-3-3-3-缺省路由（默认路由）" class="headerlink" title="2.3.3 3. 缺省路由（默认路由）"></a>2.3.3 3. 缺省路由（默认路由）</h4><ul>
+<li><strong>适用场景</strong>：路由器无法匹配路由表中任何目标网段时，默认转发的“兜底路由”，常用于出口路由器（如连接Internet的网关）。</li>
+<li><strong>配置格式</strong>：目的网络和掩码均为全0（<code>0.0.0.0 0.0.0.0</code>），指定下一跳或出接口：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[RTA]ip route-static 0.0.0.0 0.0.0.0 10.0.12.2  // 所有未知目标网段均转发到10.0.12.2</span><br><span class="line">// 或</span><br><span class="line">[RTA]ip route-static 0.0.0.0 0 GigabitEthernet 0/0/0  // 指定出接口</span><br></pre></td></tr></table></figure></li>
+<li><strong>注意</strong>：缺省路由需谨慎配置，避免“路由黑洞”（如无后续转发路径导致数据包丢弃）。</li>
+</ul>
+<h2 id="三、路由器选路原则"><a href="#三、路由器选路原则" class="headerlink" title="三、路由器选路原则"></a>三、路由器选路原则</h2><p>路由器转发数据包时，按以下优先级顺序选择路由，确保最优路径：</p>
+<h3 id="3-1-1-最长匹配原则"><a href="#3-1-1-最长匹配原则" class="headerlink" title="3.1 1. 最长匹配原则"></a>3.1 1. 最长匹配原则</h3><ul>
+<li><strong>规则</strong>：匹配目标IP时，优先选择<strong>子网掩码最长</strong>的路由条目（掩码越长，网段范围越小，匹配精度越高）。</li>
+<li><strong>示例</strong>：路由表中存在<code>10.1.1.0/24</code>（掩码24位）和<code>10.1.1.0/30</code>（掩码30位），目标IP为10.1.1.1时，优先匹配<code>10.1.1.0/30</code>。</li>
+</ul>
+<h3 id="3-2-2-优先级（Pre）原则"><a href="#3-2-2-优先级（Pre）原则" class="headerlink" title="3.2 2. 优先级（Pre）原则"></a>3.2 2. 优先级（Pre）原则</h3><ul>
+<li><strong>规则</strong>：若多条路由掩码长度相同，优先选择<strong>优先级数值小</strong>的路由协议（不同协议的默认优先级如下）。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>路由类型</th>
+<th>路由协议</th>
+<th>默认优先级（Pre）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>直连路由</td>
+<td>Direct</td>
+<td>0</td>
+</tr>
+<tr>
+<td>OSPF</td>
+<td>OSPF</td>
+<td>10</td>
+</tr>
+<tr>
+<td>静态路由</td>
+<td>Static</td>
+<td>60</td>
+</tr>
+<tr>
+<td>RIP</td>
+<td>RIP</td>
+<td>100</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>示例</strong>：目标网段10.1.1.0&#x2F;24同时存在OSPF路由（Pre&#x3D;10）和静态路由（Pre&#x3D;60），优先选择OSPF路由。</li>
+</ul>
+<h3 id="3-3-3-度量值（Cost）原则"><a href="#3-3-3-度量值（Cost）原则" class="headerlink" title="3.3 3. 度量值（Cost）原则"></a>3.3 3. 度量值（Cost）原则</h3><ul>
+<li><strong>规则</strong>：若多条路由掩码、优先级均相同（同协议路由），优先选择<strong>度量值数值小</strong>的路径。</li>
+<li><strong>示例</strong>：两条OSPF路由到达10.1.1.0&#x2F;24，Cost分别为2和5，优先选择Cost&#x3D;2的路由。</li>
+</ul>
+<h2 id="四、常用命令汇总"><a href="#四、常用命令汇总" class="headerlink" title="四、常用命令汇总"></a>四、常用命令汇总</h2><table>
+<thead>
+<tr>
+<th>功能需求</th>
+<th>命令（华为设备）</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查看接口IP配置</td>
+<td><code>display ip interface brief</code></td>
+<td>快速检查接口IP地址、状态（UP&#x2F;DOWN）</td>
+</tr>
+<tr>
+<td>查看路由表</td>
+<td><code>display ip routing-table</code></td>
+<td>查看所有路由条目，包括目的网段、协议、下一跳、出接口等</td>
+</tr>
+<tr>
+<td>配置静态路由（下一跳）</td>
+<td><code>ip route-static 目标网络 子网掩码 下一跳IP</code></td>
+<td>广播型网络必需（如以太网），例：<code>ip route-static 192.168.2.0 24 12.1.1.2</code></td>
+</tr>
+<tr>
+<td>配置静态路由（出接口）</td>
+<td><code>ip route-static 目标网络 子网掩码 出接口</code></td>
+<td>点到点网络适用（如串行链路），例：<code>ip route-static 192.168.2.0 24 Serial 1/0/0</code></td>
+</tr>
+<tr>
+<td>配置浮动静态路由</td>
+<td><code>ip route-static 目标网络 子网掩码 下一跳IP preference 优先级</code></td>
+<td>例：<code>ip route-static 192.168.2.0 24 24.1.1.2 preference 100</code></td>
+</tr>
+<tr>
+<td>配置缺省路由</td>
+<td><code>ip route-static 0.0.0.0 0.0.0.0 下一跳IP/出接口</code></td>
+<td>例：<code>ip route-static 0.0.0.0 0 10.0.12.2</code></td>
+</tr>
+<tr>
+<td>关闭接口（模拟故障）</td>
+<td><code>interface 接口名</code> → <code>shutdown</code></td>
+<td>例：<code>[RTB]interface GigabitEthernet 0/0/0</code> → <code>shutdown</code></td>
+</tr>
+</tbody></table>
+<h2 id="五、常见问题与注意事项"><a href="#五、常见问题与注意事项" class="headerlink" title="五、常见问题与注意事项"></a>五、常见问题与注意事项</h2><h3 id="5-1-静态路由配置后无法通信？"><a href="#5-1-静态路由配置后无法通信？" class="headerlink" title="5.1 静态路由配置后无法通信？"></a>5.1 静态路由配置后无法通信？</h3><ul>
+<li>检查接口状态：确保连接下一跳的接口已UP（<code>display ip interface brief</code>）。</li>
+<li>检查路由表：确认静态路由已正确加入路由表（<code>display ip routing-table</code>），无掩码错误、下一跳错误。</li>
+<li>检查反向路由：跨网段通信需双向路由，确保对端路由器也配置了返回本网段的路由。</li>
+</ul>
+<h3 id="5-2-为什么广播型网络不能仅配置出接口？"><a href="#5-2-为什么广播型网络不能仅配置出接口？" class="headerlink" title="5.2 为什么广播型网络不能仅配置出接口？"></a>5.2 为什么广播型网络不能仅配置出接口？</h3><ul>
+<li>广播型网络（如以太网）存在多个设备，仅指定出接口时，路由器无法确定“下一个转发对象”，会导致数据包无法正确送达；需指定下一跳IP，明确转发目标。</li>
+</ul>
+<h3 id="5-3-缺省路由配置在哪个设备？"><a href="#5-3-缺省路由配置在哪个设备？" class="headerlink" title="5.3 缺省路由配置在哪个设备？"></a>5.3 缺省路由配置在哪个设备？</h3><ul>
+<li>通常配置在<strong>网络出口路由器</strong>（如连接Internet的网关），避免内部路由器配置大量静态路由；内部设备仅需指向出口路由器的缺省路由，即可访问外网。</li>
+</ul>
+<h1 id="操作配置"><a href="#操作配置" class="headerlink" title="操作配置"></a>操作配置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1.路由器：工作在第三层（网络层）</span><br><span class="line"> 隔离广播：一个接口代表一个广播域（网段）</span><br><span class="line"> 路由寻址：根据源IP和目标IP进行寻址，寻址时会检查路由表中有没有到达（目标IP所在网段）的路径，</span><br><span class="line"> 如果有则根据路径所记录的方向进行转发，如果没有则不转发</span><br><span class="line">2.路由表：记录路由条目【到达目标网络的最佳路径】</span><br><span class="line"> 这个路由条目如何产生的呢</span><br><span class="line"> 直连路由：只要你在接口上配置了Ip地址，就自动写入到路由表Direct </span><br><span class="line">  静态路由：需要管理员手动添加</span><br><span class="line">  动态路由：通过相关的动态路由协议，路由器相互之间会发送路由信息（告诉对方路由我连接的网络或连接的网络状态信息）</span><br><span class="line"> 然后进行学习（根据路由协议的算法）并产生路由条目【到达目标的最优路径】</span><br><span class="line"> </span><br><span class="line">内部网路由协议：同一个自治系统内使用的路由协议：rip OSPF..</span><br><span class="line">外部网关路由协议：BGP..</span><br><span class="line"></span><br><span class="line">路由表的结构：]display ip routing-table </span><br><span class="line">[Huawei]display ip interface brief   检查接口IP地址</span><br><span class="line">[Huawei]display ip routing-table    查看路由表</span><br><span class="line">[Huawei]ip route-static 192.168.2.0 24 12.1.1.2    配置到达192.168.2.0/24网络的静态路由</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250903153336213.png" alt="image-20250903153336213"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">路由表中包含了下列关键项</span><br><span class="line">目的地址（Destination）：用来标识IP数据包的目的地址或目的网络</span><br><span class="line">网络掩码（Mask）：在IP编址课程中已经介绍了网络掩码的结构和作用。同样，在路由表中网络掩码也具有重要的意义</span><br><span class="line">IP地址和网络掩码进行“逻辑与”便可得到相应的网段信息。如本例中：目的地址12.0.0.0，掩码为255.0.0.0相与后便可得到一个A类的网段信(8.0.0.0/8)。网络掩码的另一个作用还表现在当路由表中有多条目的地址同的路由信息时，路由器将选择其掩码最长的一项作为匹配项</span><br><span class="line">路由协议（Proto）：直接路由（Direct）、静态路由（Static）、RIP、OSPF、is-is、BGP....</span><br><span class="line">输出接口（Interface）：指明IP数据包将从该路由器的哪个接口转发出去</span><br><span class="line">下一跳IP地址（NextHop）：指明IP数据包所经由的下一跳路由器的接口地址</span><br><span class="line">路由表中优先Pre):每个路由协议都有默认的优先级</span><br><span class="line">度量值（cost）到达目标的路径开销，不同的路由协议有不同的计算方法</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250903153502248.png" alt="image-20250903153502248"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">2.静态路由的配置：实现PC和PC2通信</span><br><span class="line">命令格式</span><br><span class="line">1）ip route-static 目标网络 子网掩码 下一跳地址（广播多路访问网络中）</span><br><span class="line">2）ip route-static 目标网络 子网掩码 出接口【主要在点到点网络中配置】</span><br><span class="line">如何理解下一跳：向目标网络方向的直连的下一个路由器的接口地址，称为下一跳地址</span><br><span class="line">[Huawei]ip route-static 192.168.20.0 255.255.255.0 12.1.1.2）最长匹配原则以子网掩码长度最长的这个路由条目为先</span><br><span class="line">[Huawei]ip route-static 192.168.20.0 255.255.255.255 12.1.1.2</span><br><span class="line">[Huawei]ip route-static 192.168.20.0 255.255.255.0 24.1.1.2</span><br><span class="line"></span><br><span class="line">浮动静态路由【静态路由备份】（优先级高的会显示在路由表中）</span><br><span class="line">[Huawei]ip route-static 192.168.20.0 255.255.255.0 24.1.1.2</span><br><span class="line">[Huawei]ip route-static 192.168.20.0 255.255.255.0 12.1.1.2 preference 20</span><br><span class="line">缺省路由（默认路由）：在不知道目标网络时配置，一般配置在出口路由器上</span><br><span class="line">[Huawei]ip route-static 0.0.0.0 0.0.0.0 12.1.1.2</span><br><span class="line">缺点：配置麻烦、当拓朴发生变化时得重新配置</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.2.0/24  Static  60   0          RD   24.1.1.2        GigabitEthernet0/0/2</span><br><span class="line">192.168.2.1/32  Static  60   0          RD   12.1.1.2        GigabitEthernet0/0/0</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/wjh0527/wjh0527.github.io.git/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">蜡笔小王</div><div class="post-copyright__author_desc">不想学习啊！！！</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/')">静态路由</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/null" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/wjh0527/wjh0527.github.io.git/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=静态路由&amp;url=https://github.com/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://github.com/wjh0527/wjh0527.github.io.git" target="_blank">蜡笔小王的博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>网络基础<span class="tagsPageCount">16</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VRRP/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" onerror="onerror=null;src='/wjh0527/wjh0527.github.io.git/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">VRRP</div></div></a></div><div class="next-post pull-right"><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" onerror="onerror=null;src='/wjh0527/wjh0527.github.io.git/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">网络管理协议</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/" title="DHCP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">DHCP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/GVRP/" title="GVRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">GVRP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/Firewall/" title="Firewall"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">Firewall</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/STP/" title="STP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">STP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VRP/" title="VRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">VRP</div></div></a></div><div><a href="/wjh0527/wjh0527.github.io.git/2025/09/03/VRRP/" title="VRRP"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-03</div><div class="title">VRRP</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/wjh0527/wjh0527.github.io.git/./assets/lbxw.jpg" onerror="this.onerror=null;this.src='/wjh0527/wjh0527.github.io.git/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">别看了，去玩会吧</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(null) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81IP%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80%E8%AE%A4%E7%9F%A5"><span class="toc-number">1.</span> <span class="toc-text">一、IP路由基础认知</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%B7%AF%E7%94%B1%E5%99%A8%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 路由器核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%EF%BC%88AS%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 自治系统（AS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%B7%AF%E7%94%B1%E8%A1%A8%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 路由表核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1-%E8%B7%AF%E7%94%B1%E6%9D%A1%E7%9B%AE%E6%9D%A5%E6%BA%90"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1 路由条目来源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">二、静态路由核心知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%89%B9%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 静态路由定义与特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 静态路由配置规则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 基本配置格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E5%85%B3%E9%94%AE%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 关键配置示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E7%9A%84%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 静态路由的高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-1-%E8%B4%9F%E8%BD%BD%E5%88%86%E6%8B%85%EF%BC%88%E7%AD%89%E4%BB%B7%E8%B7%AF%E7%94%B1%EF%BC%89"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.3.1 1. 负载分担（等价路由）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-2-%E6%B5%AE%E5%8A%A8%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%EF%BC%88%E8%B7%AF%E7%94%B1%E5%A4%87%E4%BB%BD%EF%BC%89"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.3.2 2. 浮动静态路由（路由备份）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-3-%E7%BC%BA%E7%9C%81%E8%B7%AF%E7%94%B1%EF%BC%88%E9%BB%98%E8%AE%A4%E8%B7%AF%E7%94%B1%EF%BC%89"><span class="toc-number">2.3.3.</span> <span class="toc-text">2.3.3 3. 缺省路由（默认路由）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%B7%AF%E7%94%B1%E5%99%A8%E9%80%89%E8%B7%AF%E5%8E%9F%E5%88%99"><span class="toc-number">3.</span> <span class="toc-text">三、路由器选路原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E6%9C%80%E9%95%BF%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 1. 最长匹配原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%88Pre%EF%BC%89%E5%8E%9F%E5%88%99"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 2. 优先级（Pre）原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-3-%E5%BA%A6%E9%87%8F%E5%80%BC%EF%BC%88Cost%EF%BC%89%E5%8E%9F%E5%88%99"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 3. 度量值（Cost）原则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB"><span class="toc-number">4.</span> <span class="toc-text">四、常用命令汇总</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">五、常见问题与注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E5%90%8E%E6%97%A0%E6%B3%95%E9%80%9A%E4%BF%A1%EF%BC%9F"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 静态路由配置后无法通信？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B9%BF%E6%92%AD%E5%9E%8B%E7%BD%91%E7%BB%9C%E4%B8%8D%E8%83%BD%E4%BB%85%E9%85%8D%E7%BD%AE%E5%87%BA%E6%8E%A5%E5%8F%A3%EF%BC%9F"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 为什么广播型网络不能仅配置出接口？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E7%BC%BA%E7%9C%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E5%9C%A8%E5%93%AA%E4%B8%AA%E8%AE%BE%E5%A4%87%EF%BC%9F"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 缺省路由配置在哪个设备？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E9%85%8D%E7%BD%AE"><span class="toc-number"></span> <span class="toc-text">操作配置</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E9%98%B2%E7%81%AB%E5%A2%99%E5%9F%BA%E7%A1%80/" title="防火墙基础">防火墙基础</a><time datetime="2025-09-03T09:11:11.000Z" title="发表于 2025-09-03 17:11:11">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/Firewall/" title="Firewall">Firewall</a><time datetime="2025-09-03T08:42:52.000Z" title="发表于 2025-09-03 16:42:52">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/DHCP/" title="DHCP">DHCP</a><time datetime="2025-09-03T08:10:33.000Z" title="发表于 2025-09-03 16:10:33">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/acl-nat/" title="acl+nat">acl+nat</a><time datetime="2025-09-03T07:56:44.000Z" title="发表于 2025-09-03 15:56:44">2025-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/wjh0527/wjh0527.github.io.git/2025/09/03/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE/" title="网络管理协议">网络管理协议</a><time datetime="2025-09-03T07:55:12.000Z" title="发表于 2025-09-03 15:55:12">2025-09-03</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/wjh0527/wjh0527.github.io.git/" title="蜡笔小王" target="_blank">蜡笔小王</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/wjh0527/wjh0527.github.io.git/archives/" title="archive"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/wjh0527/wjh0527.github.io.git/tags/" title="tag"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/wjh0527/wjh0527.github.io.git/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wjh0527/wjh0527.github.io.git/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/wjh0527/wjh0527.github.io.git/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 0.88rem;">SQL注入<sup>2</sup></a><a href="/wjh0527/wjh0527.github.io.git/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">网络基础<sup>16</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/wjh0527/wjh0527.github.io.git/js/utils.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/main.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/01/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 蜡笔小王 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/wjh0527/wjh0527.github.io.git/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/wjh0527/wjh0527.github.io.git/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
