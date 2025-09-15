@@ -1,0 +1,573 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>SSRF | 蜡笔小王的博客</title><meta name="keywords" content="漏洞"><meta name="author" content="蜡笔小王"><meta name="copyright" content="蜡笔小王"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="SSRF"><meta name="application-name" content="SSRF"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="SSRF"><meta property="og:url" content="https://wjh0527.github.io.git/2025/09/15/SSRF/index.html"><meta property="og:site_name" content="蜡笔小王的博客"><meta property="og:description" content="Web"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://wjh0527.github.io.git/assets/lbxw.jpg"><meta property="article:author" content="蜡笔小王"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://wjh0527.github.io.git/assets/lbxw.jpg"><meta name="description" content="Web"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://wjh0527.github.io.git/2025/09/15/SSRF/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"每天学习亿点点","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 蜡笔小王","link":"链接: ","source":"来源: 蜡笔小王的博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '蜡笔小王的博客',
+  title: 'SSRF',
+  postAI: '',
+  pageFillDescription: 'SSRF漏洞, 一、SSRF漏洞介绍, 二、SSRF漏洞原理, 三、SSRF漏洞的危害, 四、ssrf漏洞的常见存在场景及探测, 五、ssrf漏洞的相关函数与常用协议**, 5.1 SSRF漏洞相关函数, 5.1.1 file_get_contents()函数, 5.1.2 fsockopen()函数, 5.1.3 curl_exec()函数, 5.1.4 fopen()函数, 5.1.5 readfile()函数, 5.2 SSRF漏洞常用协议, 六、SSRF漏洞的攻击方式, 七、SSRF漏洞利用, 7.1 使用dict协议探测内网信息, 7.2 使用filex2Fx2Fx2F协议读取本地文件, 7.3 利用其他漏洞, 八、SSRF绕过方式, 8.1 将IP地址转换成十进制, 8.2 重新构造URL地址, 8.3 使用短网址, 8.4 用句号代替点号, 8.5 封闭式字母数字 (Enclosed Alphanumerics)字符, 九、SSRF漏洞修复建议, 十、参考文档漏洞一漏洞介绍服务器端请求伪造是一种由攻击者构造请求由服务端发起请求的安全漏洞它会允许攻击者诱使服务器向攻击者构造的任意域发起一个请求这个攻击者构造的域一般为内部网络也就是攻击者常常将存在漏洞的服务器作为一个跳板来对内网其他的服务器进行攻击一般情况下攻击的目标是外网无法访问的内部系统正因为请求是由服务端发起的所以服务端能请求到与自身相连而与外网隔离的内部系统二漏洞原理形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制例如黑客操作服务端从指定地址获取网页文本内容加载指定地址的图片等利用的是服务点的请求伪造利用存在缺陷的应用作为代理攻击远程和本地的服务器首先我们要对目标网站的架构了解脑子里要有一个架构图比如网站是一个所有人都可以访问的外网网站网站是一个他们内部的网站我们普通用户只可以访问网站不能访问网站但是我们可以同过网站做中间人访问网站从而达到攻击网站需求正常用户访问网站的流程是输入网站发送请求服务器接受请求没有过滤并处理返回用户响应那网站有个请求是那么产生漏洞的环节在哪里呢安全的网站应接收请求后检测请求的合法性产生的原因服务器端的验证并没有对其请求获取图片的参数做出严格的过滤以及限制导致网站可以从其他服务器的获取数据例如如果将换为与该服务器相连的内网服务器地址会有什么效果呢如果存在该内网地址就会返回之类的状态码不存在就会返回其他的状态码漏洞就是通过篡改获取资源的请求发送给服务器但是服务器并没有检测这个请求是否合法的然后服务器以他的身份来访问其他服务器的资源漏洞的主要危害对象不是存在漏洞的本服务器它的主要危害对象是内网的其他服务器三漏洞的危害可以对外网服务器所在内网本地进行端口扫描攻击运行在内网或本地的应用或者利用协议读取本地文件让服务端去访问相应的网址让服务端去访问自己所处内网的一些指纹文件来判断是否存在相应的可以使用协议进行请求访问相应的文件攻击内网应用可以向内部任意主机的任意端口发送精心构造的数据包攻击内网应用程序利用跨协议通信技术判断内网主机是否存活方法是访问看是否有端口开放攻击请求大文件始终保持连接四漏洞的常见存在场景及探测社交分享功能获取超链接的标题等内容进行显示转码服务通过地址把原地址的网页内容调优使其适合手机屏幕浏览概率较大在线翻译给网址翻译对应网页的内容概率较大图片加载下载例如富文本编辑器中的点击下载图片到本地通过地址加载或下载图片概率较大图片文章收藏功能主要其会取地址中以及文本的内容作为显示以求一个好的用具体验概率较大云服务厂商它会远程执行一些命令来判断网站是否存活等所以如果可以捕获相应的信息就可以进行测试网站采集网站抓取的地方一些网站会针对你输入的进行一些信息采集工作数据库内置功能如的函数邮件系统比如接收邮件服务器地址设备后台管理如进行存活测试未公开的实现以及其他扩展调用的功能可以利用高级语法加上这些关键字去寻找漏洞从远程服务器请求资源其他打包附件或者内容编辑并导出时生成或导出看着很多是不是其实不用记这么多下面有一些关键字可能会存在漏洞大家遇见关键字就直接试一试如等直接把原先参数后面的换成或类似的其他的地址进行尝试五漏洞的相关函数与常用协议漏洞相关函数等函数使用不当会造成漏洞这些函数的共同特点就是可以通过一些网络协议去远程访问目标服务器上的资源然后对资源进行处理函数把整个文件读入一个字符串中支持多种协议包括等并且可以从本地和远端服务器获取资源示例代码访问结果访问函数打开一个网络连接或者一个套接字连接函数示例代码定义目标服务器地址和端口号打开一个网络连接连接失败时输出错误信息发送请求头读取响应并输出关闭连接当定义的定义目标服务器地址和端口号能正常访问时正常显示网页信息访问结果当定义的定义目标服务器地址和端口号不能正常访问时会显示报错信息访问结果函数支持很多协议示例代码如下访问结果如果目标能正常访问则正常显示页面结果如果目标不能正常访问则显示错误页面函数可打开某文件并返回该文件的标识指针该文件既可以是本地的也可以是远程的函数示例代码访问如果文件不存在则输出结果函数读取一个文件并写入到输出缓存如果成功该函数返回从文件中读入的字节数如果失败该函数返回并附带错误信息您可以通过在函数名前面添加一个来隐藏错误输出示例代码访问显示如果文件存在则显示文件内容及字节数显示如果文件不存在则显示报错信息如果在文件中已经被激活还可以在本函数中把作为文件名来使用首先在文件中打开设置如下示例代码如下访问结果如下所示漏洞常用协议从文件系统中获取文件内容如字典服务器协议访问字典资源如常常利用这个协议去探测端口文件传输协议或安全文件传输协议轻量级目录访问协议简单文件传输协议分布式文档传递服务可使用生成可以通过协议将请求伪装为请求协议是利用中一个最强大的协议俗称万能协议可用于反弹是互联网上使用的分布型的文件搜集获取网络协议协议是在协议出现之前在上常见重用的协议但是现在已经用的很少了利用协议可以攻击可用于存活探测六漏洞的攻击方式可以对服务器所在的内网环境进行内网或本地的端口扫描常配合协议探测内网端口开放情况但不是所有的端口都可以被探测一般只能探测出一些带回显的端口内网存活探测获取一些服务的信息等通过协议读取本地文件比如用户的基本信息主机名和相应的地址缓存内网其他主机等对内网应用进行指纹识别通过访问应用存在的默认文件实现型漏洞利用参数就可以实现的攻击如命令执行的一些漏洞等还包括注入等型漏洞利用可利用协议进行参数构造利用未授权访问默认漏洞页面如果漏洞存在于云服务器可以进行攻击元数据服务攻击存储桶攻击越权攻击云平台内其他组件或服务攻击等七漏洞利用靶场上有关于漏洞的演示案例本案例利用该靶场对漏洞演示打开靶场漏洞模块点击标签累了吧来读一首诗吧点击标签页面跳转到一首诗的页面假如生活欺骗了你此时注意认真观察当前通过参数提交了一个地址对页面进行源代码审计查看具体功能实现尝试将利用参数访问百度页面在的前端页面可以看到百度页面使用协议探测内网信息使用协议读取本地文件这种可以尝试从文件系统中获取文件先在连接中使用大小字母判断操作系统若大写有返回小写无返回则为系统系统区分大小写要读取本地系统文件操作如下利用其他漏洞更多的时候可以利用调用内网中其他漏洞并且以此为跳板常见的是配合注入访问漏洞环境当远程的方式包含服务器上的其他网页环境也是能正常访问的在使用的注入的时候空格需要使用其他的符号替代并且编码等符号也是需要进行编码编码的空格需要使用代替并且需要两次编码编码后的结果为八绕过方式将地址转换成十进制地址转换转换完后直接接访问重新构造地址最后访问是使用短网址将一个有效的网址利用短网址平台进行转码在线短网址生成用句号代替点号封闭式字母数字字符封闭式字母数字是一个由字母数字组成的印刷符号块使用这些符号块替换域名中的字母也可以被浏览器接受在浏览器测试中只有下列单圆圈的字符可用访问结果九漏洞修复建议通常有以下个思路过滤返回信息验证远程服务器对请求的响应是比较容易的方法如果应用是去获取某一种类型的文件那么在把返回结果展示给用户之前先验证返回的信息是否符合标准统一错误信息避免用户可以根据错误信息来判断远端服务器的端口状态限制请求的端口为常用的端口比如黑名单内网避免应用被用来获取获取内网数据攻击内网禁用不需要的协议仅仅允许和请求可以防止类似于等引起的问题十参考文档漏洞工具介绍',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-09-15 16:19:56',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/./assets/lbxw.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">蜡笔小王的博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="微信" src="/null"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 1.05rem;">SQL注入<sup>2</sup></a><a href="/tags/windows/" style="font-size: 1.05rem;">windows<sup>1</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>1</sup></a><a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 1.05rem;">漏洞<sup>8</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">网络基础<sup>20</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">34</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F/" itemprop="url">渗透</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%BC%8F%E6%B4%9E/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>漏洞</span></a></span></div></div><h1 class="post-title" itemprop="name headline">SSRF</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-09-15T08:03:07.000Z" title="发表于 2025-09-15 16:03:07">2025-09-15</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-09-15T08:19:56.921Z" title="更新于 2025-09-15 16:19:56">2025-09-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="SSRF"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://wjh0527.github.io.git/2025/09/15/SSRF/"><header><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F/" itemprop="url">渗透</a><a href="/tags/%E6%BC%8F%E6%B4%9E/" tabindex="-1" itemprop="url">漏洞</a><h1 id="CrawlerTitle" itemprop="name headline">SSRF</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">蜡笔小王</span><time itemprop="dateCreated datePublished" datetime="2025-09-15T08:03:07.000Z" title="发表于 2025-09-15 16:03:07">2025-09-15</time><time itemprop="dateCreated datePublished" datetime="2025-09-15T08:19:56.921Z" title="更新于 2025-09-15 16:19:56">2025-09-15</time></header><h1 id="SSRF漏洞"><a href="#SSRF漏洞" class="headerlink" title="SSRF漏洞"></a><strong>SSRF漏洞</strong></h1><h2 id="一、SSRF漏洞介绍"><a href="#一、SSRF漏洞介绍" class="headerlink" title="一、SSRF漏洞介绍"></a><strong>一、SSRF漏洞介绍</strong></h2><p><strong>SSRF（Sever-Side Request Forgery,服务器端请求伪造）</strong>是一种由攻击者构造请求，由服务端发起请求的安全漏洞。它会允许攻击者诱使服务器向攻击者构造的任意域发起一个请求，这个攻击者构造的域一般为内部网络，也就是攻击者常常将存在SSRF漏洞的服务器作为一个“跳板”来对内网其他的服务器进行攻击。</p>
+<p>一般情况下，SSRF攻击的目标是外网无法访问的内部系统(正因为请求是由服务端发起的，所以服务端能请求到与自身相连而与外网隔离的内部系统)。</p>
+<h2 id="二、SSRF漏洞原理"><a href="#二、SSRF漏洞原理" class="headerlink" title="二、SSRF漏洞原理"></a><strong>二、SSRF漏洞原理</strong></h2><p>SSRF形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能，且没有对目标地址做过滤与限制。例如，黑客操作服务端从指定URL地址获取网页文本内容，加载指定地址的图片等，利用的是服务点的请求伪造。SSRF利用存在缺陷的Web应用作为代理攻击远程和本地的服务器。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps54.jpg" alt="img"> </p>
+<p>首先，我们要对目标网站的架构了解，脑子里要有一个架构图。比如：A网站，是一个所有人都可以访问的外网网站，B网站是一个他们内部的OA网站。我们普通用户只可以访问A网站，不能访问B网站。但是我们可以同过A网站做中间人，访问B网站，从而达到攻击B网站需求。</p>
+<p>正常用户访问网站的流程是：</p>
+<p>输入A网站URL-&gt;发送请求-&gt;A服务器接受请求（没有过滤），并处理-&gt;返回用户响应 </p>
+<p>【那网站有个请求是<a target="_blank" rel="noopener" href="http://www.baidu,com/xxx.php?image=URL%E3%80%91">www.baidu,com/xxx.php?image=URL】</a></p>
+<p>那么产生SSRF漏洞的环节在哪里呢？安全的网站应接收请求后，检测请求的合法性。 </p>
+<p>产生的原因：服务器端的验证并没有对其请求获取图片的参数（image&#x3D;）做出严格的过滤以及限制，导致A网站可以从其他服务器的获取数据</p>
+<p>例如：<a target="_blank" rel="noopener" href="http://www.baidu.com/xxx.php?image=www.abc.com/1.jpg">www.baidu.com/xxx.php?image=www.abc.com/1.jpg</a></p>
+<p>如果将<a target="_blank" rel="noopener" href="http://www.abc.com/1.jpg%E6%8D%A2%E4%B8%BA%E4%B8%8E%E8%AF%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E8%BF%9E%E7%9A%84%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%B0%E5%9D%80%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E6%95%88%E6%9E%9C%E5%91%A2%EF%BC%9F">www.abc.com/1.jpg换为与该服务器相连的内网服务器地址会有什么效果呢？</a></p>
+<p>如果存在该内网地址就会返回1xx、2xx之类的状态码，不存在就会返回其他的状态码。</p>
+<p>SSRF漏洞就是通过篡改获取资源的请求发送给服务器，但是服务器并没有检测这个请求是否合法的，然后服务器以他的身份来访问其他服务器的资源。</p>
+<p><strong>ssrf漏洞的主要危害对象不是存在ssrf漏洞的本服务器，它的主要危害对象是内网的其他服务器。</strong></p>
+<h2 id="三、SSRF漏洞的危害"><a href="#三、SSRF漏洞的危害" class="headerlink" title="三、SSRF漏洞的危害"></a><strong>三、SSRF漏洞的危害</strong></h2><p>l SSRF可以对外网、服务器所在内网、本地进行端口扫描，攻击运行在内网或本地的应用，或者利用File协议读取本地文件</p>
+<p>l 让服务端去访问相应的网址</p>
+<p>l 让服务端去访问自己所处内网的一些指纹文件来判断是否存在相应的cms</p>
+<p>l 可以使用file、dict、gopher、ftp协议进行请求访问相应的文件</p>
+<p>l 攻击内网web应用（可以向内部任意主机的任意端口发送精心构造的数据包payload）</p>
+<p>l 攻击内网应用程序（利用跨协议通信技术）</p>
+<p>l 判断内网主机是否存活：方法是访问看是否有端口开放</p>
+<p>l DoS攻击（请求大文件，始终保持连接keep-alive always）</p>
+<h2 id="四、ssrf漏洞的常见存在场景及探测"><a href="#四、ssrf漏洞的常见存在场景及探测" class="headerlink" title="四、ssrf漏洞的常见存在场景及探测"></a><strong>四、ssrf漏洞的常见存在场景及探测</strong></h2><p>l 社交分享功能:获取超链接的标题等内容进行显示</p>
+<p>l 转码服务:通过URL地址把原地址的网页内容调优使其适合手机屏幕浏览(概率较大)</p>
+<p>l 在线翻译:给网址翻译对应网页的内容（概率较大)</p>
+<p>l 图片加载&#x2F;下载:例如富文本编辑器中的点击下载图片到本地;通过URL地址加载或下载图片（概率较大)</p>
+<p>l 图片&#x2F;文章收藏功能:主要其会取URL地址中title以及文本的内容作为显示以求一个好的用具体验（概率较大)</p>
+<p>l 云服务厂商:它会远程执行一些命令来判断网站是否存活等，所以如果可以捕获相应的信息，就可以进行ssrf测试</p>
+<p>l 网站采集，网站抓取的地方:一些网站会针对你输入的url进行一些信息采集工作</p>
+<p>l 数据库内置功能:如mongodb的copyDatabase函数</p>
+<p>l 邮件系统:比如接收邮件服务器地址</p>
+<p>l 设备后台管理：如进行存活测试</p>
+<p>l 未公开的api实现以及其他扩展调用URL的功能:可以利用google高级语法加上这些关键字去寻找SSRF漏洞</p>
+<p>l 从远程服务器请求资源</p>
+<p>l 其他:打包附件或者内容编辑并导出时、PDF生成或导出</p>
+<p>看着很多是不是，其实不用记这么多，下面有一些关键字可能会存在ssrf漏洞，大家遇见关键字就直接试一试。</p>
+<p>如：Share、wap、url、link、.rc、 source、target、u、 3g、display、sourceURL、imageURL.domain等。直接把原先参数后面的url换成<a target="_blank" rel="noopener" href="http://www.baidu.com或类似的其他的地址进行尝试./">www.baidu.com或类似的其他的地址进行尝试。</a></p>
+<h2 id="五、ssrf漏洞的相关函数与常用协议"><a href="#五、ssrf漏洞的相关函数与常用协议" class="headerlink" title="五、ssrf漏洞的相关函数与常用协议**"></a><strong>五、</strong>ssrf漏洞的相关函数与常用协议**</h2><h3 id="5-1-SSRF漏洞相关函数"><a href="#5-1-SSRF漏洞相关函数" class="headerlink" title="5.1 SSRF漏洞相关函数"></a><strong>5.1 SSRF漏洞相关函数</strong></h3><p>file_get_contents()、fsockopen()、curl_exec()、fopen()、readfile()等函数使用不当会造成SSRF漏洞。这些函数的共同特点就是可以通过一些网络协议去远程访问目标服务器上的资源，然后对资源进行处理。</p>
+<h4 id="5-1-1-file-get-contents-函数"><a href="#5-1-1-file-get-contents-函数" class="headerlink" title="5.1.1 file_get_contents()函数"></a><strong>5.1.1 file_get_contents()函数</strong></h4><p>把整个文件读入一个字符串中,支持多种协议，包括http，https等,并且可以从本地和远端服务器获取资源。</p>
+<p>file_get_contents()示例代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable">$resp</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;<span class="subst">$url</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$resp</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/ssrfexample/file_get_contents.php?url=http://www.baidu.com">http://127.0.0.1/ssrfexample/file_get_contents.php?url=http://www.baidu.com</a></p>
+<p><strong>结果：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps55.jpg" alt="img"> </p>
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/ssrfexample/file_get_contents.php?url=file:///c:/windows/win.ini">http://127.0.0.1/ssrfexample/file_get_contents.php?url=file:///c:/windows/win.ini</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps56.jpg" alt="img"> </p>
+<h4 id="5-1-2-fsockopen-函数"><a href="#5-1-2-fsockopen-函数" class="headerlink" title="5.1.2 fsockopen()函数"></a><strong>5.1.2 fsockopen()函数</strong></h4><p>打开一个网络连接或者一个Unix套接字连接。</p>
+<p>fsockopen()函数示例代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义目标服务器地址和端口号</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$hostname</span> = <span class="string">&#x27;127.0.0.1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$port</span> = <span class="number">80</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打开一个网络连接</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$fp</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$hostname</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接失败时输出错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$fp</span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;Connection failed: <span class="subst">$errno</span> - <span class="subst">$errstr</span>&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">exit</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送 HTTP 请求头</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$request</span> = <span class="string">&quot;GET / HTTP/1.1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$request</span> .= <span class="string">&quot;Host: <span class="subst">$hostname</span></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$request</span> .= <span class="string">&quot;Connection: close</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">fwrite</span>(<span class="variable">$fp</span>, <span class="variable">$request</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取响应并输出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (!<span class="title function_ invoke__">feof</span>(<span class="variable">$fp</span>)) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">echo</span> <span class="title function_ invoke__">fgets</span>(<span class="variable">$fp</span>, <span class="number">128</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭连接</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当定义的定义目标服务器地址和端口号能正常访问时，正常显示网页信息。</p>
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/ssrfexample/fsockopen.php">http://127.0.0.1/ssrfexample/fsockopen.php</a></p>
+<p><strong>结果：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps57.jpg" alt="img"> </p>
+<p>当定义的定义目标服务器地址和端口号不能正常访问时，会显示报错信息。</p>
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/ssrfexample/fsockopen.php">http://127.0.0.1/ssrfexample/fsockopen.php</a></p>
+<p><strong>结果：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps58.jpg" alt="img"> </p>
+<h4 id="5-1-3-curl-exec-函数"><a href="#5-1-3-curl-exec-函数" class="headerlink" title="5.1.3 curl_exec()函数"></a><strong>5.1.3 curl_exec()函数</strong></h4><p>curl支持很多协议（ftp, ftps, http, https, gopher, telnet, dict, file, ldapa）。</p>
+<p>示例代码如下：</p>
+<?php
+
+$url = $_GET['url'];
+
+$curlobj = curl_init($url);
+
+echo curl_exec($curlobj);
+
+?>
+
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/ssrfexample/curl_exe.php?url=http://127.0.0.1">http://127.0.0.1/ssrfexample/curl_exe.php?url=http://127.0.0.1</a></p>
+<p><strong>结果1：</strong>如果目标URL能正常访问，则正常显示页面。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps59.jpg" alt="img"> </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps60.jpg" alt="img"> </p>
+<p><strong>结果2：</strong>如果目标URL不能正常访问，则显示错误页面。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps61.jpg" alt="img"> </p>
+<h4 id="5-1-4-fopen-函数"><a href="#5-1-4-fopen-函数" class="headerlink" title="5.1.4 fopen()函数"></a><strong>5.1.4 fopen()函数</strong></h4><p>fopen()：可打开某文件，并返回该文件的标识指针。该文件既可以是本地的，也可以是远程的。</p>
+<p>fopen()函数示例代码：</p>
+<?php
+
+$myfile=fopen("c:/windows/win.ini2","r") or die("File does no exist!");
+
+?>
+
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/ssrfexample/fopen.php">http://127.0.0.1/ssrfexample/fopen.php</a></p>
+<p>如果c:&#x2F;windows&#x2F;win.ini2文件不存在，则输出：File does no exist!</p>
+<p><strong>结果：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps62.jpg" alt="img"> </p>
+<h4 id="5-1-5-readfile-函数"><a href="#5-1-5-readfile-函数" class="headerlink" title="5.1.5 readfile()函数"></a><strong>5.1.5 readfile()函数</strong></h4><p>读取一个文件，并写入到输出缓存。</p>
+<p>如果成功，该函数返回从文件中读入的字节数。如果失败，该函数返回FALSE并附带错误信息。您可以通过在函数名前面添加一个@来隐藏错误输出。</p>
+<p>示例代码：</p>
+<?php
+
+echo readfile("test.txt");
+
+?>
+
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/ssrfexample/readfile.php">http://127.0.0.1/ssrfexample/readfile.php</a></p>
+<p><strong>显示1：****如果文件存在，则显示文件内容及字节数</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps63.jpg" alt="img"> </p>
+<p><strong>显示2：如果文件不存在，则显示报错信息</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps64.jpg" alt="img"> </p>
+<p><strong>如果在php.ini文件中 “fopen wrappers” 已经被激活，</strong>还<strong>可以在本函数中把URL作为文件名来使用。</strong></p>
+<p>（1）首先在php.ini文件中打开设置如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps65.jpg" alt="img"> </p>
+<p>（2）示例代码如下：</p>
+<?php
+
+echo readfile("http://127.0.0.1/test.txt");
+
+?>
+
+<p>（3）访问结果如下所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps66.jpg" alt="img"> </p>
+<h3 id="5-2-SSRF漏洞常用协议"><a href="#5-2-SSRF漏洞常用协议" class="headerlink" title="5.2 SSRF漏洞常用协议"></a><strong>5.2 SSRF漏洞常用协议</strong></h3><p>l file:&#x2F;&#x2F;&#x2F; 从文件系统中获取文件内容，如:file:&#x2F;&#x2F;&#x2F;letc&#x2F;passwd</p>
+<p>l dict:&#x2F;&#x2F;字典服务器协议，访问字典资源，如:dict:&#x2F;&#x2F;ip:6739&#x2F;info,常常利用这个协议去探测端口</p>
+<p>l sftp:&#x2F;&#x2F; SSH文件传输协议或安全文件传输协议</p>
+<p>l ldap:&#x2F;&#x2F; 轻量级目录访问协议</p>
+<p>l tftp:&#x2F;&#x2F; 简单文件传输协议</p>
+<p>l gopher:&#x2F;&#x2F; 分布式文档传递服务，可使用gopherus生成payload。可以通过gopher协议将GET请求伪装为POST请求(gopher协议是ssrf利用中一个最强大的协议(俗称万能协议)可用于反弹shell)，是互联网上使用的分布型的文件搜集获取网络协议。gopher协议是在HTTP协议出现之前,在internet上常见重用的协议,但是现在已经用的很少了，利用gopher协议，可以攻击：</p>
+<p>• MySQL (Port-3306)</p>
+<p>• FastCGI (Port-9000)</p>
+<p>• Memcached (Port-11211)</p>
+<p>• Redis (Port-6379)</p>
+<p>• Zabbix (Port-10050)</p>
+<p>• SMTP (Port-25)</p>
+<p>l http&#x2F;s:&#x2F;&#x2F; 可用于存活探测</p>
+<h2 id="六、SSRF漏洞的攻击方式"><a href="#六、SSRF漏洞的攻击方式" class="headerlink" title="六、SSRF漏洞的攻击方式"></a><strong>六、SSRF漏洞的攻击方式</strong></h2><p>l 可以对服务器所在的内网环境进行内网或本地的端口扫描(SSRF常配合DICT协议探测内网端口开放情况，但不是所有的端口都可以被探测，一般只能探测出一些带TCP回显的端口)、内网存活探测(http&#x2F;s)、获取一些服务的banner信息等。</p>
+<p>l 通过file协议读取本地文件比如:用户的基本信息【fle:&#x2F;&#x2F;&#x2F;letc&#x2F;passwd】，主机名和相应的IP地址【file:l&#x2F;&#x2F;&#x2F;etchosts】，ARP缓存(内网其他主机)【file:&#x2F;&#x2F;&#x2F;proc&#x2F;net&#x2F;arp】等。</p>
+<p>l 对内网web应用进行指纹识别，通过访问应用存在的默认文件实现。</p>
+<p>l GET型漏洞利用，GET参数就可以实现的攻击如struts2命令执行、Thinkphp、boss的一些漏洞等，还包括sg注入等。</p>
+<p>l POST型漏洞利用，可利用gopher协议进行参数构造。</p>
+<p>l 利用Redis未授权访问getshell、Weblogic默认SSRF漏洞页面。</p>
+<p>l 如果ssrf漏洞存在于云服务器可以进行攻击元数据服务、攻击存储桶、攻击Kubelet API、越权攻击云平台内其他组件或服务</p>
+<p>l DOS攻击等</p>
+<h2 id="七、SSRF漏洞利用"><a href="#七、SSRF漏洞利用" class="headerlink" title="七、SSRF漏洞利用"></a><strong>七、</strong>SSRF漏洞利用</h2><p>Pikachu靶场上有关于SSRF漏洞的演示案例，本案例利用该靶场对SSRF漏洞演示。打开pikachu靶场SSRF漏洞模块，点击A标签‘累了吧，来读一首诗吧’。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps67.jpg" alt="img"> </p>
+<p>点击A标签，页面跳转到一首诗的页面，假如生活欺骗了你，此时注意认真观察当前URL。URL通过url参数提交了一个URL地址。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps68.jpg" alt="img"> </p>
+<p>对ssrf_curl.php页面进行源代码审计，查看具体功能实现。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps69.jpg" alt="img"> </p>
+<p>尝试将利用url参数访问百度页面，在pikachu的前端页面可以看到百度页面。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps70.jpg" alt="img"> </p>
+<h3 id="7-1-使用dict协议探测内网信息"><a href="#7-1-使用dict协议探测内网信息" class="headerlink" title="7.1 使用dict协议探测内网信息"></a><strong>7.1 使用dict协议探测内网信息</strong></h3><p><a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/ssrf/ssrf_curl.php?url=dict:/192.168.149.128:3306">http://127.0.0.1/pikachu/vul/ssrf/ssrf_curl.php?url&#x3D;dict:&#x2F;&#x2F;192.168.149.128:3306</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps71.jpg" alt="img"> </p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/ssrf/ssrf_curl.php?url=dict:/192.168.149.128:21">http://127.0.0.1/pikachu/vul/ssrf/ssrf_curl.php?url&#x3D;dict:&#x2F;&#x2F;192.168.149.128:21<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps72.jpg" alt="img"></a></p>
+<h3 id="7-2-使用file-协议读取本地文件"><a href="#7-2-使用file-协议读取本地文件" class="headerlink" title="7.2 使用file:&#x2F;&#x2F;&#x2F;协议读取本地文件"></a><strong>7.2 使用file:&#x2F;&#x2F;&#x2F;协议读取本地文件</strong></h3><p>file,这种URL Schema可以尝试从文件系统中获取文件，先在连接中使用大小字母判断操作系统，若大写有返回小写无返回则为linux系统（linux系统区分大小写）。要读取本地系统文件操作如下：</p>
+<p><a target="_blank" rel="noopener" href="http://example.com/ssrf.php?url=file:/etc/passwd">http://example.com/ssrf.php?url=file:///etc/passwd</a></p>
+<p><a target="_blank" rel="noopener" href="http://example.com/ssrf.php?url=file:/C:/Windows/win.ini">http://example.com/ssrf.php?url=file:///C:/Windows/win.ini</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps73.jpg" alt="img"> </p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/ssrf/ssrf_curl.php?url=file:/C:/phpStudy/PHPTutorial/WWW/1.txt">http://127.0.0.1/pikachu/vul/ssrf/ssrf_curl.php?url&#x3D;file:&#x2F;&#x2F;C:&#x2F;phpStudy&#x2F;PHPTutorial&#x2F;WWW&#x2F;1.txt</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps74.jpg" alt="img"> </p>
+<h3 id="7-3-利用其他漏洞"><a href="#7-3-利用其他漏洞" class="headerlink" title="7.3 利用其他漏洞"></a><strong>7.3 利用其他漏洞</strong></h3><p>更多的时候，可以利用SSRF调用内网中其他漏洞，并且以此为跳板getshell。常见的是ssrf配合sql注入。访问SSRF漏洞环境，当远程的方式包含服务器上的其他网页环境也是能正常访问的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps75.jpg" alt="img"> </p>
+<p>在使用的sql注入的时候，空格需要使用其他的符号替代并且URL编码，”+、#”等符号也是需要进行编码url编码的。空格需要使用%20代替，并且需要两次编码，编码后的结果为%2520</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps76.jpg" alt="img"> </p>
+<h2 id="八、SSRF绕过方式"><a href="#八、SSRF绕过方式" class="headerlink" title="八、SSRF绕过方式"></a><strong>八、SSRF绕过方式</strong></h2><h3 id="8-1-将IP地址转换成十进制"><a href="#8-1-将IP地址转换成十进制" class="headerlink" title="8.1 将IP地址转换成十进制"></a><strong>8.1 将IP地址转换成十进制</strong></h3><p>IP地址转换：<a target="_blank" rel="noopener" href="https://www.bejson.com/convert/ip2int/">https://www.bejson.com/convert/ip2int/</a></p>
+<p>转换完后直接接访问：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps77.jpg" alt="img"> </p>
+<h3 id="8-2-重新构造URL地址"><a href="#8-2-重新构造URL地址" class="headerlink" title="8.2 重新构造URL地址"></a><strong>8.2 重新构造URL地址</strong></h3><p><a target="_blank" rel="noopener" href="http://www.baidu.com@192.168.149.134/">http://www.baidu.com@192.168.149.134</a></p>
+<p>最后访问是<a target="_blank" rel="noopener" href="http://192.168.149.134/">http://192.168.149.134</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps78.jpg" alt="img"> </p>
+<h3 id="8-3-使用短网址"><a href="#8-3-使用短网址" class="headerlink" title="8.3 使用短网址"></a><strong>8.3 使用短网址</strong></h3><p>将一个有效的网址利用短网址平台进行转码。</p>
+<p>在线短网址生成：<a target="_blank" rel="noopener" href="http://aad.tw/">http://aad.tw/</a></p>
+<h3 id="8-4-用句号代替点号"><a href="#8-4-用句号代替点号" class="headerlink" title="8.4 用句号代替点号"></a><strong>8.4 用句号代替点号</strong></h3><p><a target="_blank" rel="noopener" href="http://192.168.149.134/">http://192.168.149.134</a> &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt; <a target="_blank" rel="noopener" href="http://192.168.149.134/">http://192。168。149。134</a></p>
+<h3 id="8-5-封闭式字母数字-Enclosed-Alphanumerics-字符"><a href="#8-5-封闭式字母数字-Enclosed-Alphanumerics-字符" class="headerlink" title="8.5 封闭式字母数字 (Enclosed Alphanumerics)字符"></a><strong>8.5 封闭式字母数字 (Enclosed Alphanumerics)字符</strong></h3><p>封闭式字母数字是一个由字母数字组成的Unicode印刷符号块，使用这些符号块替换域名中的字母也可以被浏览器接受。在浏览器测试中只有下列单圆圈的字符可用：</p>
+<p><strong>List:</strong></p>
+<p><strong>访问：</strong><a target="_blank" rel="noopener" href="http://127.0.0.1/web/ssrf/ssrf.php?url=http://www.baidu.com">http://127.0.0.1/web/ssrf/ssrf.php?url=http://www.baidu.com</a></p>
+<p><strong>结果：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps79.jpg" alt="img"> </p>
+<h2 id="九、SSRF漏洞修复建议"><a href="#九、SSRF漏洞修复建议" class="headerlink" title="九、SSRF漏洞修复建议"></a><strong>九、SSRF漏洞修复建议</strong></h2><p>通常有以下5个思路：</p>
+<p>l 过滤返回信息，验证远程服务器对请求的响应是比较容易的方法。如果web应用是去获取某一种类型的文件。那么在把返回结果展示给用户之前先验证返回的信息是否符合标准。</p>
+<p>l 统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态。</p>
+<p>l 限制请求的端口为http常用的端口，比如，80,443,8080,8090。</p>
+<p>l 黑名单内网ip。避免应用被用来获取获取内网数据，攻击内网。</p>
+<p>l 禁用不需要的协议。仅仅允许http和https请求。可以防止类似于file:&#x2F;&#x2F;&#x2F;、gopher:&#x2F;&#x2F;、ftp:&#x2F;&#x2F; 等引起的问题。</p>
+<h2 id="十、参考文档"><a href="#十、参考文档" class="headerlink" title="十、参考文档"></a><strong>十、参考文档</strong></h2><p>SSRF漏洞：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52324400/article/details/127791198">https://blog.csdn.net/qq_52324400/article/details/127791198</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xv66666/article/details/131519186">https://blog.csdn.net/xv66666/article/details/131519186</a></p>
+<p>ssrfmap工具介绍：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95590262">https://zhuanlan.zhihu.com/p/95590262</a></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./assets/lbxw.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./assets/lbxw.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">蜡笔小王</div><div class="post-copyright__author_desc">不想学习啊！！！</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://wjh0527.github.io.git/2025/09/15/SSRF/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://wjh0527.github.io.git/2025/09/15/SSRF/')">SSRF</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://wjh0527.github.io.git/2025/09/15/SSRF/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=SSRF&amp;url=https://wjh0527.github.io.git/2025/09/15/SSRF/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wjh0527.github.io.git" target="_blank">蜡笔小王的博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%BC%8F%E6%B4%9E/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>漏洞<span class="tagsPageCount">8</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/./assets/lbxw.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/09/15/CSRF/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CSRF</div></div></a></div><div class="next-post pull-right"><a href="/2025/09/15/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">文件包含漏洞</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/09/15/CSRF/" title="CSRF"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">CSRF</div></div></a></div><div><a href="/2025/09/15/xxe/" title="xxe"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">xxe</div></div></a></div><div><a href="/2025/09/12/xss/" title="xss"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-12</div><div class="title">xss</div></div></a></div><div><a href="/2025/09/15/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" title="文件包含漏洞"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">文件包含漏洞</div></div></a></div><div><a href="/2025/09/15/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="命令执行"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">命令执行</div></div></a></div><div><a href="/2025/09/15/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="暴力破解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">暴力破解</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./assets/lbxw.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">别看了，去玩会吧</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(null) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SSRF%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.</span> <span class="toc-text">SSRF漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81SSRF%E6%BC%8F%E6%B4%9E%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">一、SSRF漏洞介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81SSRF%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">二、SSRF漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81SSRF%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%8D%B1%E5%AE%B3"><span class="toc-number">1.3.</span> <span class="toc-text">三、SSRF漏洞的危害</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81ssrf%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%B8%B8%E8%A7%81%E5%AD%98%E5%9C%A8%E5%9C%BA%E6%99%AF%E5%8F%8A%E6%8E%A2%E6%B5%8B"><span class="toc-number">1.4.</span> <span class="toc-text">四、ssrf漏洞的常见存在场景及探测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81ssrf%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%E4%B8%8E%E5%B8%B8%E7%94%A8%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">五、ssrf漏洞的相关函数与常用协议**</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-SSRF%E6%BC%8F%E6%B4%9E%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 SSRF漏洞相关函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-1-file-get-contents-%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">5.1.1 file_get_contents()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-fsockopen-%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">5.1.2 fsockopen()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-3-curl-exec-%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">5.1.3 curl_exec()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-4-fopen-%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">5.1.4 fopen()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-5-readfile-%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.5.</span> <span class="toc-text">5.1.5 readfile()函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-SSRF%E6%BC%8F%E6%B4%9E%E5%B8%B8%E7%94%A8%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 SSRF漏洞常用协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81SSRF%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F"><span class="toc-number">1.6.</span> <span class="toc-text">六、SSRF漏洞的攻击方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81SSRF%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">1.7.</span> <span class="toc-text">七、SSRF漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E4%BD%BF%E7%94%A8dict%E5%8D%8F%E8%AE%AE%E6%8E%A2%E6%B5%8B%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF"><span class="toc-number">1.7.1.</span> <span class="toc-text">7.1 使用dict协议探测内网信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E4%BD%BF%E7%94%A8file-%E5%8D%8F%E8%AE%AE%E8%AF%BB%E5%8F%96%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6"><span class="toc-number">1.7.2.</span> <span class="toc-text">7.2 使用file:&#x2F;&#x2F;&#x2F;协议读取本地文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E5%88%A9%E7%94%A8%E5%85%B6%E4%BB%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.7.3.</span> <span class="toc-text">7.3 利用其他漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81SSRF%E7%BB%95%E8%BF%87%E6%96%B9%E5%BC%8F"><span class="toc-number">1.8.</span> <span class="toc-text">八、SSRF绕过方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%B0%86IP%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E6%88%90%E5%8D%81%E8%BF%9B%E5%88%B6"><span class="toc-number">1.8.1.</span> <span class="toc-text">8.1 将IP地址转换成十进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E9%87%8D%E6%96%B0%E6%9E%84%E9%80%A0URL%E5%9C%B0%E5%9D%80"><span class="toc-number">1.8.2.</span> <span class="toc-text">8.2 重新构造URL地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-%E4%BD%BF%E7%94%A8%E7%9F%AD%E7%BD%91%E5%9D%80"><span class="toc-number">1.8.3.</span> <span class="toc-text">8.3 使用短网址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-%E7%94%A8%E5%8F%A5%E5%8F%B7%E4%BB%A3%E6%9B%BF%E7%82%B9%E5%8F%B7"><span class="toc-number">1.8.4.</span> <span class="toc-text">8.4 用句号代替点号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-%E5%B0%81%E9%97%AD%E5%BC%8F%E5%AD%97%E6%AF%8D%E6%95%B0%E5%AD%97-Enclosed-Alphanumerics-%E5%AD%97%E7%AC%A6"><span class="toc-number">1.8.5.</span> <span class="toc-text">8.5 封闭式字母数字 (Enclosed Alphanumerics)字符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81SSRF%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.9.</span> <span class="toc-text">九、SSRF漏洞修复建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-number">1.10.</span> <span class="toc-text">十、参考文档</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/xxe/" title="xxe">xxe</a><time datetime="2025-09-15T08:45:22.000Z" title="发表于 2025-09-15 16:45:22">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" title="逻辑漏洞">逻辑漏洞</a><time datetime="2025-09-15T08:42:57.000Z" title="发表于 2025-09-15 16:42:57">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="暴力破解">暴力破解</a><time datetime="2025-09-15T08:36:51.000Z" title="发表于 2025-09-15 16:36:51">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/sqlmap%E7%9A%84%E4%BD%BF%E7%94%A8/" title="sqlmap的使用">sqlmap的使用</a><time datetime="2025-09-15T08:31:28.000Z" title="发表于 2025-09-15 16:31:28">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="命令执行">命令执行</a><time datetime="2025-09-15T08:25:44.000Z" title="发表于 2025-09-15 16:25:44">2025-09-15</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/" title="蜡笔小王" target="_blank">蜡笔小王</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>1</sup></a><a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 0.88rem;">SQL注入<sup>2</sup></a><a href="/tags/windows/" style="font-size: 0.88rem;">windows<sup>1</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>1</sup></a><a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 0.88rem;">漏洞<sup>8</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">网络基础<sup>20</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/01/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 蜡笔小王 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

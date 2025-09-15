@@ -1,0 +1,617 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>逻辑漏洞 | 蜡笔小王的博客</title><meta name="keywords" content="漏洞"><meta name="author" content="蜡笔小王"><meta name="copyright" content="蜡笔小王"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="逻辑漏洞"><meta name="application-name" content="逻辑漏洞"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="逻辑漏洞"><meta property="og:url" content="https://wjh0527.github.io.git/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/index.html"><meta property="og:site_name" content="蜡笔小王的博客"><meta property="og:description" content="Web"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://wjh0527.github.io.git/assets/lbxw.jpg"><meta property="article:author" content="蜡笔小王"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://wjh0527.github.io.git/assets/lbxw.jpg"><meta name="description" content="Web"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://wjh0527.github.io.git/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--anzhiyu-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"每天学习亿点点","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 蜡笔小王","link":"链接: ","source":"来源: 蜡笔小王的博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '蜡笔小王的博客',
+  title: '逻辑漏洞',
+  postAI: '',
+  pageFillDescription: '常见的业务逻辑漏洞, 一、课程知识点, 二、技术目标, 三、课程内容, 1、业务逻辑漏洞, 1.1 业务逻辑漏洞基本介绍, 1.2 业务逻辑漏洞分类, 2、业务逻辑漏洞场景分类及挖掘思路**, 2.1 常见的业务逻辑漏洞分类如下：, 3、业务逻辑漏洞分析, 3.2 越权访问类漏洞, 3.3 交易活动类漏洞, 3.4 其他漏洞原理与挖掘, 4、业务逻辑漏洞修复常见的业务逻辑漏洞一课程知识点业务逻辑漏洞介绍业务逻辑漏洞分类常见业务逻辑漏洞分析业务逻辑漏洞修复二技术目标掌握业务逻辑漏洞基本原理掌握业务逻辑漏洞测试与挖掘技巧三课程内容业务逻辑漏洞业务逻辑漏洞基本介绍所有应用程序都是通过代码逻辑实现各种功能即使一个简单的应用程序都可能包含着数目庞大的逻辑操作这些逻辑就是一个复杂的攻击面但是它却常常被忽略许多自动化的扫描工具或者代码审计工具都只能扫出类似注入等常规的漏洞因为它们相比于业务逻辑漏洞而言具有更加显著的攻击特征业务逻辑漏洞产生的最核心原因就是在编写程序时只考虑了常规的操作流程即当在情况下就会出现此时执行即可但是开发者却没有考虑当用户执行了意料之外的时会发生什么这种对于异常情况的欠考虑最终导致了安全漏洞的产生业务逻辑漏洞分类应用中的缺陷通常分为两种类型在不同的应用中有相同的特征与应用程序业务领域严格相关其中第一种类型的缺陷就是类似注入之类的常规漏洞这一类漏洞的产生主要是因为应用程序依赖用户的输入来执行某些重要的功能但是在用户输入了一些非法字符时应用程序又未能对于这些输入进行充分的校验和预处理第二种类型的缺陷则是指的业务逻辑漏洞它是由错误的应用程序逻辑造成的业务逻辑缺陷允许攻击者通过绕过应用程序的业务规则来滥用应用程序这些攻击被伪装成语法上有效的请求这些请求带有恶意意图来违反预期的应用程序逻辑随着框架的普及以及新一代前端框架如等的流行常规的注入等漏洞在实际的业务系统中越来越趋于少见而在攻防演练过程中可以用于突破系统的漏洞往往集中于在业务逻辑实现层面的漏洞上业务逻辑漏洞场景分类及挖掘思路常见的业务逻辑漏洞分类如下绕过验证越权访问交易活动漏洞其他漏洞常见的业务漏洞挖掘思路业务逻辑漏洞分析绕过验证类漏洞分类涉及身份和权限验证的功能都可能存在绕过验证的漏洞常见的场景包括登录二次验证辅助验证等客户端校验绕过客户端校验是常见的一种校验方式也就是在客户端校验用户的输入将校验结果作为参数发送至服务端或利用前端语言限制用户的非法输入和操作面对此类的校验方法可以通过修改前端语言或者在传输中对参数进行篡改来绕过验证常见客户端验证方法使用的标签的属性限制用户输入的内容使用对用户输入进行校验当输入非法内容自动清除或禁止用户提交表单将用户数据在本地校验结果作为请求参数或提交将用户需要进行校验的关键数据如活动次数作为请求参数或提交常见测试方式使用浏览器的审查元素功能对进行修改解除限制在请求目标页面过程中使用拦截服务器的返回包修改和修改或解除相关校验机制先输入正常的数据提交请求拦截请求包将数据修改为恶意数据后再提交在提交请求的过程中使用拦截请求包将校验结果或关键数据修改为满足要求的数据再提交测试案例某系统需要购买才能观看视频不同的课程以划分通过测试发现是否付费只靠前端控制更改就可以看到不同的课程就是视频播放的链接无需登录即可播放根据播放地址中的可获取视频下载地址通过脚本可将全站视频下载下来客户端验证信息泄露程序员在编写验证程序时有可能会将验证信息直接泄露到客户端攻击者可以通过分析服务端的返回数据直接获得关键的验证信息从而完成验证客户端验证信息泄露途径直接将验证信息验证码返回到客户端页面的源码中将验证信息在接口中返回常见测试方式通过拦截请求及响应数据包找到验证成功和验证失败时返回包中的关键字将验证失败的关键字篡改为验证成功时的关键字后再返回客户端使用拦截请求及响应数据包跟踪验证成功时触发的请求尝试在验证失败的情况下直接构造相同的请求测试案例某免费连接时需要使用发送到手机的密码进行验证抓取发送密码的数据包时发现密码返回客户端导致任意全网账号可以登录联网客户端流程控制程序员在编写验证程序时有可能会验证结果返回到客户端由客户端根据服务端提供的验证结果进行下一步操作攻击者可以通过篡改验证结果或直接执行下一步操作实现绕过常见测试方式通过拦截请求及响应数据包找到验证成功和验证失败时返回包中的关键字将验证失败的关键字篡改为验证成功时的关键字后再返回客户端使用拦截请求及响应数据包跟踪验证成功时触发的请求尝试在验证失败的情况下直接构造相同的请求测试案例某系统重置密码需要三个步骤首先要输入图片验证码然后需要通过短信验证码验证身份访问直接跳到重置密码的页面绕过验证身份流程成功修改密码密码操作目标篡改如果某操作采用了连续身份校验机制或身份校验过程与操作过程分离可以尝试在身份验证过程中替换身份校验对象或操作对象实现绕过验证常见测试方法如果目标操作与身份校验功能分离可以尝试在完成身份校验后修改操作目标测试案例修改某系统的绑定手机选择免费接收短信校验码修改将修改的手机号改为自己的手机号码通过修改的手机号码收到的校验码修改手机号发现可以成功修改成新的手机号参数篡改程序员在编写验证程序时有可能会对验证码字段进行正确性校验但当验证码字段不存在或为空时就直接通过校验常见测试方法通过拦截请求数据包将验证码字段值设置为空或删除后再提交请求测试案例西部证券某系统存在绕过验证漏洞可以通过删除验证码字段进行爆破使用抓取登录的数据包发现含有验证码字段删除验证码字段进行爆破爆破成功并可以使用爆破出来的账号密码进行登录爆破成功并可以使用爆破出来的账号密码进行登录暴力破解暴力破解是利用大量猜测和穷举的方式来尝试获取用户口令的攻击方式如果身份验证模块设计的不好攻击者可以利用自动化攻击进行暴力破解大大增加了密码被破解的风险常见测试方式分别使用有效的用户组合错误密码和不存在的用户尝试进行身份验证操作使用抓包工具跟踪验证流程确认流程和返回信息是否一致若两种情况下流程和返回信息完全一致则认为无风险使用常见的默认账号和默认密码尝试进行登录若登录成功则记录为中风险或高风险漏洞若账号具备管理权限记录为高风险漏洞账号具备普通权限记录为中风险漏洞若应用具备账户枚举漏洞或其他暴力破解漏洞可利用相关漏洞使用自动化工具进行测试否则使用手动测试测试案例登录的时候发现没有任何的防护措施抓取登录的数据包发现用户名密码明文传输使用的的功能对字段进行爆破使用弱密码及常见用户名进行爆破长度为的为爆破成功的使用用户名密码可成功进入系统越权访问类漏洞水平越权即用户和用户属于同一个权限组水平越权就是用户可以看到用户才可以看到的一些内容一个简单的例子就是保单管理系统中每个人都只可以看到自己的保单如果出现用户可以查看到用户的保单的现象此时就发生了水平越权水平越权通常发生在对数据的增删改查等操作中当一个请求中包含了请求对象标识可以尝试将该对象标识该为其他请求对象的标识如果能够成功访问可以认为存在水平越权漏洞以下列举了常见可能发生水平越权漏洞的场景和测试方法常见水平越权漏洞场景在访问请求中包含了用户或其他可以唯一标识用户身份且可猜测的参数如用户名邮箱手机号身份证或其他证件号等且仅根据该参数决定可以访问的数据在访问请求中包含了可猜测的资源对象如订单号服务号受理号记录号等可猜测指的变化部分为位以内字符组成或可以通过其他易于获取信息推理得到且仅根据该参数决定可以访问的数据在访问请求中包含了可猜测的文件名可猜测指的变化部分为位以内字符组成或可以通过其他易于获取信息推理得到且仅根据该参数决定可以访问的数据常见水平越权漏洞测试使用两个账号分别登录后访问相同的功能模块记录正确的请求对象标识使用拦截其中一个用户的请求将其中的请求对象标识替换为另一个用户的请求对象标识如果能够成功访问则认为存在水平越权漏洞分析请求对象标识的生成规律采用或自动化脚本批量遍历请求对象标识如果能够成功访问其他用户的数据则认为存在水平越权漏洞测试案例某航空公司存在水平越权漏洞提交订单后抓取数据包可以发现请求中有蛮多信息通常情况下我们一般会挨个测试是否存在越权漏洞其中是乘机人联系人经测试可发现这两个参数修改后可查看到其他乘机人的身份证及联系人信息垂直越权即用户和用户属于不同的权限组如用户属于普通用户权限组而用户属于管理员权限组垂直越权就是用户可以看到用户才可以看到的内容一个简单的例子用户可以看到通讯录界面用户可以看到通讯录和用户管理的界面其中用户管理界面可以看到用户密码如果用户修改一下请求的即可以看到作为管理员才可已看到的全部用户密码此时就发生了垂直越权垂直越权漏洞通常可以理解为功能级访问控制缺失即某个用户没有在没有访问某个功能的权限的情况下可以成功的访问该功能以下列举了常见垂直越权漏洞的场景和测试方法常见垂直越权漏洞场景用户在未登录的情况下可以访问某些需要登录才能访问的功能模块包括页面和接口一个低权限用户可以访问高权限用户才能访问的功能模块包括页面和接口常见垂直越权漏洞测试选择一些重要的页面或请求通过记录请求包格式并在没有登录的情况下尝试构造相同的请求如果能够成功请求则认为存在垂直越权漏洞选择一些只有高权限账户才能访问的重要的页面或请求通过记录请求包格式并在只使用了低权限账户登录的情况下尝试构造相同的请求如果能够成功请求则认为存在垂直越权漏洞测试案例腾讯企业邮箱没有在服务端做用户权限限制导致低级权限用户可访问高级权限用户才能访问的功能模块新建一个低权限用户仅允许管理内部公告并使用新建的用户登录直接修改访问用户组织架构管理高权限用户才能访问的页面执行高权限用户才能做的创建账号功能添加成功不安全的权限控制框架权限控制框架决定了业务系统如何进行权限控制若系统采用了不安全的权限控制框架则会面临全局的权限控制失效在测试过程中如果发现一个系统存在大量的越权访问漏洞很有可能是权限控制框架出现了问题此时应建议开发者重新调整权限控制框架而不是简单的修复各个漏洞常见垂直越权漏洞场景在用户成功登陆后给用户分配一个简单的用户存储在中与用户名相同较短的纯数字或由字母递增的纯数字后续所有权限控制都基于用户来判断用户身份在用户成功登陆后给用户分配一个简单的用户与用户名相同较短的纯数字或由字母递增的纯数字后续所有的表单都会包含一个值为用户的隐藏字段随所有的请求一起提交权限控制都基于用户来判断用户身份采用进行权限控制即当用户访问没有权限的页面时服务端自动在页面上添加代码跳转至其他页面目前已较为少见将用户权限等级标识直接存储在中在请求时直接通过中的权限等级判断用户权限常见垂直越权漏洞测试获取两个用户使用其中一个用户登录系统在提交请求时将用户篡改为另一个用户的用户如果能够访问到另一个用户的数据可以认为权限框架存在漏洞使用拦截请求和响应数据包如果发现用户在访问没有权限的页面时被加入了跳转代码通过删除相关代码后再返回给客户端如果能成功访问相关页面可以认为权限框架存在漏洞使用低权限用户登录并将中的权限标识修改为高权限用户的权限标识尝试访问高权限用户才能访问的页面如果访问成功可以认为权限框架存在漏洞测试案例同城某重要业务平台权限控制以及设计缺陷可通过修改参数来获得管理员权限首先使用一个具有管理员权限的账号登陆查看管理员权限其次使用只有普通用户权限的账号登陆最后使用普通权限账号再次登陆在登陆过程中修改请求包中参数即可获得管理员权限交易活动类漏洞交易活动类功能是应用常见的功能之一涉及使用资金虚拟货币积分等进行交易或参与活动类赢取奖励的功能这些功能在设计实现时如果没有进行充分的安全性考虑就会产生业务逻辑漏洞交易活动类功能绕过出现业务逻辑漏洞可能直接影响用户或平台的资金安全给用户或平台造成较大的业务损失重放攻击攻击者发送一个目的主机已接收过的包来达到欺骗系统的目的这种攻击会不断恶意或欺诈性地重复一个有效的数据传输常见测试方式使用对业务已处理的请求包进行两次或多次请求进行原始回执包和重放回执包比较两者一样说明重放成功测试案例某平台的抽奖活动测试在赠送流量提示一个用户只能赠送一次获取到赠送的请求包时再次发送赠送成功可无数次发送赠送流量的请求包来获取流量故存在重放攻击数据篡改测试能否通过参数篡改的方式修改交易金额实现非法获利除了买卖以外转账打赏红包兑换等各类涉及资金虚拟币积分等功能的实现过程也需要进行本项测试常见测试方式在买卖兑换等交易过程使用抓包工具抓包跟踪交易流程查看是否有涉及商品单价订单总价等金额的参数如果有则尝试将相关参数改为较小的金额或者负数如果可以按照修改的金额交易成功实现非法获利则记录高风险漏洞在买卖兑换等交易过程使用抓包工具抓包跟踪交易流程查看是否有涉及商品数量的参数如果有则尝试将相关参数改为或负数如果可以引发程序逻辑错误导致非法获利则记录高风险漏洞在转账打赏红包等交易过程使用抓包工具抓包跟踪查看是否有涉及金额或虚拟币积分数量的参数如果有则尝试将相关参数修改为负数如果可以引发程序逻辑错误导致非法获利则记录高风险漏洞测试案例中国国旅存在支付逻辑漏洞导致一元买任意张数旅游票中国国旅买票的时候可以通过抓包直接将金额修改成元并且订单提交成功支付金额为元故存在漏洞业务流程绕过客户端测试活动业务是否存在漏洞能否在未满足活动参与条件的情况下参与活动或获得收益常见的客户端验证方法常见测试方法对于参与次数有限制的活动采用绕过验证的方法测试是否能够绕过限制重复参与活动绕过成功则记录高风险漏洞对于参与时间有限制的活动采用绕过验证的方法测试是否能够绕过限制提前参与活动或在活动结束后参与活动绕过成功则记录高风险漏洞除上述测试方法外采用绕过验证的方法测试是否能够在未满足活动参与条件的情况下参与活动或获得收益绕过成功则记录高风险漏洞对于活动类功能查看活动参与过程是否具备防止批量化自动操作的人机识别手段如短信验证码图片验证码语音识别重力识别等若无任何相关手段或相关手段可绕过则记录存在中风险漏洞测试案例北京电信推出的流量红包功能结果激活码就位数字爆破了一下后位数字就领了的流量用了不到分钟的时间其他漏洞原理与挖掘常见消息推送接口主要包括短信接口邮件接口等向手机或邮箱发送消息推送的接口如果这些接口没有采取一些有效措施防止攻击者恶意调用可以认为存在安全漏洞攻击者常见的恶意调用方式包括资源滥用和信息篡改者资源滥用如短信炸弹邮件炸弹等使用自动化工具频繁调用接口消耗系统资源对用户进行骚扰资源滥用主要针对消息推送接口短信接口邮件接口等向手机或邮箱发送消息推送的接口测试这些接口能否被滥用或发送恶意消息常见测试方法使用抓包工具跟踪消息推送接口的调用过程如果满足以下要求如业务或行业有相关规范要求以相关规范要求为准则认为不存在本漏洞如果仅满足部分要求可以无限制使用自动化工具重复调用或限制措施可以通过绕过验证的方式绕过则记录中风险漏洞接口调用有时间间隔限制且不小于一分钟接口调用有单位时间内调用次数限制如每小时最多调用多少次或每天最多调用多少次使用抓包工具跟踪消息推送接口的调用过程如果可以通过参数篡改等方式修改消息推送接口的推送的内容则记录高风险漏洞测试案例在打开登录页面点击获取验证码同时利用工具抓取数据包并发包查看问题参数遍历手机号后三位成功发送业务逻辑漏洞修复威胁建模威胁建模是通过识别目标和漏洞来优化系统安全然后定义防范或减轻系统威胁的对策的过程威胁建模是分析应用程序安全性的一种方法这是一种结构化的方法使您能够识别量化和解决与应用程序相关的安全风险威胁建模不是代码审查方法但却是对安全代码审查过程的补充在中包含威胁建模可以帮助确保从一开始就以内置的安全性开发应用程序这与作为威胁建模过程一部分的文档相结合可以使审阅者更好地理解系统这使得审阅者可以看到应用程序的入口点以及每个入口点的相关威胁威胁建模的概念并不新鲜但近年来有了明显的思维转变现代威胁建模从潜在的攻击者的角度来看待系统而不是防御者的观点微软在过去的几年里一直是这个过程的强有力的倡导者他们已经将威胁建模作为其的核心组件他们声称这是近年来产品安全性提高的原因之一当在之外执行源代码分析时例如在现有的应用程序上威胁建模的结果通过推广深度优先方法与宽度优先方法来帮助降低源代码分析的复杂性您可以不用同等重点地审查所有源代码而是将安全代码评估放在优先级上这些组件的威胁建模已经排在高风险威胁之下威胁建模可以在软件设计和在线运行时进行按照需求设计开发测试部署运行结束的软件开发生命周期威胁建模在新系统新功能开发的设计阶段增加安全需求说明通过威胁建模满足软件安全设计工作如果系统已经在上线运行可以通过威胁建模发现新的风险作为渗透测试的辅助工作尽可能的发现所有的漏洞在系统生命周期里引入威胁建模可以带来如下方面的好处进行安全设计更充分的对资源进行调研更合理的对于安全开发以及其他任务排定优先级将安全和开发结合到一起更好的互相理解以及构建系统确定威胁和兼容性的需求并且评估它们的风险定义和构建需求控制平衡风险控制和易用性基于可接受的风险确定哪块的控制是不需要的文档化威胁和缓解措施确保业务需求或目标在面对恶意参与者事故或其他影响因素时得到充分保护定义安全测试用例来验证安全方面的需求建设过程关键重要步骤每一个应用程序都需要使用事务数据流和访问控制矩阵来描述业务逻辑在设计业务逻辑时就将它设计为防止业务逻辑滥用的使用过程验证和控制假设应用程序业务逻辑可能被滥用的一些情况使用应用程序威胁建模来识别业务逻辑中存在设计缺陷的地方对于中描述的业务逻辑漏洞进行测试对于业务逻辑的滥用建立确定的测试用例分析风险并应用对策来减轻业务逻辑攻击的可能性和影响常用修复措施应用系统必须确保所有输入和传递的时候必须经过有效验证不仅仅是在刚进入应用系统的时候进行数据验证应用程序应该有检查功能避免攻击者可以通过预测操作参数或者利用隐藏的功能例如调试来阻碍操作或者改变业务逻辑工作流程应用需要对输入进行检查不允许用户直接提交未经过验证的数据到服务器因为这些数据来不可编辑的控件或者用户没有前端提交的权限任何可编辑控件必须有阻止恶意的写入或修改的功能开发应用的时候需要注意时间处理问题攻击者可以简单地通过了解不同的处理时间结果来获取一些参数所以虽然他们提交的结果也在相同的时间符合规则但却添加了其他步骤或者处理应用程序需要有阻止攻击者通过延长允许的交易时间的功能这种情况可以在操作超过规定的时间后通过取消或者重置交易应用程序需要能够过滤检测的业务逻辑当一个功能或者操作只允许被执行有限的几次或者用户不再能够执行这个功能的时候应用需要能够检测出来为了阻止用户过多次的执行某个功能应用程序可以通过类似缓存这种机制来控制或者使用不允许用户过多次执行功能的机制应有用户正确的按照业务流程来完成每一个步骤的检测机制这样可以阻止黑客在业务流程中通过跳过绕过重复任何业务流程中的工序检查开发这部分业务逻辑的时候应该测试一些无用或者误用的测试用例当没有按照正确的顺序完成正确的步骤的时候就不能成功完成业务流程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-09-15 16:45:03',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/./assets/lbxw.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">蜡笔小王的博客</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="微信" src="/null"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>1</sup></a><a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 1.05rem;">SQL注入<sup>2</sup></a><a href="/tags/windows/" style="font-size: 1.05rem;">windows<sup>1</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>1</sup></a><a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 1.05rem;">漏洞<sup>8</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">网络基础<sup>20</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">34</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F/" itemprop="url">渗透</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%BC%8F%E6%B4%9E/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>漏洞</span></a></span></div></div><h1 class="post-title" itemprop="name headline">逻辑漏洞</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-09-15T08:42:57.000Z" title="发表于 2025-09-15 16:42:57">2025-09-15</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-09-15T08:45:03.035Z" title="更新于 2025-09-15 16:45:03">2025-09-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="逻辑漏洞"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://wjh0527.github.io.git/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/"><header><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F/" itemprop="url">渗透</a><a href="/tags/%E6%BC%8F%E6%B4%9E/" tabindex="-1" itemprop="url">漏洞</a><h1 id="CrawlerTitle" itemprop="name headline">逻辑漏洞</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">蜡笔小王</span><time itemprop="dateCreated datePublished" datetime="2025-09-15T08:42:57.000Z" title="发表于 2025-09-15 16:42:57">2025-09-15</time><time itemprop="dateCreated datePublished" datetime="2025-09-15T08:45:03.035Z" title="更新于 2025-09-15 16:45:03">2025-09-15</time></header><h1 id="常见的业务逻辑漏洞"><a href="#常见的业务逻辑漏洞" class="headerlink" title="常见的业务逻辑漏洞"></a><strong>常见的业务逻辑漏洞</strong></h1><h2 id="一、课程知识点"><a href="#一、课程知识点" class="headerlink" title="一、课程知识点"></a><strong>一、课程知识点</strong></h2><p><strong>1、业务逻辑漏洞介绍</strong></p>
+<p><strong>2、业务逻辑漏洞分类</strong></p>
+<p><strong>3、常见业务逻辑漏洞分析</strong></p>
+<p><strong>4、业务逻辑漏洞修复</strong></p>
+<h2 id="二、技术目标"><a href="#二、技术目标" class="headerlink" title="二、技术目标"></a><strong>二、技术目标</strong></h2><p><strong>1、掌握业务逻辑漏洞基本原理</strong></p>
+<p><strong>2、掌握业务逻辑漏洞测试与挖掘技巧</strong></p>
+<h2 id="三、课程内容"><a href="#三、课程内容" class="headerlink" title="三、课程内容"></a><strong>三、课程内容</strong></h2><h3 id="1、业务逻辑漏洞"><a href="#1、业务逻辑漏洞" class="headerlink" title="1、业务逻辑漏洞"></a><strong>1、业务逻辑漏洞</strong></h3><h4 id="1-1-业务逻辑漏洞基本介绍"><a href="#1-1-业务逻辑漏洞基本介绍" class="headerlink" title="1.1 业务逻辑漏洞基本介绍"></a><strong>1.1 业务逻辑漏洞基本介绍</strong></h4><p>所有Web应用程序都是通过代码逻辑实现各种功能。即使一个简单的Web应用程序，都可能包含着数目庞大的逻辑操作。这些逻辑就是一个复杂的攻击面，但是它却常常被忽略。许多自动化的扫描工具或者代码审计工具，都只能扫出类似SQL注入、XSS等常规的漏洞，因为它们相比于业务逻辑漏洞而言具有更加显著的攻击特征。</p>
+<p>业务逻辑漏洞产生的最核心原因，就是在编写程序时，只考虑了常规的操作流程，即“当在A情况下，就会出现B，此时执行C即可”，但是开发者却没有考虑当用户执行了意料之外的X时会发生什么。这种对于异常情况的欠考虑，最终导致了安全漏洞的产生。</p>
+<h4 id="1-2-业务逻辑漏洞分类"><a href="#1-2-业务逻辑漏洞分类" class="headerlink" title="1.2 业务逻辑漏洞分类"></a><strong>1.2 业务逻辑漏洞分类</strong></h4><p>应用中的缺陷通常分为两种类型：</p>
+<p>l 在不同的应用中有相同的特征</p>
+<p>l 与应用程序&#x2F;业务领域严格相关</p>
+<p>其中第一种类型的缺陷，就是类似SQL注入、XSS之类的常规漏洞。这一类漏洞的产生，主要是因为应用程序依赖用户的输入来执行某些重要的功能，但是在用户输入了一些非法字符时，应用程序又未能对于这些输入进行充分的校验和预处理。</p>
+<p>第二种类型的缺陷，则是指的业务逻辑漏洞。它是由错误的应用程序逻辑造成的。业务逻辑缺陷允许攻击者通过绕过应用程序的业务规则来滥用应用程序。这些攻击被伪装成语法上有效的Web请求，这些请求带有恶意意图来违反预期的应用程序逻辑。 </p>
+<p>随着ORM框架的普及，以及新一代前端框架如AngularJS、Vue等的流行，常规的SQL注入、XSS等漏洞在实际的业务系统中越来越趋于少见。而在攻防演练过程中，可以用于突破系统的漏洞往往集中于在业务逻辑实现层面的漏洞上。</p>
+<h3 id="2、业务逻辑漏洞场景分类及挖掘思路"><a href="#2、业务逻辑漏洞场景分类及挖掘思路" class="headerlink" title="2、业务逻辑漏洞场景分类及挖掘思路**"></a><strong>2、</strong>业务逻辑漏洞场景分类及挖掘思路**</h3><h4 id="2-1-常见的业务逻辑漏洞分类如下："><a href="#2-1-常见的业务逻辑漏洞分类如下：" class="headerlink" title="2.1 常见的业务逻辑漏洞分类如下："></a><strong>2.1 常见的业务逻辑漏洞分类如下：</strong></h4><p>l 绕过验证</p>
+<p>l 越权访问</p>
+<p>l 交易活动漏洞</p>
+<p>l 其他漏洞</p>
+<p><strong>2.2 常见的业务漏洞挖掘思路：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps351.jpg" alt="img"> </p>
+<h3 id="3、业务逻辑漏洞分析"><a href="#3、业务逻辑漏洞分析" class="headerlink" title="3、业务逻辑漏洞分析"></a><strong>3、业务逻辑漏洞分析</strong></h3><p><strong>3.1</strong> <strong>绕过验证类漏洞分类</strong></p>
+<p>涉及身份和权限验证的功能都可能存在绕过验证的漏洞，常见的场景包括登录、二次验证、辅助验证等</p>
+<p><strong>3.1.1 客户端校验绕过</strong></p>
+<p>客户端校验是常见的一种校验方式，也就是在客户端校验用户的输入，将校验结果作为参数发送至服务端，或利用前端语言限制用户的非法输入和操作。面对此类的校验方法可以通过修改前端语言或者在传输中对参数进行篡改来绕过验证。</p>
+<p>l 常见客户端验证方法：</p>
+<p>1、使用HTML的input标签的属性限制用户输入的内容。2、使用javascript对用户输入进行校验，当输入非法内容自动清除或禁止用户提交表单。3、将用户数据在本地校验结果，作为请求参数或cookie提交。4、将用户需要进行校验的关键数据（如：活动次数）作为请求参数或cookie提交。</p>
+<p>l 常见测试方式：</p>
+<p>1、使用浏览器的审查元素功能对HTML进行修改，解除HTML限制。2、在请求目标页面过程中使用burp拦截服务器的返回包，修改HTML和javascript，修改或解除相关校验机制。3、先输入正常的数据提交请求，burp拦截请求包，将数据修改为恶意数据后再提交。4、在提交请求的过程中使用burp拦截请求包，将校验结果或关键数据修改为满足要求的数据再提交。</p>
+<p>l 测试案例</p>
+<p>某系统需要购买才能观看视频，不同的课程以ID划分。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps352.jpg" alt="img"> </p>
+<p>通过测试发现是否付费只靠前端js控制，更改courseID就可以看到不同的课程，recordURL就是视频播放的链接，无需登录即可播放。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps353.jpg" alt="img"> </p>
+<p>根据播放地址中的videoCode，可获取视频下载地址:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps354.jpg" alt="img"> </p>
+<p>通过脚本，可将全站视频下载下来。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps355.jpg" alt="img"> </p>
+<p><strong>3.1.2 客户端验证信息泄露</strong></p>
+<p>程序员在编写验证程序时有可能会将验证信息直接泄露到客户端，攻击者可以通过分析服务端的返回数据直接获得关键的验证信息从而完成验证。</p>
+<p>l 客户端验证信息泄露途径</p>
+<p>1、直接将验证信息（验证码）返回到客户端页面的源码中。2、将验证信息在接口中返回。</p>
+<p>l 常见测试方式</p>
+<p>1、通过BURP拦截请求及响应数据包，找到验证成功和验证失败时返回包中的关键字，将验证失败的关键字篡改为验证成功时的关键字后再返回客户端。2、使用burp拦截请求及响应数据包，跟踪验证成功时触发的请求，尝试在验证失败的情况下直接构造相同的请求</p>
+<p>l 测试案例</p>
+<p>某免费wifi连接时需要使用发送到手机的密码进行验证，抓取发送密码的数据包时，发现密码返回客户端，导致任意全网账号可以登录联网</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps356.jpg" alt="img"> </p>
+<p><strong>3.1.3 客户端流程控制</strong> </p>
+<p>程序员在编写验证程序时有可能会验证结果返回到客户端，由客户端根据服务端提供的验证结果进行下一步操作，攻击者可以通过篡改验证结果或直接执行下一步操作实现绕过。</p>
+<p>l 常见测试方式</p>
+<p>1、通过BURP拦截请求及响应数据包，找到验证成功和验证失败时返回包中的关键字，将验证失败的关键字篡改为验证成功时的关键字后再返回客户端。2、使用burp拦截请求及响应数据包，跟踪验证成功时触发的请求，尝试在验证失败的情况下直接构造相同的请求</p>
+<p>l 测试案例</p>
+<p>某系统重置密码需要三个步骤，首先要输入图片验证码。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps357.jpg" alt="img"> </p>
+<p>然后需要通过短信验证码验证身份。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps358.jpg" alt="img"> </p>
+<p>访问http:&#x2F;&#x2F;<em>.</em>.<em>.</em>&#x2F;a&#x2F;user&#x2F;findPasswordSetp 直接跳到重置密码的页面。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps359.jpg" alt="img"> </p>
+<p>绕过验证身份流程，成功修改密码密码。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps360.jpg" alt="img"> </p>
+<p><strong>3.1.4 操作目标篡改</strong></p>
+<p>如果某操作采用了连续身份校验机制或身份校验过程与操作过程分离，可以尝试在身份验证过程中替换身份校验对象或操作对象实现绕过验证。</p>
+<p>l 常见测试方法</p>
+<p>1、如果目标操作与身份校验功能分离，可以尝试在完成身份校验后修改操作目标。</p>
+<p>l 测试案例</p>
+<p>修改某系统的绑定手机。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps361.jpg" alt="img"> </p>
+<p>选择免费接收短信校验码修改。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps362.jpg" alt="img"> </p>
+<p>将修改的手机号改为自己的手机号码。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps363.jpg" alt="img"> </p>
+<p>通过修改的手机号码收到的校验码修改手机号。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps364.jpg" alt="img"> </p>
+<p>发现可以成功修改成新的手机号。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps365.jpg" alt="img"> </p>
+<p><strong>3.1.5 参数篡改</strong></p>
+<p>程序员在编写验证程序时有可能会对验证码字段进行正确性校验，但当验证码字段不存在或为空时就直接通过校验。</p>
+<p>l 常见测试方法</p>
+<p>1、通过BURP拦截请求数据包，将验证码字段值设置为空或删除后再提交请求。</p>
+<p>l 测试案例</p>
+<p>西部证券某系统存在绕过验证漏洞，可以通过删除验证码（securityCode字段）进行爆破。</p>
+<p>使用burp suite抓取登录的数据包，发现含有验证码字段（securityCode）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps366.jpg" alt="img"> </p>
+<p>删除验证码字段（securityCode）进行爆破。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps367.jpg" alt="img"> </p>
+<p>爆破成功，并可以使用爆破出来的账号密码进行登录。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps368.jpg" alt="img"> </p>
+<p>爆破成功，并可以使用爆破出来的账号密码进行登录。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps369.jpg" alt="img"> </p>
+<p><strong>3.1.6 暴力破解</strong></p>
+<p>暴力破解是利用大量猜测和穷举的方式来尝试获取用户口令的攻击方式，如果身份验证模块设计的不好攻击者可以利用自动化攻击进行暴力破解，大大增加了密码被破解的风险。</p>
+<p>l 常见测试方式</p>
+<p>1、分别使用“有效的用户组合错误密码”和“不存在的用户”尝试进行身份验证操作，使用抓包工具跟踪验证流程，确认流程和返回信息是否一致，若两种情况下流程和返回信息完全一致，则认为无风险。2、使用常见的默认账号和默认密码尝试进行登录，若登录成功则记录为中风险或高风险漏洞（若账号具备管理权限记录为高风险漏洞，账号具备普通权限记录为中风险漏洞）。若应用具备账户枚举漏洞或其他暴力破解漏洞，可利用相关漏洞使用自动化工具进行测试，否则使用手动测试。</p>
+<p>l 测试案例</p>
+<p>登录的时候发现没有任何的防护措施。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps370.jpg" alt="img"> </p>
+<p>抓取登录的数据包，发现用户名密码明文传输。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps371.jpg" alt="img"> </p>
+<p>使用burp suite的intruder的功能对j_loginid字段进行爆破</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps372.jpg" alt="img"> </p>
+<p>使用弱密码及常见用户名进行爆破，长度为495的，为爆破成功的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps373.jpg" alt="img"> </p>
+<p>使用用户名密码可成功进入系统。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps374.jpg" alt="img"> </p>
+<h4 id="3-2-越权访问类漏洞"><a href="#3-2-越权访问类漏洞" class="headerlink" title="3.2 越权访问类漏洞"></a><strong>3.2 越权访问类漏洞</strong></h4><p><strong>3.2.1 水平越权</strong></p>
+<p>即用户A和用户B属于同一个权限组，水平越权就是用户A可以看到用户B才可以看到的一些内容。一个简单的例子，就是保单管理系统中，每个人都只可以看到自己的保单，如果出现用户A可以查看到用户B的保单的现象，此时就发生了水平越权。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps375.jpg" alt="img"> </p>
+<p>水平越权通常发生在对数据的增删改查等操作中，当一个请求中包含了请求对象标识，可以尝试将该对象标识该为其他请求对象的标识，如果能够成功访问， 可以认为存在水平越权漏洞，以下列举了常见可能发生水平越权漏洞的场景和测试方法。</p>
+<p>l 常见水平越权漏洞场景</p>
+<p>1、在访问请求中包含了用户ID或其他可以唯一标识用户身份且可猜测的参数（如userid、用户名、邮箱、手机号、身份证或其他证件号等），且仅根据该参数决定可以访问的数据。 2、在访问请求中包含了可猜测的资源对象ID如（订单号、服务号、受理号、记录号等，可猜测指ID的变化部分为10位以内字符组成或可以通过其他易于获取信息推理得到。），且仅根据该参数决定可以访问的数据。 3、在访问请求中包含了可猜测的文件名（可猜测指ID的变化部分为10位以内字符组成或可以通过其他易于获取信息推理得到），且仅根据该参数决定可以访问的数据。</p>
+<p>l 常见水平越权漏洞测试</p>
+<p>1、使用两个账号分别登录后访问相同的功能模块，记录正确的请求对象标识，使用burp拦截其中一个用户的请求，将其中的请求对象标识替换为另一个用户的请求对象标识，如果能够成功访问，则认为存在水平越权漏洞。 2、分析请求对象标识的生成规律，采用burp或自动化脚本批量遍历请求对象标识，如果能够成功访问其他用户的数据，则认为存在水平越权漏洞。</p>
+<p>l 测试案例</p>
+<p>某航空公司存在水平越权漏洞，提交订单后抓取数据包。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps376.jpg" alt="img"> </p>
+<p>可以发现请求中有蛮多ID信息，通常情况下，我们一般会挨个测试，是否存在越权漏洞，其中passenger1d1是乘机人，contactId联系人。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps377.jpg" alt="img"> </p>
+<p>经测试可发现这两个参数修改后，可查看到其他乘机人的身份证及联系人信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps378.jpg" alt="img"> </p>
+<p><strong>3.2.2</strong> <strong>垂直越权</strong></p>
+<p>即用户A和用户B属于不同的权限组，如用户A属于普通用户权限组，而用户B属于管理员权限组，垂直越权就是用户A可以看到用户B才可以看到的内容。一个简单的例子，用户A可以看到通讯录界面，用户B可以看到通讯录和用户管理的界面（其中用户管理界面可以看到用户密码）。如果用户A修改一下请求的URL即可以看到作为管理员才可已看到的全部用户密码，此时就发生了垂直越权。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps379.jpg" alt="img"> </p>
+<p>垂直越权漏洞通常可以理解为功能级访问控制缺失，即某个用户没有在没有访问某个功能的权限的情况下可以成功的访问该功能。以下列举了常见垂直越权漏洞的场景和测试方法。</p>
+<p>l 常见垂直越权漏洞场景</p>
+<p>1、用户在未登录的情况下可以访问某些需要登录才能访问的功能模块，包括WEB页面和API接口。2、一个低权限用户可以访问高权限用户才能访问的功能模块，包括WEB页面和API接口。</p>
+<p>l 常见垂直越权漏洞测试</p>
+<p>1、选择一些重要的WEB页面或API请求，通过burp记录请求包格式，并在没有登录的情况下尝试构造相同的请求，如果能够成功请求，则认为存在垂直越权漏洞。 2、选择一些只有高权限账户才能访问的重要的WEB页面或API请求，通过burp记录请求包格式，并在只使用了低权限账户登录的情况下尝试构造相同的请求，如果能够成功请求，则认为存在垂直越权漏洞。</p>
+<p>l 测试案例</p>
+<p>腾讯企业邮箱没有在服务端做用户权限限制导致低级权限用户可访问高级权限用户才能访问的功能模块，新建一个低权限用户，仅允许管理内部公告，并使用新建的用户登录</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps380.jpg" alt="img">  <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps381.jpg" alt="img"></p>
+<p>直接修改URL访问用户组织架构管理（高权限用户才能访问的页面）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps382.jpg" alt="img"> </p>
+<p>执行高权限用户才能做的创建账号功能</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps383.jpg" alt="img"> </p>
+<p>添加成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps384.jpg" alt="img"> </p>
+<p><strong>3.2.3 不安全的权限控制框架</strong></p>
+<p>权限控制框架决定了业务系统如何进行权限控制，若系统采用了不安全的权限控制框架，则会面临全局的权限控制失效。在测试过程中如果发现一个系统存在大量的越权访问漏洞，很有可能是权限控制框架出现了问题，此时应建议开发者重新调整权限控制框架，而不是简单的修复各个漏洞。</p>
+<p>l 常见垂直越权漏洞场景</p>
+<p>1、在用户成功登陆后给用户分配一个简单的用户ID存储在cookie 中（与用户名相同、较短的纯数字、或由字母+递增的纯数字），后续所有权限控制都基于用户ID来判断用户身份。 2、在用户成功登陆后给用户分配一个简单的用户ID（与用户名相同、较短的纯数字、或由字母+递增的纯数字），后续所有的表单都会包含一个值为用户ID的隐藏字段随所有的请求一起提交，权限控制都基于用户ID来判断用户身份。 3、采用javascript进行权限控制，即当用户访问没有权限的页面时服务端自动在页面上添加javascript代码跳转至其他页面。（目前已较为少见） 4、将用户权限等级标识直接存储在cookie中，在请求时直接通过cookie中的权限等级判断用户权限。</p>
+<p>l 常见垂直越权漏洞测试</p>
+<p>1、获取两个用户ID，使用其中一个用户ID登录系统，在提交请求时将用户ID篡改为另一个用户的用户ID，如果能够访问到另一个用户的数据，可以认为权限框架存在漏洞。 2、使用burp拦截请求和响应数据包，如果发现用户在访问没有权限的页面时被加入了javascript跳转代码，通过burp删除相关代码后再返回给客户端，如果能成功访问相关页面，可以认为权限框架存在漏洞。3、使用低权限用户登录，并将cookie中的权限标识修改为高权限用户的权限标识，尝试访问高权限用户才能访问的页面，如果访问成功，可以认为权限框架存在漏洞。</p>
+<p>l 测试案例</p>
+<p>58同城某重要业务平台权限控制以及设计缺陷，可通过修改POST参数来获得管理员权限。</p>
+<p>首先，使用一个具有管理员权限的账号A登陆，查看管理员权限。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps385.jpg" alt="img"> </p>
+<p>其次，使用只有普通用户权限的账号B登陆</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps386.jpg" alt="img"> </p>
+<p>最后，使用普通权限账号B再次登陆，在登陆过程中修改POST请求包中ad_userId参数，即可获得管理员权限。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps387.jpg" alt="img"> </p>
+<h4 id="3-3-交易活动类漏洞"><a href="#3-3-交易活动类漏洞" class="headerlink" title="3.3 交易活动类漏洞"></a><strong>3.3 交易活动类漏洞</strong></h4><p>交易活动类功能是WEB应用常见的功能之一，涉及使用资金、虚拟货币、积分等进行交易或参与活动类赢取奖励的功能，这些功能在设计实现时如果没有进行充分的安全性考虑，就会产生业务逻辑漏洞。</p>
+<p>交易活动类功能绕过出现业务逻辑漏洞，可能直接影响用户或平台的资金安全，给用户或平台造成较大的业务损失。</p>
+<p><strong>3.3.1 重放攻击</strong></p>
+<p>攻击者发送一个目的主机已接收过的包，来达到欺骗系统的目的。这种攻击会不断恶意或欺诈性地重复一个有效的数据传输。</p>
+<p>l 常见测试方式</p>
+<p>1、使用Burp对业务已处理的请求包进行两次或多次请求，进行原始回执包和重放回执包比较，两者一样说明重放成功。</p>
+<p>l 测试案例</p>
+<p>某平台的抽奖活动，测试在赠送50M流量，提示一个用户只能赠送一次。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps388.png" alt="img"> </p>
+<p>获取到赠送的请求包时，再次发送，赠送成功。 可无数次发送赠送流量的请求包来获取流量，故存在重放攻击。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps389.png" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps390.png" alt="img"> </p>
+<p><strong>3.3.2 数据篡改</strong></p>
+<p>测试能否通过参数篡改的方式修改交易金额，实现非法获利，除了买卖以外，转账、打赏、红包、兑换等各类涉及资金、虚拟币、积分等功能的实现过程也需要进行本项测试。</p>
+<p>l 常见测试方式</p>
+<p>1、在买卖、兑换等交易过程使用抓包工具抓包跟踪交易流程，查看是否有涉及商品单价、订单总价等金额的参数，如果有则尝试将相关参数改为较小的金额、0或者负数，如果可以按照修改的金额交易成功实现非法获利，则记录高风险漏洞。 2、在买卖、兑换等交易过程使用抓包工具抓包跟踪交易流程，查看是否有涉及商品数量的参数，如果有则尝试将相关参数改为0或负数，如果可以引发程序逻辑错误导致非法获利，则记录高风险漏洞。 3、在转账、打赏、红包等交易过程使用抓包工具抓包跟踪，查看是否有涉及金额（或虚拟币、积分数量）的参数，如果有则尝试将相关参数修改为负数，如果可以引发程序逻辑错误导致非法获利，则记录高风险漏洞。</p>
+<p>l 测试案例</p>
+<p>中国国旅存在支付逻辑漏洞导致一元买任意张数旅游票。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps391.jpg" alt="img"> </p>
+<p>中国国旅买票的时候可以通过burp抓包，直接将金额修改成1元。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps392.jpg" alt="img"> </p>
+<p>并且订单提交成功，支付金额为1元，故存在漏洞。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps393.jpg" alt="img"> </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps394.jpg" alt="img"> </p>
+<p><strong>3.3.3 业务流程绕过</strong></p>
+<p>客户端测试活动业务是否存在漏洞，能否在未满足活动参与条件的情况下参与活动或获得收益常见的客户端验证方法</p>
+<p>l 常见测试方法</p>
+<p>1、对于参与次数有限制的活动，采用绕过验证的方法，测试是否能够绕过限制重复参与活动，绕过成功则记录高风险漏洞。 2、对于参与时间有限制的活动，采用绕过验证的方法，测试是否能够绕过限制提前参与活动或在活动结束后参与活动，绕过成功则记录高风险漏洞。 3、除上述测试方法外，采用绕过验证的方法，测试是否能够在未满足活动参与条件的情况下参与活动或获得收益，绕过成功则记录高风险漏洞。 4、对于活动类功能，查看活动参与过程是否具备防止批量化自动操作的人机识别手段（如短信验证码、图片验证码、语音识别、重力识别等），若无任何相关手段或相关手段可绕过，则记录存在中风险漏洞。</p>
+<p>l 测试案例</p>
+<p>北京电信推出的流量红包功能，结果激活码就9位数字，爆破了一下后4位数字就领了1G的流量，用了不到1分钟的时间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps395.jpg" alt="img"> </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps396.jpg" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps397.jpg" alt="img"> </p>
+<h4 id="3-4-其他漏洞原理与挖掘"><a href="#3-4-其他漏洞原理与挖掘" class="headerlink" title="3.4 其他漏洞原理与挖掘"></a><strong>3.4 其他漏洞原理与挖掘</strong></h4><p>常见消息推送接口主要包括短信接口、邮件接口等向手机或邮箱发送消息推送的API接口，如果这些接口没有采取一些有效措施防止攻击者恶意调用，可以认为存在安全漏洞。</p>
+<p>攻击者常见的恶意调用方式包括资源滥用和信息篡改者：</p>
+<p>资源滥用如短信炸弹、邮件炸弹等，使用自动化工具频繁调用接口，消耗系统资源，对用户进行骚扰。</p>
+<p><strong>3.4.1 资源滥用</strong></p>
+<p>主要针对消息推送接口（短信接口、邮件接口等向手机或邮箱发送消息推送的API接口），测试这些接口能否被滥用或发送恶意消息。</p>
+<p>l 常见测试方法</p>
+<p>1、使用抓包工具跟踪消息推送接口的调用过程，如果满足以下要求（如业务或行业有相关规范要求以相关规范要求为准），则认为不存在本漏洞，如果仅满足部分要求、可以无限制使用自动化工具重复调用或限制措施可以通过绕过验证的方式绕过，则记录中风险漏洞：·接口调用有时间间隔限制且不小于一分钟·接口调用有单位时间内调用次数限制，如每小时最多调用多少次或每天最多调用多少次。 2、使用抓包工具跟踪消息推送接口的调用过程，如果可以通过参数篡改等方式修改消息推送接口的推送的内容，则记录高风险漏洞。</p>
+<p>l 测试案例</p>
+<p>在打开登录页面，点击获取验证码：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps398.jpg" alt="img"> </p>
+<p>同时利用工具抓取数据包，并发包查看，问题参数receivePhone</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps399.jpg" alt="img"> </p>
+<p>遍历手机号后三位，成功发送:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5424\wps400.jpg" alt="img"> </p>
+<h3 id="4、业务逻辑漏洞修复"><a href="#4、业务逻辑漏洞修复" class="headerlink" title="4、业务逻辑漏洞修复"></a><strong>4、业务逻辑漏洞修复</strong></h3><p><strong>4.1威胁建模</strong></p>
+<p>威胁建模是通过识别目标和漏洞来优化系统安全，然后定义防范或减轻系统威胁的对策的过程。</p>
+<p>威胁建模是分析应用程序安全性的一种方法。这是一种结构化的方法，使您能够识别，量化和解决与应用程序相关的安全风险。威胁建模不是代码审查方法，但却是对安全代码审查过程的补充。在 SDLC 中包含威胁建模可以帮助确保从一开始就以内置的安全性开发应用程序。这与作为威胁建模过程一部分的文档相结合，可以使审阅者更好地理解系统。这使得审阅者可以看到应用程序的入口点以及每个入口点的相关威胁。威胁建模的概念并不新鲜，但近年来有了明显的思维转变。现代威胁建模从潜在的攻击者的角度来看待系统，而不是防御者的观点。微软在过去的几年里一直是这个过程的强有力的倡导者。他们已经将威胁建模作为其SDLC的核心组件，他们声称这是近年来产品安全性提高的原因之一。</p>
+<p>当在SDLC之外执行源代码分析时（例如在现有的应用程序上），威胁建模的结果通过推广深度优先方法与宽度优先方法来帮助降低源代码分析的复杂性。您可以不用同等重点地审查所有源代码，而是将安全代码评估放在优先级上，这些组件的威胁建模已经排在高风险威胁之下。</p>
+<p>威胁建模可以在软件设计和在线运行时进行， 按照“需求-设计-开发-测试-部署-运行-结束”的软件开发生命周期，威胁建模在新系统&#x2F;新功能开发的设计阶段，增加安全需求说明，通过威胁建模满足软件安全设计工作；如果系统已经在上线运行，可以通过威胁建模发现新的风险，作为渗透测试的辅助工作，尽可能的发现所有的漏洞。</p>
+<p>在系统生命周期里引入威胁建模可以带来如下方面的好处：</p>
+<p>·进行安全设计</p>
+<p>·更充分的对资源进行调研；更合理的对于安全、开发以及其他任务排定优先级</p>
+<p>·将安全和开发结合到一起，更好的互相理解以及构建系统</p>
+<p>·确定威胁和兼容性的需求，并且评估它们的风险</p>
+<p>·定义和构建需求控制</p>
+<p>·平衡风险、控制和易用性</p>
+<p>·基于可接受的风险，确定哪块的控制是不需要的</p>
+<p>·文档化威胁和缓解措施</p>
+<p>·确保业务需求（或目标）在面对恶意参与者、事故或其他影响因素时得到充分保护</p>
+<p>·定义安全测试用例来验证安全方面的需求</p>
+<p>建设过程关键重要步骤：</p>
+<p>·每一个应用程序都需要使用事务数据流和访问控制矩阵来描述业务逻辑</p>
+<p>·在设计业务逻辑时，就将它设计为防止业务逻辑滥用的。使用过程验证和控制假设应用程序业务逻辑可能被滥用的一些情况。</p>
+<p>·使用应用程序威胁建模来识别业务逻辑中存在设计缺陷的地方。</p>
+<p>·对于OWASP&#x2F;WASC&#x2F;SANS-25-CWE中描述的业务逻辑漏洞进行测试</p>
+<p>·对于业务逻辑的滥用建立确定的测试用例</p>
+<p>·分析风险并应用对策来减轻业务逻辑攻击的可能性和影响</p>
+<p><strong>4.2常用修复措施</strong></p>
+<p>·应用系统必须确保所有输入和传递的时候必须经过有效验证，不仅仅是在刚进入应用系统的时候进行数据验证。</p>
+<p>·应用程序应该有检查功能，避免攻击者可以通过预测、操作参数或者利用隐藏的功能（例如调试）来阻碍操作或者改变业务逻辑工作流程。</p>
+<p>·应用需要对输入进行检查，不允许用户直接提交未经过验证的数据到服务器，因为这些数据来不可编辑的控件，或者用户没有前端提交的权限，任何可编辑控件必须有阻止恶意的写入或修改的功能。</p>
+<p>·开发应用的时候需要注意时间处理问题。攻击者可以简单地通过了解不同的处理时间、结果来获取一些参数，所以虽然他们提交的结果也在相同的时间，符合规则，但却添加了其他步骤或者处理。</p>
+<p>·应用程序需要有阻止攻击者通过延长允许的交易时间的功能，这种情况可以在操作超过规定的时间后通过取消或者重置交易。</p>
+<p>·应用程序需要能够过滤检测的业务逻辑：当一个功能或者操作只允许被执行有限的几次 或者用户不再能够执行这个功能的时候，应用需要能够检测出来。为了阻止用户过多次的执行某个功能， 应用程序可以通过类似缓存这种机制来控制，或者使用不允许用户过多次执行功能的机制。</p>
+<p>·应有用户正确的按照业务流程来完成每一个步骤的检测机制，这样可以阻止黑客在业务流程中通过跳过、绕过、重复任何业务流程中的工序检查。开发这部分业务逻辑的时候应该测试一些无用或者误用的测试用例，当没有按照正确的顺序完成正确的步骤的时候，就不能成功完成业务流程。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./assets/lbxw.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./assets/lbxw.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">蜡笔小王</div><div class="post-copyright__author_desc">不想学习啊！！！</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://wjh0527.github.io.git/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://wjh0527.github.io.git/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/')">逻辑漏洞</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://wjh0527.github.io.git/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=逻辑漏洞&amp;url=https://wjh0527.github.io.git/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wjh0527.github.io.git" target="_blank">蜡笔小王的博客</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%BC%8F%E6%B4%9E/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>漏洞<span class="tagsPageCount">8</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/./assets/lbxw.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/09/15/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">暴力破解</div></div></a></div><div class="next-post pull-right"><a href="/2025/09/15/xxe/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">xxe</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/09/15/CSRF/" title="CSRF"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">CSRF</div></div></a></div><div><a href="/2025/09/15/SSRF/" title="SSRF"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">SSRF</div></div></a></div><div><a href="/2025/09/15/xxe/" title="xxe"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">xxe</div></div></a></div><div><a href="/2025/09/12/xss/" title="xss"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-12</div><div class="title">xss</div></div></a></div><div><a href="/2025/09/15/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" title="文件包含漏洞"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">文件包含漏洞</div></div></a></div><div><a href="/2025/09/15/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="命令执行"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-15</div><div class="title">命令执行</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/./assets/lbxw.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">别看了，去玩会吧</div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(null) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.</span> <span class="toc-text">常见的业务逻辑漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%AF%BE%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">一、课程知识点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8A%80%E6%9C%AF%E7%9B%AE%E6%A0%87"><span class="toc-number">1.2.</span> <span class="toc-text">二、技术目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%AF%BE%E7%A8%8B%E5%86%85%E5%AE%B9"><span class="toc-number">1.3.</span> <span class="toc-text">三、课程内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.3.1.</span> <span class="toc-text">1、业务逻辑漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">1.1 业务逻辑漏洞基本介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">1.2 业务逻辑漏洞分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%9C%BA%E6%99%AF%E5%88%86%E7%B1%BB%E5%8F%8A%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.3.2.</span> <span class="toc-text">2、业务逻辑漏洞场景分类及挖掘思路**</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%88%86%E7%B1%BB%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">2.1 常见的业务逻辑漏洞分类如下：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-number">1.3.3.</span> <span class="toc-text">3、业务逻辑漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE%E7%B1%BB%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">3.2 越权访问类漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E4%BA%A4%E6%98%93%E6%B4%BB%E5%8A%A8%E7%B1%BB%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">3.3 交易活动类漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E5%85%B6%E4%BB%96%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8C%96%E6%8E%98"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">3.4 其他漏洞原理与挖掘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D"><span class="toc-number">1.3.4.</span> <span class="toc-text">4、业务逻辑漏洞修复</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/xxe/" title="xxe">xxe</a><time datetime="2025-09-15T08:45:22.000Z" title="发表于 2025-09-15 16:45:22">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" title="逻辑漏洞">逻辑漏洞</a><time datetime="2025-09-15T08:42:57.000Z" title="发表于 2025-09-15 16:42:57">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="暴力破解">暴力破解</a><time datetime="2025-09-15T08:36:51.000Z" title="发表于 2025-09-15 16:36:51">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/sqlmap%E7%9A%84%E4%BD%BF%E7%94%A8/" title="sqlmap的使用">sqlmap的使用</a><time datetime="2025-09-15T08:31:28.000Z" title="发表于 2025-09-15 16:31:28">2025-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/15/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" title="命令执行">命令执行</a><time datetime="2025-09-15T08:25:44.000Z" title="发表于 2025-09-15 16:25:44">2025-09-15</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2024 - 2025 By <a class="footer-bar-link" href="/" title="蜡笔小王" target="_blank">蜡笔小王</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">5</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="安知鱼的博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="安知鱼的博客"/><span class="back-menu-item-text">安知鱼的博客</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>1</sup></a><a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 0.88rem;">SQL注入<sup>2</sup></a><a href="/tags/windows/" style="font-size: 0.88rem;">windows<sup>1</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>1</sup></a><a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 0.88rem;">漏洞<sup>8</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">网络基础<sup>20</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.cbd.int/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/01/2024 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2024 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 蜡笔小王 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
